@@ -1,4 +1,5 @@
 import { HERO_FEATURES, type HeroFeatureItem } from './heroFeatureData';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../../../lib/cloudinary';
 import './HeroFeatureSequence.css';
 
 interface HeroFeatureSequenceProps {
@@ -21,13 +22,15 @@ export default function HeroFeatureSequence({
               data-index={index}
             >
               <img
-                src={feature.image}
+                src={buildCloudinaryUrl(feature.image, { width: 1000, quality: 'auto', format: 'auto' })}
+                srcSet={buildCloudinarySrcSet(feature.image, [480, 768, 1000]) || undefined}
+                sizes="(max-width: 860px) 100vw, 55vw"
                 alt={feature.imageAlt}
                 className="hero-feature-image"
                 style={{
                   objectPosition: feature.focalPoint || 'center center',
                 }}
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
               <div className="hero-feature-media-overlay" aria-hidden="true" />

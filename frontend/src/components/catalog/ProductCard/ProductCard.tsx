@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import type { Product } from '../../../data/products/types';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../../lib/cloudinary';
 import './ProductCard.css';
 
 export interface ProductCardData {
@@ -103,7 +104,9 @@ export default function ProductCard({
         {/* Full-Bleed Architectural Product Image */}
         <div className="sf-product-card__media product-category-card__media">
           <img
-            src={image}
+            src={buildCloudinaryUrl(image, { width: 600, quality: 'auto', format: 'auto' })}
+            srcSet={buildCloudinarySrcSet(image, [360, 480, 600, 800]) || undefined}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
             alt={imageAlt}
             className="sf-product-card__image product-category-card__image"
             loading="lazy"

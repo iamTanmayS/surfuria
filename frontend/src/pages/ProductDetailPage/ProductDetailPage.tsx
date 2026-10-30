@@ -7,6 +7,7 @@ import {
   type CatalogueType,
 } from '../../data/products';
 import { buildWhatsAppUrl } from '../../config/whatsapp';
+import { buildCloudinaryUrl, buildCloudinarySrcSet, buildCloudinaryThumb } from '../../lib/cloudinary';
 import ProductCard from '../../components/catalog/ProductCard/ProductCard';
 import Button from '../../components/ui/Button';
 import { SEOHead, buildBreadcrumbSchema, buildProductSchema } from '../../components/seo';
@@ -149,9 +150,14 @@ export default function ProductDetailPage({ catalogue }: ProductDetailPageProps)
           <div className="product-gallery">
             <div className="product-gallery__main">
               <img
-                src={gallery[activeImageIndex] || product.cardImage}
+                src={buildCloudinaryUrl(gallery[activeImageIndex] || product.cardImage, { width: 1200, quality: 'auto', format: 'auto' })}
+                srcSet={buildCloudinarySrcSet(gallery[activeImageIndex] || product.cardImage, [600, 900, 1200]) || undefined}
+                sizes="(max-width: 768px) 100vw, 55vw"
                 alt={product.name}
                 className="product-gallery__main-img"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
               {product.badge && (
                 <span className="product-gallery__badge">{product.badge}</span>
@@ -173,10 +179,13 @@ export default function ProductDetailPage({ catalogue }: ProductDetailPageProps)
                       onClick={() => setActiveImageIndex(idx)}
                     >
                       <img
-                        src={imgSrc}
+                        src={buildCloudinaryThumb(imgSrc, 160)}
                         alt={`${product.name} view ${idx + 1}`}
                         className="product-gallery__thumb-img"
                         loading="lazy"
+                        decoding="async"
+                        width={80}
+                        height={80}
                       />
                     </button>
                   );

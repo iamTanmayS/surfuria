@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import type { HeroSlide } from './heroData';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../../../lib/cloudinary';
 
 interface HeroBackgroundProps {
   currentSlide: HeroSlide;
@@ -12,6 +13,8 @@ export default function HeroBackground({
   direction,
   shouldReduceMotion,
 }: HeroBackgroundProps) {
+  const isInitialSlide = currentSlide.id === 'slide-hardware';
+
   // Architectural filmic crossfade
   const imageVariants = {
     initial: (dir: number) => ({
@@ -40,6 +43,14 @@ export default function HeroBackground({
     }),
   };
 
+  const optimizedSrc = buildCloudinaryUrl(currentSlide.image, {
+    width: 1600,
+    quality: 'auto',
+    format: 'auto',
+  });
+
+  const srcSet = buildCloudinarySrcSet(currentSlide.image, [640, 1024, 1440, 1920]);
+
   return (
     <div className="hero__background-wrapper" aria-hidden="true">
       <AnimatePresence initial={false} custom={direction}>
@@ -53,11 +64,14 @@ export default function HeroBackground({
           className="hero__background-image-container"
         >
           <img
-            src={currentSlide.image}
+            src={optimizedSrc}
+            srcSet={srcSet || undefined}
+            sizes="100vw"
             alt={currentSlide.imageAlt}
             className="hero__background-image"
-            loading="eager"
-            decoding="async"
+            loading={isInitialSlide ? 'eager' : 'lazy'}
+            fetchPriority={isInitialSlide ? 'high' : 'low'}
+            decoding={isInitialSlide ? 'sync' : 'async'}
             style={{
               objectPosition: currentSlide.focalPoint || 'center center',
             }}

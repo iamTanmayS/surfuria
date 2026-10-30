@@ -240,7 +240,7 @@ export default function QualitySection() {
                         src={panel.image}
                         alt={panel.imageAlt}
                         className="about-philo-img"
-                        loading="eager"
+                        loading={idx === 0 ? 'eager' : 'lazy'}
                         decoding="async"
                       />
                       <div className="about-philo-media-scrim" aria-hidden="true" />

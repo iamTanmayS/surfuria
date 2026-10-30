@@ -4,6 +4,7 @@ import {
   getKitchenConfigurationBySlug,
   KITCHEN_CONFIGURATIONS,
 } from '../../data/products';
+import { buildCloudinaryUrl, buildCloudinarySrcSet, buildCloudinaryThumb } from '../../lib/cloudinary';
 import ProductCard from '../../components/catalog/ProductCard/ProductCard';
 import Button from '../../components/ui/Button';
 import { SEOHead, buildBreadcrumbSchema, buildKitchenPackageSchema } from '../../components/seo';
@@ -304,10 +305,13 @@ export default function KitchenConfigurationDetailPage() {
             <div className="config-hero__visual">
               <div className="config-hero__stage">
                 <img
-                  src={gallery[activeImageIndex] || configuration.image}
+                  src={buildCloudinaryUrl(gallery[activeImageIndex] || configuration.image, { width: 1400, quality: 'auto', format: 'auto' })}
+                  srcSet={buildCloudinarySrcSet(gallery[activeImageIndex] || configuration.image, [640, 1024, 1400]) || undefined}
+                  sizes="(max-width: 860px) 100vw, 55vw"
                   alt={`${configuration.name} Kitchen photo ${activeImageIndex + 1}`}
                   className="config-hero__img"
                   loading="eager"
+                  fetchPriority="high"
                   decoding="async"
                 />
                 <div className="config-hero__stage-caption">
@@ -339,10 +343,13 @@ export default function KitchenConfigurationDetailPage() {
                         onClick={() => setActiveImageIndex(idx)}
                       >
                         <img
-                          src={imgSrc}
+                          src={buildCloudinaryThumb(imgSrc, 160)}
                           alt={`${configuration.name} thumbnail ${idx + 1}`}
                           className="config-hero__thumb-img"
                           loading="lazy"
+                          decoding="async"
+                          width={80}
+                          height={80}
                         />
                       </button>
                     );
@@ -530,10 +537,15 @@ export default function KitchenConfigurationDetailPage() {
                   <div className="config-hw-tile__visual">
                     {tile.image ? (
                       <img
-                        src={tile.image}
+                        src={buildCloudinaryUrl(tile.image, { width: 320, quality: 'auto', format: 'auto' })}
+                        srcSet={buildCloudinarySrcSet(tile.image, [160, 240, 320]) || undefined}
+                        sizes="140px"
                         alt={tile.imageAlt || tile.name}
                         className="config-hw-tile__img"
                         loading="lazy"
+                        decoding="async"
+                        width={140}
+                        height={140}
                       />
                     ) : tile.isSchematic === 'minifix' ? (
                       <MinifixSchematic />

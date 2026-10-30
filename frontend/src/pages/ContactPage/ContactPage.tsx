@@ -7,6 +7,7 @@ import Button from '../../components/ui/Button';
 import ContactHero from './components/ContactHero';
 import { SEOHead, buildBreadcrumbSchema, buildOrganizationSchema } from '../../components/seo';
 import { getEnquiryContext } from '../../lib/enquiryContext';
+import { buildCloudinaryThumb } from '../../lib/cloudinary';
 import {
   generateEnquiryMessage,
   updateMessageCustomerName,
@@ -194,9 +195,13 @@ export default function ContactPage() {
               {context.thumbnail && (
                 <div className="cp-banner__thumb">
                   <img
-                    src={context.thumbnail}
+                    src={buildCloudinaryThumb(context.thumbnail, 160)}
                     alt={context.thumbnailAlt ?? context.title}
                     className="cp-banner__img"
+                    loading="lazy"
+                    decoding="async"
+                    width={80}
+                    height={80}
                   />
                 </div>
               )}

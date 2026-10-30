@@ -241,7 +241,7 @@ export default function CapabilitiesSection() {
                         src={item.image}
                         alt={item.imageAlt}
                         className="about-cap-frame-img"
-                        loading="eager"
+                        loading={idx === 0 ? 'eager' : 'lazy'}
                         decoding="async"
                       />
                       <div className="about-cap-media-scrim" aria-hidden="true" />

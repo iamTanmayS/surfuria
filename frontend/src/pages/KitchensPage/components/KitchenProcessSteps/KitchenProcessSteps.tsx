@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'motion/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../../../lib/cloudinary';
 import './KitchenProcessSteps.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -217,11 +218,15 @@ export default function KitchenProcessSteps() {
                     }`}
                   >
                     <img
-                      src={step.image}
+                      src={buildCloudinaryUrl(step.image, { width: 800, quality: 'auto', format: 'auto' })}
+                      srcSet={buildCloudinarySrcSet(step.image, [400, 600, 800]) || undefined}
+                      sizes="(max-width: 860px) 100vw, 480px"
                       alt={step.imageAlt}
                       className="kitchen-steps-img"
                       loading={idx === 0 ? 'eager' : 'lazy'}
                       decoding="async"
+                      width={520}
+                      height={420}
                     />
                   </div>
                 ))}

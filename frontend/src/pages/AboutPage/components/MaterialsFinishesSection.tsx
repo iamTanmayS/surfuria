@@ -111,7 +111,7 @@ export default function MaterialsFinishesSection({
                     src={activeItem.image}
                     alt={activeItem.imageAlt}
                     className="about-materials__stage-image"
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                   />
                   <div className="about-materials__stage-scrim" aria-hidden="true" />
@@ -178,8 +178,10 @@ export default function MaterialsFinishesSection({
                       src={item.image}
                       alt=""
                       className="about-materials__option-thumb"
-                      loading="eager"
+                      loading="lazy"
                       decoding="async"
+                      width={52}
+                      height={52}
                     />
                   </div>
 

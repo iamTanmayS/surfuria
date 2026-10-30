@@ -29,7 +29,8 @@ export default function BrandKitchenShowcase({ kitchens }: BrandKitchenShowcaseP
           alt={kitchens.imageAlt}
           className="brand-editorial__kitchen-image"
           style={{ objectPosition: kitchens.focalPoint || '50% 50%' }}
-          loading="eager"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 

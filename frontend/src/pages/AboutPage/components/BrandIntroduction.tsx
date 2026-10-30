@@ -117,7 +117,7 @@ export default function BrandIntroduction() {
                   src={posterImage}
                   alt={posterAlt}
                   className="about-intro__poster-img"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
                 />
                 <div className="about-intro__poster-scrim" aria-hidden="true" />

@@ -3,6 +3,9 @@ import './KitchenHero.css';
 import { motion, useReducedMotion } from 'motion/react';
 
 import HeroContent from '../../../../components/ui/HeroContent';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../../../lib/cloudinary';
+
+const KITCHEN_HERO_IMAGE = 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1792750002/21_SURFURIA_KITCHEN_hv0bfl.png';
 
 interface KitchenHeroProps {
   onExploreClick?: () => void;
@@ -25,11 +28,14 @@ export default function KitchenHero({ onExploreClick }: KitchenHeroProps) {
       {/* Background Architectural Media */}
       <div className="kitchen-hero__media" aria-hidden="true">
         <img
-          src="https://res.cloudinary.com/dwhajzdg2/image/upload/v1792750002/21_SURFURIA_KITCHEN_hv0bfl.png"
+          src={buildCloudinaryUrl(KITCHEN_HERO_IMAGE, { width: 1400, quality: 'auto', format: 'auto' })}
+          srcSet={buildCloudinarySrcSet(KITCHEN_HERO_IMAGE, [640, 1024, 1400, 1920]) || undefined}
+          sizes="100vw"
           alt="Surfuria architectural modular kitchen with monolithic island and bespoke cabinetry"
           className="kitchen-hero__img"
           loading="eager"
           decoding="async"
+          fetchPriority="high"
         />
         <div className="kitchen-hero__scrim" />
       </div>

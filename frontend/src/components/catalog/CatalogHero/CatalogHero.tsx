@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react';
 import HeroContent from '../../ui/HeroContent';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../../lib/cloudinary';
 import './CatalogHero.css';
 
 export interface CatalogHeroProps {
@@ -51,11 +52,14 @@ export default function CatalogHero({
       {/* Background Architectural Media */}
       <div className="catalog-hero__media" aria-hidden="true">
         <img
-          src={image}
+          src={buildCloudinaryUrl(image, { width: 1400, quality: 'auto', format: 'auto' })}
+          srcSet={buildCloudinarySrcSet(image, [640, 1024, 1400, 1920]) || undefined}
+          sizes="100vw"
           alt={imageAlt}
           className="catalog-hero__img"
           loading="eager"
           decoding="async"
+          fetchPriority="high"
         />
         <div className="catalog-hero__scrim" />
       </div>
