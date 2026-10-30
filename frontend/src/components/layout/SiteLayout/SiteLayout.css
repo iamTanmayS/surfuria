@@ -1,0 +1,25 @@
+/* ==========================================================================
+   SURFURIA SITE LAYOUT & PAGE TRANSITIONS
+   ========================================================================== */
+
+#main-content {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.sf-page-transition-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-page-transition-wrap {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

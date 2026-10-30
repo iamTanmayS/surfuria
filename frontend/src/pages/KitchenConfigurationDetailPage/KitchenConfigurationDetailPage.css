@@ -1,0 +1,998 @@
+/* ==========================================================================
+   SURFURIA — KITCHEN CONFIGURATION DETAIL PAGE STYLES
+   Visual Clarity, Architectural Dominance & High-Conversion Ergonomics
+   ========================================================================== */
+
+.config-detail-page {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-paper, #fbf9f5);
+  color: var(--color-ink, #171715);
+  min-height: 100vh;
+  padding-top: calc(var(--sf-nav-offset, 84px) + 2rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* --------------------------------------------------------------------------
+   1. BREADCRUMBS
+   -------------------------------------------------------------------------- */
+.config-breadcrumbs {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+}
+
+.config-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted, #7c7267);
+}
+
+.config-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.config-breadcrumbs__link {
+  color: var(--color-muted, #7c7267);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.config-breadcrumbs__link:hover {
+  color: var(--color-bronze, #b77b3f);
+}
+
+.config-breadcrumbs__sep {
+  opacity: 0.5;
+  font-size: 0.75rem;
+  user-select: none;
+}
+
+.config-breadcrumbs__item.is-current {
+  color: var(--color-ink, #171715);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   2. CONFIGURATION HERO (TWO-COLUMN ARCHITECTURE)
+   Desktop: 55–60% width dominant kitchen image on left, package info on right
+   -------------------------------------------------------------------------- */
+.config-hero {
+  margin-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.config-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+}
+
+/* Left Column: Complete Uncropped Kitchen Image */
+.config-hero__visual {
+  position: relative;
+  width: 100%;
+}
+
+.config-hero__stage {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(circle at center, #24211e 0%, #151311 100%);
+  border: 1px solid rgba(23, 23, 21, 0.14);
+  border-radius: clamp(14px, 1.6vw, 22px);
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
+  box-shadow:
+    0 10px 30px -5px rgba(23, 23, 21, 0.1),
+    0 24px 60px -15px rgba(23, 23, 21, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.config-hero__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.config-hero__stage-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: clamp(0.6rem, 1vw, 0.9rem);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.04em;
+}
+
+.config-hero__stage-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-bronze, #b77b3f);
+  flex-shrink: 0;
+}
+
+/* Gallery Thumbnails Strip */
+.config-hero__thumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+  margin-top: 0.875rem;
+  padding: 0.25rem 0.125rem;
+  scrollbar-width: thin;
+}
+
+.config-hero__thumb {
+  flex: 0 0 clamp(72px, 10vw, 96px);
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--color-line, #e7e0d5);
+  background-color: #24211e;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.config-hero__thumb:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 123, 63, 0.5);
+}
+
+.config-hero__thumb.is-selected {
+  border-color: var(--color-bronze, #b77b3f);
+  box-shadow: 0 2px 10px rgba(183, 123, 63, 0.3);
+}
+
+.config-hero__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Right Column: Package Information */
+.config-hero__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-hero__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.config-hero__eyebrow {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+}
+
+.config-hero__status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(183, 123, 63, 0.12);
+  border: 1px solid rgba(183, 123, 63, 0.3);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-bronze, #b77b3f);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.config-hero__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.85rem 0;
+}
+
+.config-hero__subtitle {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Price Box */
+.config-hero__price-box {
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-left: 4px solid var(--color-bronze, #b77b3f);
+  border-radius: 12px;
+  padding: clamp(1rem, 1.6vw, 1.4rem);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 16px rgba(23, 23, 21, 0.04);
+}
+
+.config-hero__price-label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-bronze, #b77b3f);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.config-hero__price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+
+.config-hero__price-val {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2.4rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-ink, #171715);
+  line-height: 1;
+}
+
+.config-hero__price-tag {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #2e6930;
+  background: rgba(46, 105, 48, 0.1);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+
+.config-hero__price-subtext {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8rem;
+  color: var(--color-muted, #7c7267);
+  margin: 0;
+  border-top: 1px dashed var(--color-line, #e7e0d5);
+  padding-top: 0.5rem;
+}
+
+/* Specs Row: Door & Box Areas */
+.config-hero__specs-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.config-hero__spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-hero__spec-label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted, #7c7267);
+  margin-bottom: 0.15rem;
+}
+
+.config-hero__spec-val {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-ink, #171715);
+  line-height: 1.2;
+}
+
+.config-hero__spec-note {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-bronze, #b77b3f);
+  font-weight: 500;
+}
+
+.config-hero__spec-divider {
+  width: 1px;
+  height: 38px;
+  background: var(--color-line, #e7e0d5);
+}
+
+/* Summary Pills */
+.config-hero__summary-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.config-hero__summary-pill {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* Actions */
+.config-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.config-hero__primary-cta {
+  padding-inline: 2rem;
+  min-height: 52px;
+}
+
+.config-hero__scroll-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  text-decoration: none;
+  padding: 0.75rem 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.config-hero__scroll-link:hover {
+  color: var(--color-bronze, #b77b3f);
+  transform: translateY(2px);
+}
+
+/* --------------------------------------------------------------------------
+   3. SHARED SECTION HEADERS
+   -------------------------------------------------------------------------- */
+.config-section-header {
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.config-section-eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.5rem;
+}
+
+.config-section-title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--color-ink, #171715);
+  line-height: 1.2;
+  margin: 0 0 0.65rem 0;
+}
+
+.config-section-subtitle {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+  max-width: 720px;
+}
+
+/* --------------------------------------------------------------------------
+   4. EVERYTHING INCLUDED IN YOUR KITCHEN (VISUAL BREAKDOWN)
+   -------------------------------------------------------------------------- */
+.config-inclusions-section {
+  margin-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+/* Materials Row: 2 Large Visual Cards */
+.config-materials-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.config-material-card {
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(23, 23, 21, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.config-material-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(23, 23, 21, 0.08);
+}
+
+.config-material-card__image-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #171513;
+}
+
+.config-material-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.config-material-card:hover .config-material-card__image {
+  transform: scale(1.04);
+}
+
+.config-material-card__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(23, 23, 21, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.config-material-card__content {
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.config-material-card__header {
+  margin-bottom: 0.75rem;
+}
+
+.config-material-card__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.35rem 0;
+}
+
+.config-material-card__spec-highlight {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-bronze, #b77b3f);
+  display: block;
+}
+
+.config-material-card__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0 0 1.25rem 0;
+  flex-grow: 1;
+}
+
+.config-material-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-line, #e7e0d5);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8rem;
+  color: var(--color-muted, #7c7267);
+  flex-wrap: wrap;
+}
+
+.config-material-card__meta strong {
+  color: var(--color-ink, #171715);
+}
+
+/* Hardware Block & 8-Item Grid */
+.config-hardware-block {
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  box-shadow: 0 4px 20px rgba(23, 23, 21, 0.04);
+}
+
+.config-hardware-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.config-hardware-block__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+.config-hardware-block__count {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-bronze, #b77b3f);
+  background: rgba(183, 123, 63, 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+}
+
+.config-hardware-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.config-hw-tile {
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.config-hw-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-bronze, #b77b3f);
+  box-shadow: 0 8px 20px rgba(23, 23, 21, 0.06);
+}
+
+.config-hw-tile__visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #fbf9f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.config-hw-tile__img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  display: block;
+}
+
+.config-hw-schematic {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.config-hw-tile__check {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #2e6930;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(46, 105, 48, 0.2);
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.config-hw-tile__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-hw-tile__name {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.25rem 0;
+  line-height: 1.3;
+}
+
+.config-hw-tile__label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8rem;
+  color: var(--color-muted, #7c7267);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   5. WHAT YOUR PACKAGE COVERS (SUMMARY FIGURES & CLEAR LABELS)
+   -------------------------------------------------------------------------- */
+.config-covers-section {
+  margin-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.config-covers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.config-cover-card {
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 14px;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(23, 23, 21, 0.03);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.config-cover-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 123, 63, 0.4);
+}
+
+.config-cover-card__val {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--color-ink, #171715);
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.config-cover-card__label {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.25rem 0;
+}
+
+.config-cover-card__sub {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-bronze, #b77b3f);
+  margin: 0 0 0.5rem 0;
+}
+
+.config-cover-card__detail {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8rem;
+  color: var(--color-muted, #7c7267);
+  line-height: 1.5;
+  margin-top: auto;
+  border-top: 1px dashed var(--color-line, #e7e0d5);
+  padding-top: 0.65rem;
+}
+
+/* Price card special styling */
+.config-cover-card--price {
+  background: #171513;
+  color: #ffffff;
+  border-color: #2b2723;
+}
+
+.config-cover-card--price .config-cover-card__val--price {
+  color: #ffffff;
+}
+
+.config-cover-card--price .config-cover-card__label {
+  color: #ffffff;
+}
+
+.config-cover-card--price .config-cover-card__sub {
+  color: #d19a62;
+}
+
+.config-cover-card--price .config-cover-card__detail {
+  color: rgba(255, 255, 255, 0.65);
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   6. SECONDARY ENQUIRY BANNER
+   -------------------------------------------------------------------------- */
+.config-enquiry-banner {
+  margin-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.config-enquiry-banner__card {
+  background: linear-gradient(135deg, #f7f3eb 0%, #ece5d8 100%);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 18px;
+  padding: clamp(2rem, 3.5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow: 0 8px 24px rgba(23, 23, 21, 0.05);
+}
+
+.config-enquiry-banner__content {
+  max-width: 640px;
+}
+
+.config-enquiry-banner__eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.5rem;
+}
+
+.config-enquiry-banner__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.config-enquiry-banner__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+.config-enquiry-banner__action {
+  flex-shrink: 0;
+}
+
+.config-enquiry-banner__btn {
+  padding-inline: 2.25rem;
+  min-height: 52px;
+}
+
+/* --------------------------------------------------------------------------
+   7. CROSS-COMPARISON: OTHER PACKAGES
+   -------------------------------------------------------------------------- */
+.config-other-section {
+  margin-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.config-other-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2vw, 2rem);
+  align-items: stretch;
+}
+
+.config-other-card {
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   8. FINAL CLOSING CTA
+   -------------------------------------------------------------------------- */
+.config-closing-cta {
+  margin-top: 2rem;
+}
+
+.config-closing-cta__box {
+  background: #171513;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.config-closing-cta__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.config-closing-cta__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 650px;
+  margin: 0 auto 2rem auto;
+}
+
+.config-closing-cta__btn {
+  padding-inline: 2.5rem;
+  min-height: 54px;
+}
+
+/* --------------------------------------------------------------------------
+   9. NOT FOUND STATE
+   -------------------------------------------------------------------------- */
+.config-not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+}
+
+.config-not-found__card {
+  background: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  max-width: 540px;
+}
+
+.config-not-found__eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.5rem;
+}
+
+.config-not-found__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1rem 0;
+}
+
+.config-not-found__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0 0 2rem 0;
+}
+
+/* --------------------------------------------------------------------------
+   10. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .config-hero__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .config-covers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .config-other-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .config-materials-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .config-hardware-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .config-covers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .config-enquiry-banner__card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .config-enquiry-banner__btn {
+    width: 100%;
+  }
+
+  .config-other-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .config-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .config-hero__primary-cta {
+    width: 100%;
+  }
+
+  .config-hero__scroll-link {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .config-hero__specs-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .config-hero__spec-divider {
+    display: none;
+  }
+
+  .config-hero__price-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+}

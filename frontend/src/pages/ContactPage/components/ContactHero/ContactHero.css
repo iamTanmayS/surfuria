@@ -1,0 +1,183 @@
+/* ==========================================================================
+   SURFURIA — Cinematic Contact Hero Styles
+   Editorial typography, architectural imagery, reassurance badge
+   ========================================================================== */
+
+.sf-contact-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Studio eyebrow pill */
+.sf-contact-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(183, 123, 63, 0.08);
+  border: 1px solid rgba(183, 123, 63, 0.22);
+  border-radius: var(--radius-pill, 999px);
+  width: fit-content;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+}
+
+.sf-contact-hero__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-bronze, #b77b3f);
+}
+
+/* Editorial Headline */
+.sf-contact-hero__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2rem, 3.4vw, 2.85rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+/* Supporting Lead */
+.sf-contact-hero__lead {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+  max-width: 540px;
+}
+
+/* Cinematic Image Panel */
+.sf-contact-hero__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg, 1.125rem);
+  overflow: hidden;
+  border: 1px solid rgba(183, 123, 63, 0.25);
+  background: #171310;
+  box-shadow: 0 10px 30px rgba(23, 23, 21, 0.06);
+  margin-top: 0.5rem;
+}
+
+.sf-contact-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.sf-contact-hero__image-wrap:hover .sf-contact-hero__image {
+  transform: scale(1.025);
+}
+
+.sf-contact-hero__image-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 23, 21, 0.05) 0%,
+    rgba(23, 23, 21, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+.sf-contact-hero__image-caption {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Reassurance Badge */
+.sf-contact-hero__reassurance {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.95rem 1.25rem;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-left: 3px solid var(--color-bronze, #b77b3f);
+  border-radius: var(--radius-md, 0.75rem);
+  box-shadow: 0 2px 10px rgba(23, 23, 21, 0.03);
+  margin-top: 0.25rem;
+}
+
+.sf-contact-hero__reassurance-icon {
+  flex-shrink: 0;
+  color: var(--color-bronze, #b77b3f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.1rem;
+}
+
+.sf-contact-hero__reassurance-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sf-contact-hero__reassurance-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+}
+
+.sf-contact-hero__reassurance-sub {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted, #5f5b54);
+  line-height: 1.45;
+}
+
+/* Mobile Jump Button */
+.sf-contact-hero__mobile-jump {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-bronze, #b77b3f);
+  color: var(--color-bronze-dark, #8e5b2b);
+  border-radius: var(--radius-pill, 999px);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast, 160ms ease);
+}
+
+.sf-contact-hero__mobile-jump:hover {
+  background: var(--color-bronze-pale, #f7ead8);
+}
+
+@media (max-width: 1024px) {
+  .sf-contact-hero__mobile-jump {
+    display: inline-flex;
+    margin-top: 0.5rem;
+  }
+}

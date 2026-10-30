@@ -1,0 +1,530 @@
+/* ==========================================================================
+   SURFURIA — PRODUCT DETAIL PAGE STYLES
+   Architectural Editorial Layout, Spec Presentation, Responsive Micro-details
+   ========================================================================== */
+
+.product-detail-page {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-paper, #fbf9f5);
+  color: var(--color-ink, #171715);
+  min-height: 100vh;
+  padding-top: clamp(6.5rem, 9vw, 8.5rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* --------------------------------------------------------------------------
+   1. BREADCRUMBS
+   -------------------------------------------------------------------------- */
+.product-breadcrumbs {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+}
+
+.product-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted, #7c7267);
+}
+
+.product-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.product-breadcrumbs__link {
+  color: var(--color-muted, #7c7267);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.product-breadcrumbs__link:hover {
+  color: var(--color-bronze, #b77b3f);
+}
+
+.product-breadcrumbs__sep {
+  opacity: 0.5;
+  font-size: 0.75rem;
+  user-select: none;
+}
+
+.product-breadcrumbs__item.is-current {
+  color: var(--color-ink, #171715);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   2. OVERVIEW SPLIT (GALLERY & INFO)
+   -------------------------------------------------------------------------- */
+.product-detail-overview {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 4.5vw, 4.5rem);
+  align-items: start;
+}
+
+/* Gallery */
+.product-gallery {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-gallery__main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background-color: #ffffff;
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: clamp(14px, 1.4vw, 20px);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(23, 23, 21, 0.06);
+}
+
+.product-gallery__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.product-gallery__badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(23, 19, 16, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(225, 195, 160, 0.28);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e6bd84;
+  z-index: 2;
+}
+
+.product-gallery__thumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.25rem 0.125rem;
+  scrollbar-width: thin;
+}
+
+.product-gallery__thumb {
+  flex: 0 0 clamp(72px, 10vw, 92px);
+  aspect-ratio: 16 / 11;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--color-line, #e7e0d5);
+  background-color: #ffffff;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.product-gallery__thumb:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 123, 63, 0.4);
+}
+
+.product-gallery__thumb.is-selected {
+  border-color: var(--color-bronze, #b77b3f);
+  box-shadow: 0 2px 8px rgba(183, 123, 63, 0.25);
+}
+
+.product-gallery__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+/* Info Panel */
+.product-info-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info-category-tag {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  text-decoration: none;
+  margin-bottom: 0.65rem;
+  transition: color 0.2s ease;
+}
+
+.product-info-category-tag:hover {
+  color: var(--color-bronze-dark, #8a5726);
+}
+
+.product-info-title {
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.85rem 0;
+}
+
+.product-info-lead {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-muted, #5f574e);
+  margin: 0;
+}
+
+.product-info-rule {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-line, #e7e0d5);
+  margin: 1.75rem 0;
+}
+
+.product-info-description {
+  margin-bottom: 1.75rem;
+}
+
+.product-info-section-title {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted, #7c7267);
+  margin: 0 0 0.65rem 0;
+}
+
+.product-info-description p {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.68;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+/* Finishes */
+.product-info-finishes {
+  margin-bottom: 2rem;
+}
+
+.product-info-subtitle {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted, #7c7267);
+  margin: 0 0 0.75rem 0;
+}
+
+.product-finish-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.product-finish-tag {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  background-color: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 999px;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  color: var(--color-ink, #171715);
+  box-shadow: 0 1px 3px rgba(23, 23, 21, 0.04);
+}
+
+/* Action block */
+.product-info-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: auto;
+}
+
+.product-enquire-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.product-export-note {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-muted, #7c7267);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* WhatsApp secondary CTA */
+.product-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: #25d366;
+  color: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.product-whatsapp-link:hover {
+  background: #128c4e;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   3. VERIFIED SPECS & FEATURES SECTION
+   -------------------------------------------------------------------------- */
+.product-tech-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  background-color: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: clamp(14px, 1.5vw, 20px);
+  box-shadow: 0 2px 12px rgba(23, 23, 21, 0.03);
+}
+
+.product-specs-heading {
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 500;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1.25rem 0;
+}
+
+/* Feature List */
+.product-features-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.product-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-ink, #171715);
+}
+
+.product-feature-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: rgba(183, 123, 63, 0.12);
+  color: var(--color-bronze, #b77b3f);
+  margin-top: 1px;
+}
+
+/* Specifications DL */
+.product-specs-dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-specs-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(231, 224, 213, 0.6);
+  gap: 1.5rem;
+}
+
+.product-specs-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.product-specs-dt {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-muted, #7c7267);
+  flex: 0 0 auto;
+}
+
+.product-specs-dd {
+  margin: 0;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   4. RELATED SELECTIONS
+   -------------------------------------------------------------------------- */
+.product-related-section {
+  margin-top: clamp(4rem, 7vw, 6rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--color-line, #e7e0d5);
+}
+
+.product-related-header {
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.product-related-eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.5rem;
+}
+
+.product-related-title {
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  font-weight: 500;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+.product-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* --------------------------------------------------------------------------
+   5. NOT FOUND FALLBACK
+   -------------------------------------------------------------------------- */
+.product-not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+}
+
+.product-not-found__card {
+  max-width: 520px;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 18px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(23, 23, 21, 0.05);
+}
+
+.product-not-found__eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.75rem;
+}
+
+.product-not-found__title {
+  font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+  font-size: 2rem;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1rem 0;
+}
+
+.product-not-found__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-muted, #7c7267);
+  margin: 0 0 2rem 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .product-detail-overview {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .product-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-tech-specs {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .product-related-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-gallery__main {
+    border-radius: 12px;
+  }
+
+  .product-specs-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .product-specs-dd {
+    text-align: left;
+  }
+}
+

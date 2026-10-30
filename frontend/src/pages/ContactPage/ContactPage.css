@@ -1,0 +1,665 @@
+/* ==========================================================================
+   SURFURIA — Cinematic Contact Page Styles
+   Editorial Asymmetric Layout, Fine Borders, Accessible Intelligent Validation
+   ========================================================================== */
+
+/* ── Page Shell ───────────────────────────────────────────────────────────── */
+.cp-page {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-paper, #fbf9f5);
+  color: var(--color-ink, #171715);
+  min-height: 100vh;
+  padding-top: clamp(6rem, 8.5vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* ── Main Two-Column Editorial Layout ─────────────────────────────────────── */
+.cp-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+/* ── Left Column: Studio Hero & Secondary Channels ────────────────────────── */
+.cp-story-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: calc(var(--navbar-height, 72px) + 1.5rem);
+}
+
+/* ── Active Enquiry Context Banner ────────────────────────────────────────── */
+.cp-banner {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.85rem, 1.8vw, 1.5rem);
+  background: var(--color-surface, #ffffff);
+  border: 1px solid rgba(183, 123, 63, 0.32);
+  border-left: 3px solid var(--color-bronze, #b77b3f);
+  border-radius: var(--radius-md, 0.75rem);
+  padding: 0.9rem 1.25rem;
+  box-shadow: 0 4px 16px rgba(183, 123, 63, 0.08);
+  animation: cp-fade-in 0.3s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+@keyframes cp-fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cp-banner__thumb {
+  flex: 0 0 clamp(64px, 8vw, 80px);
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #171310;
+  border: 1px solid var(--color-line, #e7e0d5);
+}
+
+.cp-banner__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cp-banner__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cp-banner__badge {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+}
+
+.cp-banner__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cp-banner__price {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-bronze, #b77b3f);
+}
+
+.cp-banner__actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.cp-banner__view-link {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  color: var(--color-bronze, #b77b3f);
+  text-decoration: none;
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.cp-banner__view-link:hover {
+  color: var(--color-bronze-dark, #8e5b2b);
+  text-decoration: underline;
+}
+
+.cp-banner__clear-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-ink-muted, #5f5b54);
+  cursor: pointer;
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.cp-banner__clear-btn:hover {
+  color: var(--color-ink, #171715);
+}
+
+/* ── WhatsApp Alternative Card ────────────────────────────────────────────── */
+.cp-whatsapp-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: var(--radius-md, 0.75rem);
+  padding: 1.15rem 1.35rem;
+  box-shadow: 0 2px 10px rgba(23, 23, 21, 0.03);
+}
+
+.cp-whatsapp-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cp-whatsapp-card__eyebrow {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+}
+
+.cp-whatsapp-card__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+.cp-whatsapp-card__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+.cp-whatsapp-card__btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25d366;
+  color: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius-pill, 999px);
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(37, 211, 102, 0.28);
+  transition: background-color var(--transition-fast, 160ms ease),
+              box-shadow var(--transition-fast, 160ms ease),
+              transform var(--transition-fast, 160ms ease);
+}
+
+.cp-whatsapp-card__btn:hover {
+  background-color: #128c4e;
+  box-shadow: 0 5px 18px rgba(37, 211, 102, 0.38);
+  transform: translateY(-1px);
+}
+
+.cp-whatsapp-card__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+/* ── Direct Contact (Call + Email) ───────────────────────────────────────── */
+.cp-direct-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0.25rem;
+}
+
+.cp-direct-contact__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted, #5f5b54);
+}
+
+.cp-direct-contact__label {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cp-direct-contact__link {
+  color: var(--color-bronze, #b77b3f);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.cp-direct-contact__link:hover {
+  color: var(--color-bronze-dark, #8e5b2b);
+  text-decoration: underline;
+}
+
+.cp-direct-contact__link--call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cp-direct-contact__action-text {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: rgba(183, 123, 63, 0.12);
+  color: var(--color-bronze, #b77b3f);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.cp-direct-contact__phone-number {
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.cp-direct-contact__link--call:hover .cp-direct-contact__phone-number {
+  color: var(--color-bronze, #b77b3f);
+}
+
+/* ── Right Column: The Enquiry Form ───────────────────────────────────────── */
+.cp-form-column {
+  scroll-margin-top: calc(var(--navbar-height, 72px) + 2rem);
+}
+
+.cp-form-container {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-top: 3px solid var(--color-bronze, #b77b3f);
+  border-radius: var(--radius-lg, 1.125rem);
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  box-shadow: 0 10px 34px rgba(23, 23, 21, 0.05);
+}
+
+/* Form Header */
+.cp-form-header {
+  margin-bottom: 1.65rem;
+}
+
+.cp-form-header__eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.35rem;
+}
+
+.cp-form-header__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  letter-spacing: -0.015em;
+  margin: 0 0 0.5rem 0;
+}
+
+.cp-form-header__reassurance {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+/* Form Stack */
+.cp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Field */
+.cp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cp-field__label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cp-label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  letter-spacing: 0.01em;
+}
+
+.cp-field__badge {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cp-field__badge--required {
+  color: var(--color-bronze, #b77b3f);
+}
+
+.cp-field__badge--optional {
+  color: #8c8275;
+}
+
+/* Inputs & Textareas */
+.cp-input,
+.cp-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9375rem;
+  color: var(--color-ink, #171715);
+  background-color: var(--color-paper, #fbf9f5);
+  border: 1.5px solid var(--color-line, #e7e0d5);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: border-color var(--transition-fast, 160ms ease),
+              box-shadow var(--transition-fast, 160ms ease),
+              background-color var(--transition-fast, 160ms ease);
+  appearance: none;
+}
+
+.cp-input:focus,
+.cp-textarea:focus {
+  background-color: #ffffff;
+  border-color: var(--color-bronze, #b77b3f);
+  box-shadow: 0 0 0 3px rgba(183, 123, 63, 0.15);
+}
+
+.cp-input--error {
+  border-color: var(--color-danger, #b54737) !important;
+  background-color: #fffcfb;
+}
+
+.cp-input--error:focus {
+  box-shadow: 0 0 0 3px rgba(181, 71, 55, 0.16) !important;
+}
+
+.cp-input::placeholder,
+.cp-textarea::placeholder {
+  color: rgba(95, 91, 84, 0.55);
+}
+
+.cp-textarea {
+  resize: vertical;
+  min-height: 125px;
+  line-height: 1.6;
+}
+
+/* Contact Group Box */
+.cp-contact-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  background: rgba(183, 123, 63, 0.03);
+  border: 1px solid rgba(183, 123, 63, 0.18);
+  border-radius: var(--radius-md, 0.75rem);
+  padding: 1.15rem;
+}
+
+.cp-contact-group__banner {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-ink, #171715);
+  line-height: 1.4;
+}
+
+.cp-contact-group__banner svg {
+  flex-shrink: 0;
+  color: var(--color-bronze, #b77b3f);
+}
+
+/* Cross-Field Validation Error Alert */
+.cp-cross-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(181, 71, 55, 0.08);
+  border: 1px solid rgba(181, 71, 55, 0.35);
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-danger, #b54737);
+  line-height: 1.45;
+  animation: cp-fade-in 0.2s ease;
+}
+
+.cp-cross-error svg {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Inline Field Error */
+.cp-error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.78125rem;
+  font-weight: 500;
+  color: var(--color-danger, #b54737);
+  margin-top: 0.35rem;
+  line-height: 1.4;
+  animation: cp-fade-in 0.18s ease;
+}
+
+.cp-error svg {
+  flex-shrink: 0;
+}
+
+/* Privacy Note */
+.cp-privacy-note {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0.15rem 0 0.35rem 0;
+  line-height: 1.5;
+}
+
+/* Submission Error Notice */
+.cp-submit-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: rgba(181, 71, 55, 0.08);
+  border: 1px solid rgba(181, 71, 55, 0.28);
+  border-radius: 8px;
+  padding: 0.85rem 1.15rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  color: var(--color-danger, #b54737);
+  line-height: 1.5;
+}
+
+.cp-submit-error svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.cp-submit-error__content {
+  flex: 1 1 auto;
+}
+
+/* Primary Submit Button */
+.cp-submit-btn {
+  width: 100%;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ── Success Feedback Card ────────────────────────────────────────────────── */
+.cp-success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-top: 3px solid var(--color-success, #47755b);
+  border-radius: var(--radius-lg, 1.125rem);
+  box-shadow: 0 10px 34px rgba(23, 23, 21, 0.05);
+  animation: cp-fade-in 0.35s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.cp-success-card__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(71, 117, 91, 0.12);
+  color: var(--color-success, #47755b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+}
+
+.cp-success-card__eyebrow {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-success, #47755b);
+  margin-bottom: 0.5rem;
+}
+
+.cp-success-card__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.85rem 0;
+  line-height: 1.2;
+}
+
+.cp-success-card__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-ink-muted, #5f5b54);
+  max-width: 440px;
+  margin: 0 0 2rem 0;
+}
+
+.cp-success-card__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.cp-success-card__whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25d366;
+  color: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-pill, 999px);
+  text-decoration: none;
+  transition: background-color var(--transition-fast, 160ms ease);
+}
+
+.cp-success-card__whatsapp-btn:hover {
+  background-color: #128c4e;
+}
+
+.cp-success-card__reset-btn {
+  min-width: 210px;
+}
+
+/* ── Responsive Adaptations ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .cp-layout {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .cp-story-column {
+    position: static;
+  }
+
+  .cp-whatsapp-card {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .cp-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cp-banner__thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    flex: unset;
+  }
+
+  .cp-banner__actions {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-line, #e7e0d5);
+  }
+
+  .cp-whatsapp-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cp-whatsapp-card__btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 375px) {
+  .cp-form-container {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .cp-contact-group {
+    padding: 0.95rem 0.85rem;
+  }
+}

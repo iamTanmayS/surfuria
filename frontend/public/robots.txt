@@ -1,0 +1,12 @@
+# ==============================================================================
+# SURFURIA — robots.txt
+# https://surfuria.com/robots.txt
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://surfuria.com/sitemap.xml
+

@@ -1,0 +1,11 @@
+export { default as CatalogHero } from './CatalogHero/CatalogHero';
+export { default as CategoryPillNavigation } from './CategoryPillNavigation/CategoryPillNavigation';
+export { default as CategoryPills } from './CategoryPillNavigation/CategoryPillNavigation';
+export { default as ProductCarousel } from './ProductCarousel/ProductCarousel';
+export { default as ProductCard } from './ProductCard/ProductCard';
+export { default as CatalogueCategorySection } from './CatalogueCategorySection/CatalogueCategorySection';
+export { default as CategorySection } from './CatalogueCategorySection/CatalogueCategorySection';
+export { useCategoryScrollSync } from './useCategoryScrollSync';
+export type { CategoryPillItem, CategoryPillNavigationProps } from './CategoryPillNavigation/CategoryPillNavigation';
+export type { ProductCarouselProps } from './ProductCarousel/ProductCarousel';
+export type { CatalogueCategorySectionProps } from './CatalogueCategorySection/CatalogueCategorySection';

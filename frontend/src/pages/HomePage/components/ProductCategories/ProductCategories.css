@@ -1,0 +1,350 @@
+/* ==========================================================================
+   SURFURIA — PRODUCT CATEGORIES COMPONENT
+   Spacious Ivory Surface, Motion-Powered Carousel, Contact Us Interaction Language
+   ========================================================================== */
+
+/* Outer Section: Warm neutral architectural background framing the canvas */
+.product-categories-wrapper {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    #ebe7df 0%,
+    #f2eee6 120px,
+    #f7f4ee 280px,
+    #faf8f5 100%
+  );
+  padding-top: clamp(2rem, 3.8vw, 3.75rem);
+  padding-bottom: clamp(2rem, 3.5vw, 3.25rem);
+  color: var(--color-ink, #171715);
+  overflow: hidden;
+}
+
+/* Spacious, Warm-White / Ivory Content Surface */
+.product-categories-surface {
+  background: #faf8f5;
+  border: 1px solid rgba(220, 212, 200, 0.45);
+  border-radius: clamp(1rem, 1.8vw, 1.5rem);
+  padding-top: clamp(2.5rem, 4.5vw, 4.5rem);
+  padding-inline: clamp(1.5rem, 3.8vw, 3.75rem);
+  padding-bottom: clamp(2rem, 3.8vw, 3.5rem);
+  box-shadow:
+    0 1px 3px rgba(28, 22, 16, 0.02),
+    0 16px 44px -16px rgba(28, 22, 16, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   EDITORIAL HEADER: Asymmetric Left Heading + Upper Right Description
+   -------------------------------------------------------------------------- */
+.product-categories-header {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 420px);
+  align-items: flex-end;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.product-categories-header__primary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Outlined Eyebrow Pill Badge */
+.product-categories-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border: 1px solid rgba(183, 123, 63, 0.35);
+  border-radius: 999px;
+  background: rgba(183, 123, 63, 0.06);
+  margin-bottom: 1.15rem;
+}
+
+.product-categories-eyebrow-badge__pip {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--color-bronze, #b77b3f);
+}
+
+.product-categories-eyebrow-badge__text {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze-dark, #8e5b2b);
+}
+
+/* Editorial Heading */
+.product-categories-title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2.25rem, 3.8vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+/* Subtitle */
+.product-categories-subtitle {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.5;
+  color: #6e685f;
+  margin-top: 0.65rem;
+  margin-bottom: 0;
+}
+
+/* Right-side Description */
+.product-categories-header__secondary {
+  display: flex;
+  align-items: flex-end;
+}
+
+.product-categories-description {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.68;
+  color: #55514a;
+  margin: 0;
+  padding-bottom: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   HORIZONTAL PRODUCT CAROUSEL VIEWPORT & MOTION TRACK
+   Clean, Spacious, Image-Focused (No arrow buttons)
+   Supports Drag, Touch Swipe, Trackpad, and Snap
+   -------------------------------------------------------------------------- */
+.product-categories-carousel-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-block: 0.5rem 1.5rem;
+  margin-bottom: clamp(2rem, 3.2vw, 3rem);
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.product-categories-carousel-viewport:active {
+  cursor: grabbing;
+}
+
+.product-categories-carousel-track {
+  display: flex;
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+  align-items: stretch;
+  width: max-content;
+}
+
+.product-categories-carousel-track .sf-product-card,
+.product-categories-carousel-track .product-category-card {
+  width: clamp(340px, 27vw, 400px);
+  min-height: clamp(520px, 38vw, 590px);
+  flex-shrink: 0;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 992px) {
+  .product-categories-carousel-track .sf-product-card,
+  .product-categories-carousel-track .product-category-card {
+    width: clamp(300px, 45vw, 360px);
+    min-height: clamp(460px, 44vw, 520px);
+  }
+}
+
+@media (max-width: 640px) {
+  .product-categories-carousel-track .sf-product-card,
+  .product-categories-carousel-track .product-category-card {
+    width: min(85vw, 330px);
+    min-height: 420px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CENTERED BOTTOM CTA (Contact Us Animation Language: Sliding Underlay & Shift)
+   -------------------------------------------------------------------------- */
+.product-categories-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-categories-cta {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 2.25rem;
+  min-height: 2.85rem;
+  border-radius: 10rem;
+  background: #171715;
+  color: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  border: 1px solid rgba(255, 235, 210, 0.35);
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.25) inset,
+    0 4px 18px rgba(23, 23, 21, 0.16);
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Sliding underlay expansion matching Contact Us button */
+.product-categories-cta::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #965d2c 100%);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.product-categories-cta:hover {
+  color: #ffffff;
+  border-color: rgba(255, 240, 220, 0.55);
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 10px 28px rgba(183, 123, 63, 0.45);
+}
+
+.product-categories-cta:hover::before {
+  width: 100%;
+}
+
+.product-categories-cta:active {
+  transform: translateY(1px);
+}
+
+.product-categories-cta__label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+}
+
+.product-categories-cta__arrow {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-categories-cta:hover .product-categories-cta__arrow {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .product-categories-header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .product-category-card {
+    width: clamp(290px, 40vw, 360px);
+    min-height: 480px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-categories-wrapper {
+    padding-top: 1.75rem;
+    padding-bottom: 2rem;
+  }
+
+  .product-categories-surface {
+    padding: clamp(1.75rem, 4vw, 2.25rem) clamp(1rem, 3.5vw, 1.5rem);
+    border-radius: 1.25rem;
+  }
+
+  /* Category Filters Row on Mobile */
+  .product-categories-filters-row {
+    margin-bottom: 1.75rem;
+  }
+
+  /* Product-Card Carousel on Mobile: Full-width deliberate card with subtle peek */
+  .product-categories-carousel-viewport {
+    padding-block: 0.35rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .product-categories-carousel-track {
+    gap: 1rem;
+  }
+
+  .product-category-card {
+    /* Displays ONE complete full-width editorial card at a time */
+    width: clamp(285px, calc(100vw - 4.5rem), 360px);
+    min-height: clamp(480px, 68vh, 540px);
+    margin-top: 0;
+    border-radius: 1.25rem;
+  }
+
+  .product-category-card__link {
+    padding: 1.35rem;
+  }
+
+  .product-category-card__panel {
+    padding: 1.25rem 1.35rem;
+    border-radius: 1rem;
+  }
+
+  .product-category-card__title {
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .product-category-card__subtitle {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .product-category-card__action {
+    margin-top: 0.95rem;
+    padding-top: 0.85rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION OVERRIDE
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .product-category-card,
+  .product-category-card:hover,
+  .product-category-card__image,
+  .product-category-card:hover .product-category-card__image,
+  .product-categories-cta,
+  .product-categories-cta:hover,
+  .product-categories-cta::before {
+    transition: none !important;
+    transform: none !important;
+  }
+}

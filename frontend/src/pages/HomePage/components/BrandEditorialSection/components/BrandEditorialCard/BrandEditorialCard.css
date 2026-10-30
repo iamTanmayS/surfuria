@@ -1,0 +1,299 @@
+/* ==========================================================================
+   SURFURIA — BRAND EDITORIAL: INFORMATION CARD COMPONENT
+   Architectural Materiality & Restrained Precision Motion
+   ========================================================================== */
+
+.brand-editorial-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(225, 218, 208, 0.7);
+  border-radius: clamp(0.875rem, 1.2vw, 1.125rem);
+  padding: clamp(1.25rem, 1.6vw, 1.55rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 230px;
+  box-shadow: 0 1px 2px rgba(28, 22, 16, 0.02);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Card Hover: Precise, Quiet Architectural Feedback */
+.brand-editorial-card:hover {
+  border-color: rgba(183, 123, 63, 0.35);
+  box-shadow: 0 8px 24px -8px rgba(28, 22, 16, 0.08);
+  background-color: #ffffff;
+}
+
+/* Coordinated subtle affordance nudge on card hover */
+.brand-editorial-card:hover .brand-editorial-card__arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+.brand-editorial-card:hover .brand-editorial-cta-btn__icon {
+  transform: translate(2px, -2px);
+}
+
+/* Top Row: Circular Arrow Button on Right */
+.brand-editorial-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.brand-editorial-card__label-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 205, 192, 0.75);
+  background: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.665rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-ink, #171715);
+}
+
+/* Circular Arrow CTA Button
+   Follows Contact Us 3-Layer Architecture */
+.brand-editorial-card__arrow-btn {
+  width: 2.125rem;
+  height: 2.125rem;
+  border-radius: 50%;
+  border: 1px solid rgba(215, 205, 192, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink, #171715);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(28, 22, 16, 0.04);
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+}
+
+.brand-editorial-card__arrow-btn:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 2px;
+}
+
+/* Base background (Layer 0) */
+.brand-editorial-card__arrow-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 50%;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+/* Sliding liquid bronze underlay (Layer 1) */
+.brand-editorial-card__arrow-btn::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #965d2c 100%);
+  transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Icon Span (Layer 2) — Always above background layers */
+.brand-editorial-card__arrow-icon {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-editorial-card__arrow-btn:hover {
+  color: #ffffff;
+  border-color: rgba(183, 123, 63, 0.5);
+  box-shadow: 0 4px 12px rgba(183, 123, 63, 0.25);
+}
+
+.brand-editorial-card__arrow-btn:hover::before {
+  width: 100%;
+}
+
+.brand-editorial-card__arrow-btn:hover .brand-editorial-card__arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+.brand-editorial-card__arrow-btn:active {
+  transform: translateY(1px);
+}
+
+/* Middle: Heading and Description */
+.brand-editorial-card__body {
+  margin-top: clamp(0.95rem, 1.4vw, 1.25rem);
+  flex-grow: 1;
+}
+
+.brand-editorial-card__heading {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.05rem, 1.2vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.45rem 0;
+}
+
+.brand-editorial-card__description {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+/* Card Footer: Outlined Pill Button matching Contact Us Interaction Language */
+.brand-editorial-card__footer {
+  margin-top: clamp(1.25rem, 1.8vw, 1.6rem);
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(225, 218, 208, 0.45);
+  display: flex;
+  align-items: center;
+}
+
+/* Card CTA Pill Button:
+   Follows Contact Us 3-Layer Architecture:
+   ::after (base white, z:0), ::before (sliding liquid bronze layer, z:1), spans (z:2) */
+.brand-editorial-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  min-height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(215, 205, 192, 0.85);
+  background: transparent;
+  color: var(--color-ink, #171715);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(28, 22, 16, 0.03);
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-editorial-cta-btn:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 2px;
+}
+
+/* Base background layer (Layer 0) */
+.brand-editorial-cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 999px;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+/* Sliding liquid bronze underlay (Layer 1) */
+.brand-editorial-cta-btn::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #965d2c 100%);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 999px;
+  z-index: 1;
+}
+
+/* Text and Icon Spans (Layer 2) — Always above background layers */
+.brand-editorial-cta-btn__text,
+.brand-editorial-cta-btn__icon {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-editorial-cta-btn__icon {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-editorial-cta-btn:hover {
+  color: #ffffff;
+  border-color: rgba(183, 123, 63, 0.5);
+  box-shadow: 0 4px 14px rgba(183, 123, 63, 0.28);
+}
+
+.brand-editorial-cta-btn:hover::before {
+  width: 100%;
+}
+
+.brand-editorial-cta-btn:hover .brand-editorial-cta-btn__icon {
+  transform: translate(2px, -2px);
+}
+
+.brand-editorial-cta-btn:active {
+  transform: translateY(1px);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .brand-editorial-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-editorial-card {
+    padding: 1.15rem;
+    border-radius: 1rem;
+  }
+}
+
+/* Reduced Motion Preference Override */
+@media (prefers-reduced-motion: reduce) {
+  .brand-editorial-card,
+  .brand-editorial-card__arrow-btn,
+  .brand-editorial-card__arrow-btn::before,
+  .brand-editorial-card__arrow-icon,
+  .brand-editorial-cta-btn,
+  .brand-editorial-cta-btn::before,
+  .brand-editorial-cta-btn__icon {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

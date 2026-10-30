@@ -1,0 +1,361 @@
+/* ==========================================================================
+   SURFURIA — ARCHITECTURAL NEWSLETTER PANEL STYLES
+   Responsive frosted glass card floating above footer with luxury materiality
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   FLOATING NEWSLETTER CONTAINER
+   Centered horizontally, sized to ~70% of footer width, overlapping top edge
+   -------------------------------------------------------------------------- */
+.site-newsletter-container {
+  position: relative;
+  z-index: 10;
+  /* Exactly 70% of the footer surface width on desktop */
+  width: calc(min(var(--container-wide, 1440px), calc(100% - var(--page-gutter) * 2)) * 0.70);
+  max-width: 1008px;
+  margin-inline: auto;
+  /* Negative margin pulls the newsletter slightly over the footer so it feels merged */
+  margin-bottom: calc(-1 * clamp(2.25rem, 3.8vw, 3.5rem));
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .site-newsletter-container {
+    width: min(90%, calc(100% - var(--page-gutter) * 2));
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-newsletter-container {
+    width: calc(100% - var(--page-gutter) * 2);
+    /* Safe offset on mobile to comfortably bridge into the footer */
+    margin-bottom: calc(-1 * clamp(1.25rem, 3vw, 2rem));
+  }
+}
+
+/* Newsletter Card with Frosted Glass Aesthetics & Refined Floating Shadows */
+.sf-newsletter {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(
+    140deg,
+    rgba(26, 22, 18, 0.88) 0%,
+    rgba(15, 13, 11, 0.94) 100%
+  );
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid rgba(255, 235, 210, 0.16);
+  border-top: 1px solid rgba(255, 245, 230, 0.28);
+  border-radius: clamp(1.2rem, 2.2vw, 1.85rem);
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
+    0 16px 36px -6px rgba(18, 14, 11, 0.35),
+    0 36px 80px -16px rgba(18, 14, 11, 0.55);
+  overflow: hidden;
+  padding: clamp(1.25rem, 2.5vw, 2.25rem);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.sf-newsletter:hover {
+  border-color: rgba(255, 235, 210, 0.26);
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.26) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.4) inset,
+    0 20px 44px -6px rgba(18, 14, 11, 0.42),
+    0 44px 96px -16px rgba(18, 14, 11, 0.62);
+}
+
+.sf-newsletter__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(1.25rem, 2.8vw, 2.5rem);
+  align-items: center;
+}
+
+/* Responsive Single-Column Flow on Tablet & Mobile (< 768px) */
+@media (max-width: 768px) {
+  .sf-newsletter {
+    padding: clamp(1.15rem, 4vw, 1.6rem);
+    border-radius: 1.25rem;
+  }
+
+  .sf-newsletter__inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* Left Visual: Architectural Photography Frame */
+.sf-newsletter__visual-wrap {
+  position: relative;
+  height: 100%;
+  min-height: 220px;
+  max-height: 270px;
+  border-radius: clamp(0.85rem, 1.4vw, 1.15rem);
+  overflow: hidden;
+  background-color: #120e0c;
+  border: 1px solid rgba(255, 235, 210, 0.14);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+  .sf-newsletter__visual-wrap {
+    min-height: 140px;
+    height: 155px;
+    max-height: 175px;
+    width: 100%;
+    border-radius: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sf-newsletter__visual-wrap {
+    min-height: 120px;
+    height: 135px;
+  }
+}
+
+.sf-newsletter__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.sf-newsletter:hover .sf-newsletter__image {
+  transform: scale(1.035);
+}
+
+.sf-newsletter__visual-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 14, 12, 0.05) 0%,
+    rgba(18, 14, 12, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Right Content */
+.sf-newsletter__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.sf-newsletter__header {
+  margin-bottom: 0.15rem;
+}
+
+.sf-newsletter__eyebrow {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-bronze-light, #e6bd84);
+  margin-bottom: 0.45rem;
+}
+
+.sf-newsletter__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.2rem, 1.65vw, 1.55rem);
+  font-weight: 700;
+  color: #fbf9f5;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .sf-newsletter__title {
+    font-size: clamp(1.15rem, 4.8vw, 1.35rem);
+  }
+}
+
+.sf-newsletter__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.8125rem, 0.9vw, 0.875rem);
+  color: rgba(251, 249, 245, 0.72);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Accessible Off-Screen Utility */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.sf-newsletter__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+/* Unified Frosted Pill Capsule matching Surfuria Editorial Aesthetic */
+.sf-newsletter__pill-field {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 240, 220, 0.2);
+  border-radius: 999px;
+  padding: 0.28rem 0.28rem 0.28rem 1.15rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.22);
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sf-newsletter__pill-field:focus-within {
+  border-color: var(--color-bronze-light, #e6bd84);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 3px rgba(183, 123, 63, 0.25),
+    inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.sf-newsletter__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.3;
+  padding: 0.35rem 0.25rem 0.35rem 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sf-newsletter__input::placeholder {
+  color: rgba(251, 249, 245, 0.44);
+}
+
+.sf-newsletter__input--error {
+  color: #ff9d99 !important;
+}
+
+.sf-newsletter__input--success {
+  color: #a3e9be !important;
+}
+
+.sf-newsletter__submit-btn {
+  flex-shrink: 0;
+  min-height: 2.35rem;
+  padding: 0.55rem 1.35rem;
+  font-size: 0.775rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Clean, Mobile-First Stack on Small Devices (< 480px) */
+@media (max-width: 480px) {
+  .sf-newsletter__pill-field {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 14px;
+    padding: 0.45rem;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .sf-newsletter__input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.95rem;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .sf-newsletter__submit-btn {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 9px;
+    font-size: 0.825rem;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+  }
+}
+
+.sf-newsletter__feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  animation: sfFadeIn 0.25s ease forwards;
+}
+
+.sf-newsletter__feedback-icon {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.sf-newsletter__feedback--error {
+  background: rgba(217, 83, 79, 0.15);
+  border: 1px solid rgba(217, 83, 79, 0.35);
+  color: #ff9d99;
+}
+
+.sf-newsletter__feedback--success {
+  background: rgba(71, 117, 91, 0.18);
+  border: 1px solid rgba(71, 117, 91, 0.4);
+  color: #8ed2ab;
+}
+
+.sf-newsletter__privacy {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  color: rgba(251, 249, 245, 0.45);
+  line-height: 1.45;
+}
+
+.sf-newsletter__privacy-link {
+  color: var(--color-bronze-light, #e6bd84);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.sf-newsletter__privacy-link:hover {
+  color: #ffffff;
+}
+
+@keyframes sfFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,10 @@
+export { default as HomePage } from './HomePage';
+export { default as AboutPage } from './AboutPage';
+export { default as HardwarePage } from './HardwarePage';
+export { default as KitchensPage } from './KitchensPage';
+export { default as KitchenConfigurationDetailPage } from './KitchenConfigurationDetailPage';
+export { default as ProductDetailPage } from './ProductDetailPage';
+export { default as ContactPage } from './ContactPage';
+export { default as PrivacyPolicyPage } from './PrivacyPolicyPage';
+export { default as TermsPage } from './TermsPage';
+export { default as NotFoundPage } from './NotFoundPage';

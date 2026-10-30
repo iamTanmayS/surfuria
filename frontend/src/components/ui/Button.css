@@ -1,0 +1,234 @@
+/* ==========================================================================
+   SURFURIA — REUSABLE BUTTON COMPONENT WITH SLIDING LIQUID UNDERLAY
+   ========================================================================== */
+
+.sf-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.45rem;
+  min-height: 2.65rem;
+  border-radius: 10rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.825rem;
+  font-weight: 700;
+  letter-spacing: 0.12rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(255, 235, 210, 0.35);
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.25) inset,
+    0 8px 24px rgba(183, 123, 63, 0.28);
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  outline: none;
+}
+
+.sf-button:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 3px;
+}
+
+.sf-button-text {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sf-button-icon {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.sf-button:hover .sf-button-icon {
+  transform: translateX(3px);
+}
+
+.sf-button:active {
+  transform: translateY(1px);
+}
+
+/* --------------------------------------------------------------------------
+   BASE VARIANT: BRONZE (Luxury Warm Amber / Bronze)
+   Base: #b77b3f / Underlay expansion: #8e5b2b
+   -------------------------------------------------------------------------- */
+.sf-button--bronze {
+  color: #ffffff;
+}
+
+.sf-button--bronze::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #a46d35 100%);
+  border-radius: 10rem;
+  z-index: -2;
+}
+
+.sf-button--bronze::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #965d2c 0%, #7d491c 100%);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.sf-button--bronze:hover {
+  color: #ffffff;
+  border-color: rgba(255, 240, 220, 0.55);
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 10px 28px rgba(183, 123, 63, 0.45);
+}
+
+.sf-button--bronze:hover::before {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   DARK VARIANT: ESPRESSO INK
+   -------------------------------------------------------------------------- */
+.sf-button--dark {
+  color: #f7f2eb;
+  border-color: rgba(220, 185, 145, 0.2);
+}
+
+.sf-button--dark::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #221b16;
+  border-radius: 10rem;
+  z-index: -2;
+}
+
+.sf-button--dark::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #0f0b09;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.sf-button--dark:hover::before {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   OUTLINE VARIANT
+   -------------------------------------------------------------------------- */
+.sf-button--outline {
+  background: transparent;
+  border-color: rgba(220, 185, 145, 0.35);
+  color: #f7f2eb;
+}
+
+.sf-button--outline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10rem;
+  z-index: -2;
+}
+
+.sf-button--outline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: rgba(183, 123, 63, 0.25);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.sf-button--outline:hover::before {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   GHOST / NAV INITIAL VARIANT (Transparent at top, gains bronze glow on hover)
+   -------------------------------------------------------------------------- */
+.sf-button--ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: #ffffff;
+}
+
+.sf-button--ghost::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: 10rem;
+  z-index: -2;
+  transition: background 0.3s ease;
+}
+
+.sf-button--ghost::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #965d2c 100%);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.sf-button--ghost:hover {
+  border-color: rgba(255, 240, 220, 0.4);
+  box-shadow: 0 4px 18px rgba(183, 123, 63, 0.35);
+}
+
+.sf-button--ghost:hover::before {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .sf-button {
+    padding: 0.55rem 1.15rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.09rem;
+    min-height: 2.45rem;
+  }
+}
+

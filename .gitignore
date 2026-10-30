@@ -1,0 +1,10 @@
+# Environment variables (NEVER commit secrets or API keys)
+.env
+.env.local
+.env.*.local
+*.env
+
+node_modules
+dist
+.vercel
+

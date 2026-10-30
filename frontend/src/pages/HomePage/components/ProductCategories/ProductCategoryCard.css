@@ -1,0 +1,2 @@
+/* Re-export centralized ProductCard styles */
+@import '../../../../components/catalog/ProductCard/ProductCard.css';

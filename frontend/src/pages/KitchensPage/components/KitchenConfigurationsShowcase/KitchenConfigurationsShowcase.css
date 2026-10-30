@@ -1,0 +1,165 @@
+/* ==========================================================================
+   SURFURIA — KITCHEN CONFIGURATIONS SHOWCASE
+   Compact Architectural Catalogue Cards with Dedicated Detail Page Linking
+   ========================================================================== */
+
+.kitchen-configs-section {
+  position: relative;
+  width: 100%;
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+  background-color: var(--color-surface, #ffffff);
+  border-bottom: 1px solid var(--color-line, #e7e0d5);
+  box-sizing: border-box;
+  scroll-margin-top: calc(var(--sf-nav-height, 84px) + 24px);
+}
+
+/* Header */
+.kitchen-configs-header {
+  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+.kitchen-configs-header__main {
+  max-width: 780px;
+  margin-bottom: 2rem;
+}
+
+.kitchen-configs-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.775rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.65rem;
+}
+
+.kitchen-configs-title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2.1rem, 3.8vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1rem 0;
+}
+
+.kitchen-configs-desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.65;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+/* Layout Filter Pills */
+.kitchen-configs-pills-row {
+  position: relative;
+  width: 100%;
+}
+
+/* ==========================================================================
+   CONFIGURATIONS GRID — COMPACT 4-COLUMN ARCHITECTURAL CATALOGUE
+   Equal width and height within the same row
+   ========================================================================== */
+.kitchen-configs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 2vw, 2rem);
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  align-items: stretch;
+}
+
+.kitchen-configs-grid--single {
+  grid-template-columns: minmax(320px, 420px);
+  justify-content: center;
+}
+
+.kitchen-configs-card {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   GLOBAL HARDWARE ASSURANCE BANNER
+   ========================================================================== */
+.kitchen-hardware-assurance {
+  background: #171310;
+  color: #fbf9f5;
+  border-radius: clamp(16px, 1.6vw, 24px);
+  padding: clamp(2rem, 3.5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.kitchen-hw-assurance__eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e6bd84;
+  margin-bottom: 0.65rem;
+}
+
+.kitchen-hw-assurance__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 0.85rem 0;
+}
+
+.kitchen-hw-assurance__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #d8cebf;
+  margin: 0;
+}
+
+.kitchen-hw-assurance__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.kitchen-hw-assurance__tag {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(225, 195, 160, 0.25);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.785rem;
+  font-weight: 600;
+  color: #e6bd84;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUTS (< 1200px, < 1024px, < 768px)
+   ========================================================================== */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .kitchen-configs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .kitchen-hardware-assurance {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .kitchen-configs-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

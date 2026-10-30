@@ -1,0 +1,13 @@
+/* ==========================================================================
+   SURFURIA — KITCHENS PAGE STYLES
+   Editorial Architectural Layout, Polished Transitions & Responsive Flow
+   ========================================================================== */
+.kitchens-page {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-paper, #fbf9f5);
+  color: var(--color-ink, #171715);
+  min-height: 100vh;
+}

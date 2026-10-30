@@ -1,0 +1,240 @@
+/* ==========================================================================
+   SURFURIA — REUSABLE PRODUCT CAROUSEL COMPONENT
+   Responsive Track: Multi-Column Grid on Desktop, Horizontal Swiping on Mobile/Tablet
+   ========================================================================== */
+.sf-carousel {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   DESKTOP (>= 1024px): ARCHITECTURAL MULTI-COLUMN GRID
+   ========================================================================== */
+.sf-carousel__track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  width: 100%;
+}
+
+.sf-carousel--editorial .sf-carousel__track {
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.75rem, 3vw, 3rem);
+}
+
+.sf-carousel__card {
+  width: 100%;
+  height: 100%;
+}
+
+/* Controls and fades are desktop-hidden by default */
+.sf-carousel__controls,
+.sf-carousel__fade {
+  display: none;
+}
+
+/* ==========================================================================
+   TABLET & MOBILE (< 1024px): HORIZONTAL SWIPEABLE TRACK WITH PEEK
+   ========================================================================== */
+@media (max-width: 1023px) {
+  .sf-carousel__track {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 1.25rem;
+    padding-block: 0.5rem 1.25rem;
+    padding-inline: 4px;
+    touch-action: pan-x pan-y;
+    cursor: grab;
+    user-select: none;
+    scroll-behavior: smooth;
+  }
+
+  .sf-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sf-carousel__track.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+
+  .sf-carousel__card {
+    flex: 0 0 clamp(320px, 48vw, 380px);
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    height: auto;
+  }
+
+  /* Edge Fade Cues */
+  .sf-carousel__fade {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 3.5rem;
+    width: 28px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .sf-carousel__fade--left {
+    left: 0;
+    background: linear-gradient(to right, rgba(251, 249, 245, 0.95), transparent);
+  }
+
+  .sf-carousel__fade--right {
+    right: 0;
+    background: linear-gradient(to left, rgba(251, 249, 245, 0.95), transparent);
+  }
+
+  .sf-carousel__fade.is-visible {
+    opacity: 1;
+  }
+
+  /* Carousel Controls Bar */
+  .sf-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .sf-carousel__arrows {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sf-carousel__arrow-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-line, #e7e0d5);
+    background: var(--color-surface, #ffffff);
+    color: var(--color-ink, #171715);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(23, 23, 21, 0.05);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.15s ease;
+  }
+
+  .sf-carousel__arrow-btn:hover:not(:disabled) {
+    background: #ffffff;
+    border-color: var(--color-bronze, #b77b3f);
+    color: var(--color-bronze, #b77b3f);
+    transform: scale(1.05);
+  }
+
+  .sf-carousel__arrow-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: var(--color-line, #e7e0d5);
+  }
+
+  .sf-carousel__arrow-btn:focus-visible {
+    outline: 2px solid var(--color-bronze, #b77b3f);
+    outline-offset: 2px;
+  }
+
+  /* Pagination Dots */
+  .sf-carousel__dots {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .sf-carousel__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #d8cebf;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition:
+      width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.25s ease;
+  }
+
+  .sf-carousel__dot:hover {
+    background: #a98a68;
+  }
+
+  .sf-carousel__dot.is-active {
+    width: 22px;
+    background: var(--color-bronze, #b77b3f);
+  }
+
+  .sf-carousel__dot:focus-visible {
+    outline: 2px solid var(--color-bronze, #b77b3f);
+    outline-offset: 2px;
+  }
+
+  /* Counter Pill */
+  .sf-carousel__counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-body, 'DM Sans', sans-serif);
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: var(--color-ink-muted, #5f5b54);
+    background: rgba(23, 23, 21, 0.05);
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+  }
+
+  .sf-carousel__counter-sep {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   MOBILE (< 768px): OPTIMIZED PEEKING CARDS
+   ========================================================================== */
+@media (max-width: 767px) {
+  .sf-carousel__track {
+    gap: 1rem;
+    padding-block: 0.25rem 1rem;
+  }
+
+  .sf-carousel__card {
+    /* 82vw card width gives a clear ~18% peek of the adjacent card */
+    flex: 0 0 clamp(275px, 82vw, 330px);
+  }
+
+  .sf-carousel__arrows {
+    display: none; /* Rely on fluid native touch swiping on mobile */
+  }
+
+  .sf-carousel__controls {
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-carousel__track {
+    scroll-behavior: auto !important;
+  }
+}
+

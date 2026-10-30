@@ -1,0 +1,251 @@
+/* ==========================================================================
+   SURFURIA — KITCHEN INTRO & MATERIALS SECTION
+   Editorial Rigor, Architectural Split & Material Specifications
+   ========================================================================== */
+.kitchen-intro-section {
+  position: relative;
+  width: 100%;
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+  background-color: var(--color-paper, #fbf9f5);
+  border-bottom: 1px solid var(--color-line, #e7e0d5);
+  box-sizing: border-box;
+}
+
+/* Two-Column Manifesto Grid */
+.kitchen-intro-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+  margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.kitchen-intro__manifesto-col {
+  max-width: 680px;
+}
+
+.kitchen-intro__eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.775rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.75rem;
+}
+
+.kitchen-intro__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1.5rem 0;
+}
+
+.kitchen-intro__lead {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(1.05rem, 1.25vw, 1.185rem);
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1.25rem 0;
+}
+
+.kitchen-intro__body {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+/* Right Column: Pillar Card */
+.kitchen-intro__pillar-card {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: clamp(16px, 1.4vw, 22px);
+  padding: clamp(1.75rem, 2.5vw, 2.5rem);
+  box-shadow: 0 8px 30px rgba(23, 23, 21, 0.04);
+}
+
+.kitchen-intro__pillar-tag {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.35rem;
+}
+
+.kitchen-intro__pillar-title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0 0 1.5rem 0;
+}
+
+.kitchen-intro__pillar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.kitchen-intro__pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.kitchen-intro__pillar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(183, 123, 63, 0.12);
+  color: var(--color-bronze, #b77b3f);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.kitchen-intro__pillar-item strong {
+  display: block;
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  margin-bottom: 0.2rem;
+}
+
+.kitchen-intro__pillar-item p {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+/* ==========================================================================
+   MATERIALS & FINISHES MATRIX
+   ========================================================================== */
+.kitchen-materials-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+  padding-top: clamp(2.5rem, 4vw, 3.5rem);
+  border-top: 1px solid var(--color-line, #e7e0d5);
+}
+
+.kitchen-materials-group__header {
+  margin-bottom: 1.5rem;
+}
+
+.kitchen-materials-group__tag {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.25rem;
+}
+
+.kitchen-materials-group__title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+.kitchen-materials-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.kitchen-mat-card {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: var(--radius-md, 0.75rem);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.kitchen-mat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(183, 123, 63, 0.4);
+  box-shadow: 0 8px 24px rgba(23, 23, 21, 0.06);
+}
+
+.kitchen-mat-card__top {
+  margin-bottom: 0.35rem;
+}
+
+.kitchen-mat-card__name {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+}
+
+.kitchen-mat-card__sub {
+  display: block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.785rem;
+  font-weight: 600;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.65rem;
+}
+
+.kitchen-mat-card__desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.825rem;
+  line-height: 1.55;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .kitchen-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .kitchen-materials-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kitchen-materials-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .kitchen-mat-card {
+    padding: 1.15rem;
+  }
+}
+

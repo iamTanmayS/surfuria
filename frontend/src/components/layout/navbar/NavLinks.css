@@ -1,0 +1,93 @@
+/* ==========================================================================
+   SURFURIA NAVBAR — PRIMARY NAVIGATION LINKS
+   ========================================================================== */
+
+.sf-nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sf-nav-item {
+  position: relative;
+  display: inline-flex;
+}
+
+/* The Navigation Pill Buttons & Links */
+.sf-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius-pill, 999px);
+  background: transparent;
+  border: 1px solid transparent;
+  color: #f3eee8;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45); /* Subtle text shadow for crisp legibility over photography */
+  transition:
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    text-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sf-nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sf-nav-link:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 2px;
+}
+
+/* Active or Dropdown-Open State on the Trigger (only shows background when scrolled) */
+.sf-navbar[data-scrolled='true'] .sf-nav-link[data-active='true'] {
+  color: #ffffff;
+  background: rgba(220, 185, 145, 0.16);
+  border-color: rgba(220, 185, 145, 0.32);
+  box-shadow: 0 1px 0 rgba(255, 245, 230, 0.12) inset;
+}
+
+/* Chevron indicator */
+.sf-nav-chevron {
+  width: 0.85rem;
+  height: 0.85rem;
+  display: inline-block;
+  color: #c4a480;
+  transition: transform var(--transition-base), color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sf-nav-link:hover .sf-nav-chevron,
+.sf-nav-link[data-active='true'] .sf-nav-chevron {
+  color: #ffffff;
+}
+
+.sf-nav-link[data-active='true'] .sf-nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (TABLETS & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .sf-nav-center {
+    display: none; /* Move to mobile drawer */
+  }
+}
+

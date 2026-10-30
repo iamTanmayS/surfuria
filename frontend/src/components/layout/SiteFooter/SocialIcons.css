@@ -1,0 +1,151 @@
+/* ==========================================================================
+   FOOTER SOCIAL ICONS COMPONENT STYLES
+   ========================================================================== */
+/* --------------------------------------------------------------------------
+   SOCIAL MEDIA ICONS (Contact Us Button Animation Style)
+   -------------------------------------------------------------------------- */
+.sf-footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.65rem;
+}
+
+.sf-footer-social__label {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink, #171715);
+}
+
+.sf-footer-social__list {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+/*
+ * Shared 3-Layer Contact Us button animation architecture for social icons:
+ * Base: Ivory/stone background (.sf-footer-social__icon::after)
+ * Animated underlay: Sliding liquid bronze layer (.sf-footer-social__icon::before)
+ * Foreground: SVG icon (always on top via relative z-index)
+ */
+.sf-footer-social__icon {
+  position: relative;
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 0;
+  border: 1px solid rgba(220, 212, 200, 0.85);
+  box-shadow: 0 1px 2px rgba(28, 22, 16, 0.04);
+}
+
+.sf-footer-social__icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #f4f1ec;
+  border-radius: 50%;
+  z-index: -2;
+}
+
+.sf-footer-social__icon::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #965d2c 100%);
+  border-radius: 50%;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+.sf-footer-social__icon svg {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Interactive link variant */
+.sf-footer-social__icon--link {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-ink-muted, #5f5b54);
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+.sf-footer-social__icon--link:hover {
+  color: #ffffff;
+  border-color: rgba(183, 123, 63, 0.55);
+  box-shadow: 0 6px 18px rgba(183, 123, 63, 0.32);
+  transform: translateY(-2px);
+}
+
+.sf-footer-social__icon--link:hover::before {
+  width: 100%;
+}
+
+.sf-footer-social__icon--link:active {
+  transform: translateY(0);
+}
+
+.sf-footer-social__icon--link:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 3px;
+}
+
+/* Inactive decorative variant */
+.sf-footer-social__icon--inactive {
+  cursor: default;
+  color: rgba(95, 91, 84, 0.45);
+  border-color: rgba(220, 212, 200, 0.5);
+}
+
+.sf-footer-social__icon--inactive::after {
+  background-color: #f8f6f2;
+}
+
+@media (max-width: 640px) {
+  .sf-footer-social {
+    margin-top: 0.5rem;
+    gap: 0.45rem;
+  }
+
+  .sf-footer-social__label {
+    font-size: 0.675rem;
+  }
+
+  .sf-footer-social__list {
+    gap: 0.45rem;
+  }
+
+  .sf-footer-social__icon {
+    width: 2.125rem;
+    height: 2.125rem;
+  }
+
+  .sf-footer-social__icon svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-footer-social__icon--link,
+  .sf-footer-social__icon--link::before {
+    transition: none !important;
+  }
+}

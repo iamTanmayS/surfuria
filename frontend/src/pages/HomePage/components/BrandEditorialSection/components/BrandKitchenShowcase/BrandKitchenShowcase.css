@@ -1,0 +1,249 @@
+/* ==========================================================================
+   SURFURIA — BRAND EDITORIAL: KITCHENS ARCHITECTURAL SHOWCASE
+   ========================================================================== */
+
+.brand-editorial__kitchen-panel {
+  position: relative;
+  border-radius: clamp(1rem, 1.8vw, 1.5rem);
+  overflow: hidden;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(220, 212, 200, 0.45);
+  box-shadow:
+    0 1px 3px rgba(28, 22, 16, 0.02),
+    0 16px 44px -16px rgba(28, 22, 16, 0.05);
+  background-color: #1a1614;
+}
+
+/* Background Image Layer with Restrained Scale Motion */
+.brand-editorial__kitchen-image-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.brand-editorial__kitchen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transform-origin: center center;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.brand-editorial__kitchen-panel:hover .brand-editorial__kitchen-image {
+  transform: scale(1.03);
+}
+
+/* Atmospheric Scrim Gradients (Legibility without Competing with Photography) */
+.brand-editorial__kitchen-scrim-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 42%;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 11, 9, 0.5) 0%,
+    rgba(14, 11, 9, 0.18) 50%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brand-editorial__kitchen-scrim-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(
+    0deg,
+    rgba(14, 11, 9, 0.82) 0%,
+    rgba(14, 11, 9, 0.38) 48%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Upper Action Pill: Explore Kitchens ↗
+   Follows Contact Us 3-Layer Architecture:
+   ::after (base background, z:0), ::before (sliding liquid bronze layer, z:1), spans (z:2) */
+.brand-editorial-pill-action {
+  position: relative;
+  z-index: 3;
+  align-self: flex-start;
+  margin: clamp(1.25rem, 2.2vw, 2rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.25rem;
+  min-height: 2.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #171715;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  user-select: none;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-editorial-pill-action:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 3px;
+}
+
+/* Base Frosted Background (Layer 0) */
+.brand-editorial-pill-action::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 999px;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+/* Sliding Liquid Bronze Underlay (Layer 1) */
+.brand-editorial-pill-action::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, #c49658 0%, #b77b3f 60%, #965d2c 100%);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 999px;
+  z-index: 1;
+}
+
+/* Text and Icon Spans (Layer 2) — Always above background layers */
+.brand-editorial-pill-action__text,
+.brand-editorial-pill-action__icon {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-editorial-pill-action__icon {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-editorial-pill-action:hover {
+  color: #ffffff;
+  border-color: rgba(255, 240, 220, 0.65);
+  box-shadow: 0 8px 24px rgba(183, 123, 63, 0.4);
+}
+
+.brand-editorial-pill-action:hover::before {
+  width: 100%;
+}
+
+.brand-editorial-pill-action:hover .brand-editorial-pill-action__icon {
+  transform: translate(3px, -2px);
+}
+
+.brand-editorial-pill-action:active {
+  transform: translateY(1px);
+}
+
+/* Bottom Descriptors: Compact 3-Part Strip */
+.brand-editorial__descriptors {
+  position: relative;
+  z-index: 3;
+  margin: clamp(1.25rem, 2.2vw, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 0.85rem;
+}
+
+.brand-editorial__descriptor-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.brand-editorial__descriptor-bullet {
+  color: #e6bd84;
+  font-size: 0.85rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.brand-editorial__descriptor-text {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.725rem, 0.88vw, 0.8125rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .brand-editorial__kitchen-panel {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 860px) {
+  .brand-editorial__kitchen-panel {
+    min-height: clamp(380px, 48vh, 460px);
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-editorial__kitchen-panel {
+    border-radius: 1.25rem;
+    min-height: 380px;
+  }
+
+  .brand-editorial-pill-action {
+    margin: 1.15rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.775rem;
+  }
+
+  .brand-editorial__descriptors {
+    margin: 1.15rem;
+    gap: 0.45rem 0.65rem;
+  }
+}
+
+/* Reduced Motion Preference Override */
+@media (prefers-reduced-motion: reduce) {
+  .brand-editorial__kitchen-image,
+  .brand-editorial-pill-action,
+  .brand-editorial-pill-action::before,
+  .brand-editorial-pill-action__icon {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

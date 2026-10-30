@@ -1,0 +1,422 @@
+/* ==========================================================================
+   SURFURIA — EDITORIAL HERO FEATURE SEQUENCE (FROSTED MIRROR GLASS POPUP)
+   Smoked Mirror Glass, Floating Depth, Restrained Architectural Materiality
+   ========================================================================== */
+
+/* Outer stage: centered within the pinned viewport */
+.hero-feature-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vh, 3.5rem) var(--page-gutter, 1.5rem);
+  pointer-events: none;
+}
+
+/* Master Architectural Frame: Floating, Frosted-Mirror Glass Surface */
+.hero-feature-frame {
+  position: relative;
+  width: min(1140px, 92vw);
+  height: min(560px, 72vh);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  
+  /* Layered Smoked Mirror Surface with espresso & bronze undertones */
+  background:
+    /* Layer 1: Soft specular angled glass reflection (top-left to center) */
+    linear-gradient(
+      135deg,
+      rgba(255, 248, 240, 0.06) 0%,
+      rgba(255, 240, 220, 0.02) 28%,
+      transparent 58%
+    ),
+    /* Layer 2: Smoked mirror gradient with deep espresso & charcoal undertones */
+    linear-gradient(
+      150deg,
+      rgba(26, 20, 16, 0.82) 0%,
+      rgba(18, 14, 11, 0.86) 48%,
+      rgba(12, 9, 7, 0.92) 100%
+    );
+
+  /* Carefully balanced frosted mirror blur & saturation */
+  backdrop-filter: blur(24px) saturate(145%) brightness(0.95);
+  -webkit-backdrop-filter: blur(24px) saturate(145%) brightness(0.95);
+
+  /* Polished glass edge with delicate warm highlight */
+  border: 1px solid rgba(225, 195, 160, 0.18);
+  border-radius: clamp(14px, 1.2vw, 18px);
+
+  /* Layered Shadow System: Physical elevation, contact shadow & ambient halo */
+  box-shadow:
+    /* Top bevel edge specular catch (light catching polished glass) */
+    0 1px 0 0 rgba(255, 250, 242, 0.22) inset,
+    /* Left bevel edge specular catch */
+    1px 0 0 0 rgba(255, 250, 242, 0.12) inset,
+    /* Bottom bevel dark contact lip */
+    0 -1px 0 0 rgba(0, 0, 0, 0.5) inset,
+    /* Subtle inner ambient bronze glow */
+    inset 0 0 48px -12px rgba(183, 123, 63, 0.06),
+    /* 1. Contact shadow (grounding) */
+    0 6px 12px -2px rgba(0, 0, 0, 0.45),
+    /* 2. Mid ambient shadow (body separation) */
+    0 20px 40px -8px rgba(6, 4, 3, 0.58),
+    /* 3. Deep floating elevation (wide falloff) */
+    0 40px 80px -16px rgba(0, 0, 0, 0.72),
+    /* 4. Warm subtle bronze aura */
+    0 0 80px -20px rgba(183, 123, 63, 0.12);
+
+  overflow: hidden;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateZ(0);
+  will-change: opacity, transform;
+}
+
+/* Subtle, stationary frosted-mirror surface reflection */
+.hero-feature-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 85% 55% at 20% 0%,
+    rgba(255, 245, 230, 0.07) 0%,
+    rgba(255, 240, 220, 0.02) 40%,
+    transparent 75%
+  );
+}
+
+/* Micro-fine inner border for polished glass refraction depth */
+.hero-feature-frame::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: calc(clamp(14px, 1.2vw, 18px) - 1px);
+  border: 1px solid rgba(255, 255, 255, 0.035);
+}
+
+/* Fallback for browsers lacking backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .hero-feature-frame {
+    background: rgba(18, 14, 11, 0.94);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LEFT: 55% ARCHITECTURAL IMAGE VIEWPORT
+   Polished editorial treatment with natural image depth and subtle separation
+   -------------------------------------------------------------------------- */
+.hero-feature-media-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #100b08;
+  z-index: 1;
+  /* Subtle architectural separation between image and right glass panel */
+  box-shadow:
+    1px 0 0 0 rgba(220, 185, 145, 0.12),
+    12px 0 32px -6px rgba(0, 0, 0, 0.45);
+}
+
+.hero-feature-image-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  will-change: clip-path, transform, opacity;
+}
+
+.hero-feature-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  filter: contrast(1.03) brightness(0.96);
+  will-change: transform;
+}
+
+/* Subtle architectural edge gradient: softens transition into the glass surface */
+.hero-feature-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(14, 10, 8, 0.03) 0%,
+    transparent 35%,
+    rgba(14, 10, 8, 0.12) 75%,
+    rgba(14, 10, 8, 0.46) 100%
+  );
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT: 45% EDITORIAL TEXT VIEWPORT
+   Warm ivory typography, deliberate rhythm, exceptional contrast
+   -------------------------------------------------------------------------- */
+.hero-feature-content-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  z-index: 2;
+}
+
+.hero-feature-text-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.25rem, 3.8vw, 3.75rem);
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.hero-feature-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.95rem;
+}
+
+.hero-feature-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #cbb292;
+}
+
+.hero-feature-eyebrow-pip {
+  display: inline-block;
+  width: 0rem;
+  height: 0rem;
+  border-radius: 50%;
+  background: #b77b3f;
+  box-shadow: 0 0 8px rgba(183, 123, 63, 0.55);
+}
+
+.hero-feature-meta-badge {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.675rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(180, 170, 160, 0.65);
+}
+
+/* Editorial Heading: Warm ivory, high legibility on smoked glass */
+.hero-feature-heading {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.95rem, 2.8vw, 2.65rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: #f7f4ef;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+  margin: 0;
+}
+
+/* Delicate Bronze Accent Rule */
+.hero-feature-rule {
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, #cbb292 0%, rgba(203, 178, 146, 0.15) 100%);
+  margin-block: 1.35rem;
+  border: none;
+}
+
+/* Concise Narrative: Warm light stone, calm and readable */
+.hero-feature-description {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.925rem, 1.15vw, 1.05rem);
+  line-height: 1.68;
+  color: #c9c1b6;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  margin: 0;
+  max-width: 430px;
+}
+
+/* Footer Index Indicator */
+.hero-feature-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: clamp(1.75rem, 3vh, 2.75rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(225, 195, 160, 0.12);
+}
+
+.hero-feature-step-counter {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.775rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #cbb292;
+  text-transform: uppercase;
+}
+
+.hero-feature-step-label {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  letter-spacing: 0.08em;
+  color: #8c8275;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (TABLETS & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .hero-feature-frame {
+    height: min(520px, 75vh);
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-feature-text-layer {
+    padding: 1.75rem 2rem;
+  }
+
+  .hero-feature-heading {
+    font-size: 1.85rem;
+  }
+
+  .hero-feature-description {
+    font-size: 0.925rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-feature-stage {
+    padding: 1rem var(--page-gutter, 1rem);
+  }
+
+  .hero-feature-frame {
+    display: flex;
+    flex-direction: column;
+    height: min(560px, 80vh);
+  }
+
+  .hero-feature-media-viewport {
+    height: 42%;
+    width: 100%;
+    flex-shrink: 0;
+    box-shadow:
+      0 1px 0 0 rgba(220, 185, 145, 0.12),
+      0 8px 24px -4px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-feature-content-viewport {
+    height: 58%;
+    width: 100%;
+  }
+
+  .hero-feature-text-layer {
+    padding: 1.35rem 1.45rem;
+    justify-content: flex-start;
+  }
+
+  .hero-feature-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-feature-heading {
+    font-size: 1.45rem;
+  }
+
+  .hero-feature-rule {
+    margin-block: 0.75rem;
+  }
+
+  .hero-feature-description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .hero-feature-footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-feature-frame {
+    height: min(540px, 82vh);
+  }
+
+  .hero-feature-media-viewport {
+    height: 38%;
+  }
+
+  .hero-feature-content-viewport {
+    height: 62%;
+  }
+
+  .hero-feature-text-layer {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .hero-feature-heading {
+    font-size: 1.3rem;
+  }
+
+  .hero-feature-description {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+}
+
+/* Reduced Motion: Accessible fallback */
+@media (prefers-reduced-motion: reduce) {
+  .hero-feature-stage {
+    position: relative;
+    padding: 4rem 1.5rem;
+  }
+
+  .hero-feature-frame {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .hero-feature-media-viewport,
+  .hero-feature-content-viewport {
+    position: relative;
+    height: auto;
+  }
+
+  .hero-feature-image-layer,
+  .hero-feature-text-layer {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    height: auto;
+  }
+}

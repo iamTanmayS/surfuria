@@ -1,0 +1,12 @@
+/* ==========================================================================
+   SURFURIA — ABOUT PAGE ROOT STYLING
+   ========================================================================== */
+
+.about-page {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-paper, #fbf9f5);
+  color: var(--color-ink, #171715);
+}

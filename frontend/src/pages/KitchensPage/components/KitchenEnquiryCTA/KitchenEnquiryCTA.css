@@ -1,0 +1,158 @@
+/* ==========================================================================
+   SURFURIA — KITCHEN ENQUIRY CTA SECTION
+   Architectural Closing Card with Warm Espresso Tones & Direct Routing
+   ========================================================================== */
+.kitchen-cta-section {
+  position: relative;
+  width: 100%;
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+  background-color: var(--color-paper, #fbf9f5);
+  box-sizing: border-box;
+}
+
+.kitchen-cta-card {
+  position: relative;
+  background: #171310;
+  color: #fbf9f5;
+  border-radius: clamp(18px, 2vw, 28px);
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -16px rgba(23, 23, 21, 0.22);
+}
+
+.kitchen-cta-content {
+  position: relative;
+  z-index: 2;
+}
+
+.kitchen-cta-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.775rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e6bd84;
+  margin-bottom: 0.85rem;
+}
+
+.kitchen-cta-title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(2.1rem, 3.8vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0 0 1.25rem 0;
+}
+
+.kitchen-cta-desc {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: clamp(0.975rem, 1.25vw, 1.125rem);
+  line-height: 1.65;
+  color: #d8cebf;
+  margin: 0 0 2.25rem 0;
+  max-width: 580px;
+}
+
+.kitchen-cta-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.15rem;
+}
+
+.kitchen-cta-btn-secondary {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(8px);
+}
+
+.kitchen-cta-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: #e6bd84 !important;
+  color: #e6bd84 !important;
+}
+
+/* Feature Pillars */
+.kitchen-cta-features {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(225, 195, 160, 0.18);
+  border-radius: var(--radius-lg, 1rem);
+  padding: clamp(1.75rem, 2.5vw, 2.25rem);
+}
+
+.kitchen-cta-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.kitchen-cta-feat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgba(230, 189, 132, 0.15);
+  color: #e6bd84;
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.775rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.kitchen-cta-feat-text strong {
+  display: block;
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.kitchen-cta-feat-text p {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: #b8aba0;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .kitchen-cta-card {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .kitchen-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .kitchen-cta-btn-primary,
+  .kitchen-cta-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
