@@ -1,4 +1,4 @@
-import type { KitchenConfiguration } from './types.ts';
+import type { KitchenConfiguration } from './types.js';
 
 /**
  * SURFURIA — Shared Kitchen Included Hardware List

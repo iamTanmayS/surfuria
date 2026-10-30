@@ -1,4 +1,4 @@
-import { isHoneypotTriggered } from '../security/honeypot';
+import { isHoneypotTriggered } from '../security/honeypot.js';
 
 export interface ValidatedNewsletterPayload {
   email: string;

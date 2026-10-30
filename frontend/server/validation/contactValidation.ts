@@ -1,4 +1,4 @@
-import { getTriggeredHoneypotField } from '../security/honeypot';
+import { getTriggeredHoneypotField } from '../security/honeypot.js';
 
 export interface ValidatedContactPayload {
   name: string;

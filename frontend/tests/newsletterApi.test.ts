@@ -5,7 +5,7 @@ import handler, {
   buildNewsletterNotificationEmail,
   checkRateLimit,
   resetRateLimitsForTesting,
-} from '../api/newsletter';
+} from '../api/newsletter.js';
 
 function createMockHttp(options: { method?: string; body?: unknown; headers?: Record<string, string>; ip?: string }) {
   const req = {

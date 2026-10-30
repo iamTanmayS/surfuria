@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { OFFICIAL_EMAIL, OFFICIAL_PHONE, getBrevoConfig } from '../server/config/serverConfig';
+import { OFFICIAL_EMAIL, OFFICIAL_PHONE, getBrevoConfig } from '../server/config/serverConfig.js';
 import { resolveWhatsAppNumber, buildWhatsAppUrl } from '../src/config/whatsapp';
-import { buildCustomerConfirmationEmail } from '../server/email/templates/customerConfirmationEmail';
-import { buildOwnerContactEmail } from '../server/email/templates/ownerContactEmail';
-import { buildNewsletterNotificationEmail } from '../server/email/templates/newsletterNotificationEmail';
+import { buildCustomerConfirmationEmail } from '../server/email/templates/customerConfirmationEmail.js';
+import { buildOwnerContactEmail } from '../server/email/templates/ownerContactEmail.js';
+import { buildNewsletterNotificationEmail } from '../server/email/templates/newsletterNotificationEmail.js';
 
 describe('Official Business Contact Information Verification', () => {
   it('official email is info@surfuria.com', () => {

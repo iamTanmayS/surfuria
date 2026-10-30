@@ -1,5 +1,5 @@
-import { BREVO_API_URL } from '../config/serverConfig';
-import type { BrevoPayload } from './brevoClient';
+import { BREVO_API_URL } from '../config/serverConfig.js';
+import type { BrevoPayload } from './brevoClient.js';
 
 export interface SendEmailResult {
   ok: true;
@@ -35,10 +35,14 @@ export async function sendTransactionalEmail(
       return { ok: true, messageId: result.messageId };
     }
 
-    const errorDetails = (await response.json().catch(() => ({}))) as {
-      message?: string;
-      code?: string;
-    };
+    const errorDetails = (await response.json().catch(() => ({}))) as Record<string, unknown>;
+    const rawMsg = errorDetails.message || errorDetails.error;
+    const extractedMessage =
+      typeof rawMsg === 'string' && rawMsg.trim().length > 0
+        ? rawMsg.trim()
+        : rawMsg && typeof rawMsg === 'object' && 'message' in rawMsg && typeof (rawMsg as { message: unknown }).message === 'string'
+          ? (rawMsg as { message: string }).message.trim()
+          : undefined;
 
     if (response.status === 401 || response.status === 403) {
       return {
@@ -46,7 +50,7 @@ export async function sendTransactionalEmail(
         status: response.status,
         code: 'BREVO_AUTH_ERROR',
         message:
-          errorDetails.message ||
+          extractedMessage ||
           'Email service authentication failed. Please check your Brevo API key.',
       };
     }
@@ -56,7 +60,7 @@ export async function sendTransactionalEmail(
       status: response.status,
       code: 'BREVO_UPSTREAM_ERROR',
       message:
-        errorDetails.message ||
+        extractedMessage ||
         'Email delivery could not be completed at this time.',
     };
   } catch (err) {

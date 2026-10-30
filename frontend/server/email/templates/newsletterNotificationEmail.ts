@@ -1,7 +1,7 @@
-import { escapeHtml } from '../../security/sanitize';
-import { OFFICIAL_EMAIL } from '../../config/serverConfig';
-import type { EmailOutput, SubmissionMetadata } from '../emailTypes';
-import type { ValidatedNewsletterPayload } from '../../validation/newsletterValidation';
+import { escapeHtml } from '../../security/sanitize.js';
+import { OFFICIAL_EMAIL } from '../../config/serverConfig.js';
+import type { EmailOutput, SubmissionMetadata } from '../emailTypes.js';
+import type { ValidatedNewsletterPayload } from '../../validation/newsletterValidation.js';
 
 export function buildNewsletterNotificationEmail(
   data: ValidatedNewsletterPayload,

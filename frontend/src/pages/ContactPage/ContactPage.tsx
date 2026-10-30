@@ -8,6 +8,7 @@ import ContactHero from './components/ContactHero';
 import { SEOHead, buildBreadcrumbSchema, buildOrganizationSchema } from '../../components/seo';
 import { getEnquiryContext } from '../../lib/enquiryContext';
 import { buildCloudinaryThumb } from '../../lib/cloudinary';
+import { extractErrorMessage } from '../../lib/apiErrors';
 import {
   generateEnquiryMessage,
   updateMessageCustomerName,
@@ -444,19 +445,22 @@ function EnquiryForm({
         body: JSON.stringify(payload),
       });
 
-      const data = (await res.json().catch(() => ({}))) as {
-        success?: boolean;
-        error?: string;
-        message?: string;
-      };
+      const data: unknown = await res.json().catch(() => ({}));
 
-      if (res.ok && data.success) {
+      const isSuccess =
+        res.ok &&
+        typeof data === 'object' &&
+        data !== null &&
+        Boolean((data as Record<string, unknown>).success);
+
+      if (isSuccess) {
         setSubmitState('success');
       } else {
-        setErrorMessage(
-          data.error ||
-            'Email delivery could not be completed at this time. Please retry or contact us on WhatsApp.'
+        const errorMsg = extractErrorMessage(
+          data,
+          'Email delivery could not be completed at this time. Please retry or contact us on WhatsApp.'
         );
+        setErrorMessage(errorMsg);
         setSubmitState('error');
       }
     } catch {
@@ -819,7 +823,13 @@ function EnquiryForm({
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
             <div className="cp-submit-error__content">
-              <span>{errorMessage}</span>
+              <span>
+                {typeof errorMessage === 'string'
+                  ? errorMessage
+                  : (errorMessage && typeof errorMessage === 'object' && 'message' in errorMessage)
+                    ? String((errorMessage as { message: unknown }).message)
+                    : 'Email delivery could not be completed at this time. Please retry or contact us on WhatsApp.'}
+              </span>
             </div>
           </div>
         )}

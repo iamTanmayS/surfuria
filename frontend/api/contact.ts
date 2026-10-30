@@ -1,21 +1,21 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getBrevoConfig } from '../server/config/serverConfig';
-import { sendTransactionalEmail } from '../server/brevo/sendTransactionalEmail';
-import type { BrevoPayload } from '../server/brevo/brevoClient';
-import { buildOwnerContactEmail } from '../server/email/templates/ownerContactEmail';
-import { buildCustomerConfirmationEmail } from '../server/email/templates/customerConfirmationEmail';
-import { validateContactPayload } from '../server/validation/contactValidation';
-import { checkRateLimit, resetRateLimitsForTesting } from '../server/security/rateLimiter';
-import { escapeHtml } from '../server/security/sanitize';
-import { extractClientIp } from '../server/security/ipExtractor';
+import { getBrevoConfig } from '../server/config/serverConfig.js';
+import { sendTransactionalEmail } from '../server/brevo/sendTransactionalEmail.js';
+import type { BrevoPayload } from '../server/brevo/brevoClient.js';
+import { buildOwnerContactEmail } from '../server/email/templates/ownerContactEmail.js';
+import { buildCustomerConfirmationEmail } from '../server/email/templates/customerConfirmationEmail.js';
+import { validateContactPayload } from '../server/validation/contactValidation.js';
+import { checkRateLimit, resetRateLimitsForTesting } from '../server/security/rateLimiter.js';
+import { escapeHtml } from '../server/security/sanitize.js';
+import { extractClientIp } from '../server/security/ipExtractor.js';
 
 // Re-export for test compatibility
 export { validateContactPayload, checkRateLimit, resetRateLimitsForTesting, escapeHtml };
 export { buildOwnerContactEmail as buildEnquiryEmail };
 export { buildCustomerConfirmationEmail };
-export type { ValidatedContactPayload as ValidatedPayload } from '../server/validation/contactValidation';
-export type { BrevoPayload, BrevoContact } from '../server/brevo/brevoClient';
-export type { SubmissionMetadata } from '../server/email/emailTypes';
+export type { ValidatedContactPayload as ValidatedPayload } from '../server/validation/contactValidation.js';
+export type { BrevoPayload, BrevoContact } from '../server/brevo/brevoClient.js';
+export type { SubmissionMetadata } from '../server/email/emailTypes.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const reqId = `req_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;

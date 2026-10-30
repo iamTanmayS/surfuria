@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../ui/Button';
 import type { NewsletterConfig } from './siteFooter.types';
 import { DEFAULT_NEWSLETTER_CONFIG } from '../../../data/site/footerData';
+import { extractErrorMessage } from '../../../lib/apiErrors';
 import './NewsletterPanel.css';
 
 export interface NewsletterPanelProps {
@@ -63,21 +64,29 @@ export default function NewsletterPanel({ config, onSubscribe }: NewsletterPanel
         body: JSON.stringify({ email: trimmed }),
       });
 
-      const data = (await response.json().catch(() => ({}))) as {
-        success?: boolean;
-        message?: string;
-        error?: string;
-      };
+      const data: unknown = await response.json().catch(() => ({}));
 
-      if (response.ok && data.success) {
+      const isSuccess =
+        response.ok &&
+        typeof data === 'object' &&
+        data !== null &&
+        Boolean((data as Record<string, unknown>).success);
+
+      if (isSuccess) {
         setSubmissionState('success');
-        setFeedbackMessage(data.message || "You're on the list. Thank you for subscribing.");
+        const successMsg =
+          typeof (data as Record<string, unknown>).message === 'string'
+            ? ((data as Record<string, unknown>).message as string)
+            : "You're on the list. Thank you for subscribing.";
+        setFeedbackMessage(successMsg);
         setEmail('');
       } else {
         setSubmissionState('error');
-        setFeedbackMessage(
-          data.error || "We couldn't complete your subscription. Please try again."
+        const errorMsg = extractErrorMessage(
+          data,
+          "We couldn't complete your subscription. Please try again."
         );
+        setFeedbackMessage(errorMsg);
       }
     } catch {
       setSubmissionState('error');
@@ -189,7 +198,13 @@ export default function NewsletterPanel({ config, onSubscribe }: NewsletterPanel
                     <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.22 5.28a.75.75 0 010 1.06l-4 4a.75.75 0 01-1.06 0l-2-2a.75.75 0 111.06-1.06L7 9.94l3.47-3.47a.75.75 0 011.06 0z" />
                   </svg>
                 )}
-                <span>{feedbackMessage}</span>
+                <span>
+                  {typeof feedbackMessage === 'string'
+                    ? feedbackMessage
+                    : (feedbackMessage && typeof feedbackMessage === 'object' && 'message' in feedbackMessage)
+                      ? String((feedbackMessage as { message: unknown }).message)
+                      : "We couldn't complete your subscription. Please try again."}
+                </span>
               </div>
             )}
 

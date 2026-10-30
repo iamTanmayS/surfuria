@@ -7,7 +7,7 @@ import handler, {
   checkRateLimit,
   resetRateLimitsForTesting,
   escapeHtml,
-} from '../api/contact';
+} from '../api/contact.js';
 
 function createMockRequest(
   method: string,
@@ -435,6 +435,43 @@ describe('Surfuria Contact API & Validation Suite', () => {
       await handler(req, res as unknown as VercelResponse);
       expect(res.statusCode).toBe(502);
       expect((res.data as Record<string, string>).code).toBe('NETWORK_ERROR');
+    });
+
+    it('guarantees response error is always a string even if upstream returns nested error object', async () => {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+        ok: false,
+        status: 500,
+        json: async () => ({
+          error: {
+            code: 'UPSTREAM_FAILURE',
+            message: 'Nested upstream failure message',
+          },
+        }),
+      }));
+      const req = createMockRequest('POST', { name: 'Test Customer', email: 'customer@test.com', message: 'Testing nested error structure' });
+      const res = createMockResponse();
+      await handler(req, res as unknown as VercelResponse);
+      expect(res.statusCode).toBe(502);
+      const data = res.data as { error: unknown; code: string };
+      expect(typeof data.error).toBe('string');
+      expect(data.error).toBe('Nested upstream failure message');
+    });
+
+    it('handles malformed upstream JSON gracefully without crashing', async () => {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+        ok: false,
+        status: 502,
+        json: async () => {
+          throw new Error('Unexpected token < in JSON at position 0');
+        },
+      }));
+      const req = createMockRequest('POST', { name: 'Test Customer', email: 'customer@test.com', message: 'Testing malformed HTML response' });
+      const res = createMockResponse();
+      await handler(req, res as unknown as VercelResponse);
+      expect(res.statusCode).toBe(502);
+      const data = res.data as { error: unknown; code: string };
+      expect(typeof data.error).toBe('string');
+      expect(data.error).toBe('Email delivery could not be completed at this time.');
     });
   });
 });

@@ -1,10 +1,10 @@
-import { HARDWARE_PRODUCTS } from '../../../src/data/products/hardwareProducts.ts';
-import { KITCHEN_CONFIGURATIONS } from '../../../src/data/products/kitchenConfigurations.ts';
-import type { Product, KitchenConfiguration } from '../../../src/data/products/types.ts';
-import { escapeHtml } from '../../security/sanitize';
-import { OFFICIAL_EMAIL } from '../../config/serverConfig';
-import type { EmailOutput, SubmissionMetadata } from '../emailTypes';
-import type { ValidatedContactPayload } from '../../validation/contactValidation';
+import { HARDWARE_PRODUCTS } from '../../../src/data/products/hardwareProducts.js';
+import { KITCHEN_CONFIGURATIONS } from '../../../src/data/products/kitchenConfigurations.js';
+import type { Product, KitchenConfiguration } from '../../../src/data/products/types.js';
+import { escapeHtml } from '../../security/sanitize.js';
+import { OFFICIAL_EMAIL } from '../../config/serverConfig.js';
+import type { EmailOutput, SubmissionMetadata } from '../emailTypes.js';
+import type { ValidatedContactPayload } from '../../validation/contactValidation.js';
 
 interface OwnerHtmlParams {
   resolvedSubject: string;

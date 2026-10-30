@@ -6,17 +6,13 @@
     "types": ["node", "@vercel/node"],
     "skipLibCheck": true,
     "strict": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["api", "server", "tests"]
+  "include": ["api", "server"]
 }
 

@@ -1,18 +1,18 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getBrevoConfig } from '../server/config/serverConfig';
-import { sendTransactionalEmail } from '../server/brevo/sendTransactionalEmail';
-import type { BrevoPayload } from '../server/brevo/brevoClient';
-import { buildNewsletterNotificationEmail } from '../server/email/templates/newsletterNotificationEmail';
-import { validateNewsletterPayload } from '../server/validation/newsletterValidation';
-import { checkRateLimit, resetRateLimitsForTesting } from '../server/security/rateLimiter';
-import { escapeHtml } from '../server/security/sanitize';
-import { extractClientIp } from '../server/security/ipExtractor';
+import { getBrevoConfig } from '../server/config/serverConfig.js';
+import { sendTransactionalEmail } from '../server/brevo/sendTransactionalEmail.js';
+import type { BrevoPayload } from '../server/brevo/brevoClient.js';
+import { buildNewsletterNotificationEmail } from '../server/email/templates/newsletterNotificationEmail.js';
+import { validateNewsletterPayload } from '../server/validation/newsletterValidation.js';
+import { checkRateLimit, resetRateLimitsForTesting } from '../server/security/rateLimiter.js';
+import { escapeHtml } from '../server/security/sanitize.js';
+import { extractClientIp } from '../server/security/ipExtractor.js';
 
 // Re-export for test compatibility
 export { validateNewsletterPayload, checkRateLimit, resetRateLimitsForTesting, escapeHtml };
 export { buildNewsletterNotificationEmail };
-export type { ValidatedNewsletterPayload } from '../server/validation/newsletterValidation';
-export type { NewsletterValidationResult } from '../server/validation/newsletterValidation';
+export type { ValidatedNewsletterPayload } from '../server/validation/newsletterValidation.js';
+export type { NewsletterValidationResult } from '../server/validation/newsletterValidation.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
