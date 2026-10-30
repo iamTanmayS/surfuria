@@ -473,5 +473,33 @@ describe('Surfuria Contact API & Validation Suite', () => {
       expect(typeof data.error).toBe('string');
       expect(data.error).toBe('Email delivery could not be completed at this time.');
     });
+
+    it('returns 500 INTERNAL_ERROR when validateContactPayload throws unexpectedly', async () => {
+      // The top-level try/catch in the handler catches any unexpected synchronous exception.
+      // We simulate this by having validateContactPayload (re-exported from the module) throw.
+      // Spy on the re-exported reference — the handler calls its own internal import,
+      // so we trigger this by making req.body a Proxy that throws on property access.
+      const throwingProxy = new Proxy({}, {
+        get(_target, prop) {
+          // Allow normal string checks on method to not interfere with earlier guards
+          if (prop === 'method') return 'POST';
+          // Throw on body access inside validateContactPayload
+          throw new Error('Unexpected proxy error simulating corrupt request body');
+        },
+      });
+      // Create a request where body is the proxy
+      const req = {
+        method: 'POST',
+        body: throwingProxy,
+        headers: {},
+        socket: { remoteAddress: '192.168.1.1' },
+      } as unknown as VercelRequest;
+      const res = createMockResponse();
+      await handler(req, res as unknown as VercelResponse);
+      expect(res.statusCode).toBe(500);
+      const data = res.data as { error: string; code: string };
+      expect(data.code).toBe('INTERNAL_ERROR');
+      expect(typeof data.error).toBe('string');
+    });
   });
 });

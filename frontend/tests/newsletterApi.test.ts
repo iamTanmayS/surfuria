@@ -202,5 +202,15 @@ describe('Surfuria Newsletter API & Validation Suite', () => {
       expect(getStatus()).toBe(429);
       expect(getData().code).toBe('RATE_LIMIT_EXCEEDED');
     });
+
+    it('returns 502 NETWORK_ERROR with human-readable message when Brevo is unreachable', async () => {
+      vi.spyOn(globalThis, 'fetch').mockRejectedValueOnce(new Error('ECONNREFUSED connect to api.brevo.com'));
+      const { req, res, getStatus, getData } = createMockHttp({ method: 'POST', body: { email: 'subscriber@designstudio.com' } });
+      await handler(req, res);
+      expect(getStatus()).toBe(502);
+      expect(getData().code).toBe('NETWORK_ERROR');
+      expect(typeof getData().error).toBe('string');
+      expect((getData().error as string).length).toBeGreaterThan(0);
+    });
   });
 });
