@@ -65,24 +65,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const result = await sendTransactionalEmail(apiKey, brevoPayload);
 
-  if (result.ok) {
-    return res.status(200).json({
-      success: true,
-      message: "You're on the list. Thank you for subscribing.",
-      messageId: result.messageId,
+  if (!result.ok) {
+    if (result.code === 'BREVO_AUTH_ERROR') {
+      console.error('[Surfuria Newsletter API] Brevo authentication failed:', result.message);
+      return res.status(502).json({ error: result.message, code: 'BREVO_AUTH_ERROR' });
+    }
+
+    console.error('[Surfuria Newsletter API] Brevo request rejected:', result.code, result.message);
+    return res.status(502).json({
+      error:
+        result.code === 'NETWORK_ERROR'
+          ? 'Network error connecting to email service. Please retry later.'
+          : result.message || 'Newsletter notification could not be delivered at this time.',
+      code: result.code,
     });
   }
 
-  if (result.code === 'BREVO_AUTH_ERROR') {
-    console.error('[Surfuria Newsletter API] Brevo authentication failed:', result.message);
-    return res.status(502).json({ error: result.message, code: 'BREVO_AUTH_ERROR' });
-  }
-
-  console.error('[Surfuria Newsletter API] Brevo request rejected:', result.code, result.message);
-  return res.status(502).json({
-    error: result.code === 'NETWORK_ERROR'
-      ? 'Network error connecting to email service. Please retry later.'
-      : result.message || 'Newsletter notification could not be delivered at this time.',
-    code: result.code,
+  return res.status(200).json({
+    success: true,
+    message: "You're on the list. Thank you for subscribing.",
+    messageId: result.messageId,
   });
 }
