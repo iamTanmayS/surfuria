@@ -2,7 +2,8 @@ import { useMemo, lazy, Suspense } from 'react';
 import AboutHero from './components/AboutHero';
 import BrandIntroduction from './components/BrandIntroduction';
 import CapabilitiesSection from './components/CapabilitiesSection';
-import MaterialsFinishesSection from './components/MaterialsFinishesSection';
+import { MaterialsFinishes } from '../../components/sections';
+import { SUBSTRATES_DATA, FINISHES_DATA } from '../../data/about/aboutPageData';
 import QualitySection from './components/QualitySection';
 import AboutClosingSection from './components/AboutClosingSection';
 import { SEOHead, buildBreadcrumbSchema, buildOrganizationSchema } from '../../components/seo';
@@ -45,7 +46,11 @@ export default function AboutPage() {
       <CapabilitiesSection />
 
       {/* 4. Materials and Finishes Showcase */}
-      <MaterialsFinishesSection />
+      <MaterialsFinishes
+        title="MATERIALS & FINISHES"
+        substrates={SUBSTRATES_DATA}
+        finishes={FINISHES_DATA}
+      />
 
       {/* 5. Quality, Precision and Functionality Philosophy */}
       <QualitySection />

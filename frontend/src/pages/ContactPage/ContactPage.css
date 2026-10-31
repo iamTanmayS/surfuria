@@ -12,8 +12,50 @@
   background-color: var(--color-paper, #fbf9f5);
   color: var(--color-ink, #171715);
   min-height: 100vh;
-  padding-top: clamp(6rem, 8.5vw, 8rem);
+  padding-top: clamp(5.5rem, 8vw, 7.5rem);
   padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* ── Centered Content Container ───────────────────────────────────────────── */
+.cp-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+@media (max-width: 1024px) {
+  .cp-container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cp-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 375px) {
+  .cp-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.cp-anchor {
+  display: block;
+  position: relative;
+  top: 0;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* ── Main Two-Column Editorial Layout ─────────────────────────────────────── */
@@ -276,8 +318,10 @@
 }
 
 /* ── Right Column: The Enquiry Form ───────────────────────────────────────── */
-.cp-form-column {
-  scroll-margin-top: calc(var(--navbar-height, 72px) + 2rem);
+.cp-form-column,
+#enquiry-form,
+#contact-form {
+  scroll-margin-top: calc(var(--navbar-height, 80px) + 2rem);
 }
 
 .cp-form-container {
@@ -383,6 +427,10 @@
               box-shadow var(--transition-fast, 160ms ease),
               background-color var(--transition-fast, 160ms ease);
   appearance: none;
+}
+
+.cp-input {
+  min-height: 48px;
 }
 
 .cp-input:focus,
@@ -515,24 +563,86 @@
 /* Primary Submit Button */
 .cp-submit-btn {
   width: 100%;
+  min-height: 48px;
   justify-content: center;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
-/* ── Success Feedback Card ────────────────────────────────────────────────── */
+/* ── Success Modal Dialog & Frosted Overlay ──────────────────────────────── */
+.cp-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(23, 19, 16, 0.65);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  animation: cp-overlay-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes cp-overlay-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .cp-success-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+  width: 100%;
+  max-width: 460px;
+  box-sizing: border-box;
+  padding: clamp(2rem, 4.5vw, 2.85rem) clamp(1.25rem, 3.5vw, 2.25rem);
   background: var(--color-surface, #ffffff);
   border: 1px solid var(--color-line, #e7e0d5);
   border-top: 3px solid var(--color-success, #47755b);
   border-radius: var(--radius-lg, 1.125rem);
-  box-shadow: 0 10px 34px rgba(23, 23, 21, 0.05);
-  animation: cp-fade-in 0.35s cubic-bezier(0.2, 0.75, 0.25, 1);
+  box-shadow: 0 20px 50px rgba(10, 7, 5, 0.28), 0 4px 16px rgba(10, 7, 5, 0.08);
+  animation: cp-modal-pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cp-modal-pop-in {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.cp-success-modal__close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(23, 23, 21, 0.05);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-ink-muted, #5f5b54);
+  cursor: pointer;
+  transition: background-color var(--transition-fast, 160ms ease),
+              color var(--transition-fast, 160ms ease),
+              transform var(--transition-fast, 160ms ease);
+}
+
+.cp-success-modal__close-btn:hover {
+  background: rgba(23, 23, 21, 0.12);
+  color: var(--color-ink, #171715);
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  .cp-success-card {
+    max-width: calc(100vw - 32px);
+    padding: 1.85rem 1.15rem;
+  }
 }
 
 .cp-success-card__icon {
@@ -559,11 +669,11 @@
 
 .cp-success-card__title {
   font-family: var(--font-heading, 'Manrope', sans-serif);
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
   font-weight: 700;
   color: var(--color-ink, #171715);
   margin: 0 0 0.85rem 0;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .cp-success-card__desc {
@@ -572,7 +682,7 @@
   line-height: 1.6;
   color: var(--color-ink-muted, #5f5b54);
   max-width: 440px;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.75rem 0;
 }
 
 .cp-success-card__actions {
@@ -580,12 +690,18 @@
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
+  width: 100%;
 }
 
 .cp-success-card__whatsapp-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  width: 100%;
+  max-width: 260px;
+  min-height: 48px;
+  box-sizing: border-box;
   background-color: #25d366;
   color: #ffffff;
   font-family: var(--font-body, 'DM Sans', sans-serif);
@@ -602,7 +718,9 @@
 }
 
 .cp-success-card__reset-btn {
-  min-width: 210px;
+  width: 100%;
+  max-width: 260px;
+  min-height: 48px;
 }
 
 /* ── Responsive Adaptations ───────────────────────────────────────────────── */

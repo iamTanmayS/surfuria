@@ -1,0 +1,119 @@
+/* ==========================================================================
+   SURFURIA — AUTOMATIC CONTACT IMAGE CAROUSEL
+   Subtle 2.5s Crossfade, Consistent Aspect Ratio, Zero Layout Shifts
+   ========================================================================== */
+
+.cp-image-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0.5rem;
+}
+
+.cp-image-carousel__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg, 1.125rem);
+  overflow: hidden;
+  border: 1px solid rgba(183, 123, 63, 0.25);
+  background: #171310;
+  box-shadow: 0 10px 30px rgba(23, 23, 21, 0.06);
+}
+
+.cp-image-carousel__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity;
+}
+
+/* Outgoing slide remains visible underneath to prevent abrupt cuts or dipping to dark background */
+.cp-image-carousel__slide.is-previous {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Active incoming slide dissolves gently over the previous slide */
+.cp-image-carousel__slide.is-active {
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+  transition: opacity 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cp-image-carousel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cp-image-carousel__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 23, 21, 0.05) 0%,
+    rgba(23, 23, 21, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+.cp-image-carousel__caption {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.725rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f7f3ec;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease 0.3s;
+}
+
+.cp-image-carousel__slide.is-active .cp-image-carousel__caption {
+  opacity: 1;
+}
+
+.cp-image-carousel__caption-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-bronze, #b77b3f);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE (MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .cp-image-carousel__viewport {
+    aspect-ratio: 16 / 9;
+    max-height: 220px;
+    border-radius: 12px;
+  }
+
+  .cp-image-carousel__caption {
+    font-size: 0.675rem;
+    bottom: 0.65rem;
+    left: 0.65rem;
+    right: 0.65rem;
+  }
+}
+

@@ -41,12 +41,12 @@ export default function KitchenHero({ onExploreClick }: KitchenHeroProps) {
       </div>
 
       {/* Editorial Content Frame with Reusable Hero Content */}
-      <div className="container--wide kitchen-hero__content-wrap">
+      <div className="kitchen-hero__content-wrap">
         <motion.div
           className="kitchen-hero__content"
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: shouldReduceMotion ? 0.05 : 0.65, ease: 'easeOut' }}
         >
           <HeroContent
             title="Custom Kitchens & Furniture. Built For Your Space."

@@ -2,6 +2,7 @@
    SURFURIA — KITCHENS HERO COMPONENT
    Architectural Media Foundation with Left-Oriented Layout
    Title, Subtitle, and CTAs styled via reusable HeroContent component
+   Aligned with Homepage Hero composition, typography & vertical rhythm
    ========================================================================== */
 .kitchen-hero {
   position: relative;
@@ -10,12 +11,12 @@
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding-top: calc(var(--nav-height, 72px) + clamp(2rem, 4vw, 3.5rem));
-  padding-bottom: clamp(3rem, 5vw, 4.5rem);
   box-sizing: border-box;
   overflow: hidden;
   background-color: #120e0b;
   color: #fbf9f5;
+  isolation: isolate;
+  padding: 0;
 }
 
 /* Background Media */
@@ -59,15 +60,22 @@
   pointer-events: none;
 }
 
-/* Content Frame */
+/* Content Frame: Matches Homepage .hero__container */
 .kitchen-hero__content-wrap {
   position: relative;
-  z-index: 2;
-  width: 100%;
+  z-index: 5;
+  width: min(var(--container-wide, 1440px), calc(100% - var(--page-gutter, 2rem) * 2));
+  margin-inline: auto;
+  padding-top: clamp(6.5rem, 12vh, 9rem);
+  padding-bottom: clamp(6rem, 10vh, 7.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .kitchen-hero__content {
-  max-width: 740px;
+  max-width: 820px;
+  width: 100%;
 }
 
 /* Process Line */
@@ -101,33 +109,29 @@
 /* ==========================================================================
    RESPONSIVE (PAGE-SPECIFIC LAYOUT & MEDIA)
    ========================================================================== */
-@media (max-width: 1024px) {
-  .kitchen-hero {
-    min-height: 100vh;
-    min-height: 100svh;
-  }
-
-  .kitchen-hero__content {
-    max-width: 620px;
+@media (max-width: 960px) {
+  .kitchen-hero__content-wrap {
+    padding-top: 7rem;
+    padding-bottom: 7.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .kitchen-hero {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding-top: calc(var(--nav-height, 64px) + 1.75rem);
-    padding-bottom: 2.75rem;
-  }
-
+  /* Full-coverage scrim on mobile — warm vignette wraps the kitchen
+     photography while keeping strong text contrast throughout. */
   .kitchen-hero__scrim {
     background:
       linear-gradient(
         180deg,
-        rgba(14, 10, 8, 0.78) 0%,
-        rgba(14, 10, 8, 0.65) 50%,
+        rgba(14, 10, 8, 0.84) 0%,
+        rgba(14, 10, 8, 0.62) 45%,
         rgba(14, 10, 8, 0.88) 100%
       );
+  }
+
+  /* Focus on the kitchen island / counter zone on portrait mobile */
+  .kitchen-hero__img {
+    object-position: 40% center;
   }
 
   .kitchen-hero__process-line {
@@ -135,5 +139,28 @@
     gap: 0.45rem;
     padding: 0.35rem 0.75rem;
     margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .kitchen-hero {
+    min-height: 100dvh;
+    min-height: 100svh;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .kitchen-hero__content-wrap {
+    padding-top: clamp(4.75rem, 14vh, 6.5rem);
+    padding-bottom: clamp(5rem, 12vh, 7rem);
+    min-height: 100dvh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .kitchen-hero__content {
+    max-width: 100%;
   }
 }

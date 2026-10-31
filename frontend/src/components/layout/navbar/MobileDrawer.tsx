@@ -138,6 +138,33 @@ export default function MobileDrawer({
                         </svg>
                       </Link>
                     </li>
+
+                    <li>
+                      <Link
+                        to="/contact#enquiry-form"
+                        className="sf-mobile-nav-link"
+                        onClick={(e) => {
+                          onClose();
+                          if (typeof window !== 'undefined' && window.location.pathname === '/contact') {
+                            const formEl =
+                              document.getElementById('enquiry-form') ||
+                              document.getElementById('contact-form');
+                            if (formEl) {
+                              e.preventDefault();
+                              formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                          }
+                        }}
+                      >
+                        <div className="sf-mobile-nav-link__text">
+                          <span className="sf-mobile-nav-link__title">Contact Us</span>
+                          <span className="sf-mobile-nav-link__desc">Direct specification line &amp; project enquiry</span>
+                        </div>
+                        <svg className="sf-mobile-nav-link__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M6 3l5 5-5 5" />
+                        </svg>
+                      </Link>
+                    </li>
                   </ul>
                 </motion.div>
               ) : (

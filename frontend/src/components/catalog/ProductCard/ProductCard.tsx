@@ -65,12 +65,13 @@ export default function ProductCard({
   const image = propImage || card?.image || product?.cardImage || '';
   const imageAlt = propImageAlt || card?.imageAlt || title;
 
-  // Destination calculation
+  // Destination calculation: prioritize product's own canonical categoryId over inherited prop
+  const resolvedCategorySlug = product?.categoryId || categorySlug;
   const destination =
     propDestination ||
     card?.destination ||
-    (product && (categorySlug || product.categoryId)
-      ? `/${product.catalogue}/${categorySlug || product.categoryId}/${product.slug}`
+    (product && resolvedCategorySlug
+      ? `/${product.catalogue}/${resolvedCategorySlug}/${product.slug}`
       : '#');
 
   const badge = propBadge || card?.badge || product?.badge;

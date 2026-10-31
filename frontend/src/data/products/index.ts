@@ -59,12 +59,23 @@ export function getHardwareProductBySlug(
   categorySlug: string,
   productSlug: string
 ): { product?: Product; category?: ProductCategory } {
-  const category = getHardwareCategoryBySlug(categorySlug);
-  const product = HARDWARE_PRODUCTS.find(
+  let category = getHardwareCategoryBySlug(categorySlug);
+  let product = HARDWARE_PRODUCTS.find(
     (p) =>
-      p.slug === productSlug &&
-      (!category || p.categoryId === category.id || p.categoryId === categorySlug)
+      (p.slug === productSlug || p.id === productSlug) &&
+      (category ? p.categoryId === category.id || p.categoryId === categorySlug : false)
   );
+
+  // Fallback: If not found under specified category (e.g. cross-category navigation or mismatched link),
+  // locate product across hardware catalogue and resolve its true canonical category.
+  if (!product) {
+    product = HARDWARE_PRODUCTS.find((p) => p.slug === productSlug || p.id === productSlug);
+  }
+
+  if (product && (!category || category.id !== product.categoryId)) {
+    category = getHardwareCategoryBySlug(product.categoryId);
+  }
+
   return { product, category };
 }
 
@@ -75,12 +86,22 @@ export function getKitchenProductBySlug(
   categorySlug: string,
   productSlug: string
 ): { product?: Product; category?: ProductCategory } {
-  const category = getKitchenCategoryBySlug(categorySlug);
-  const product = KITCHEN_PRODUCTS.find(
+  let category = getKitchenCategoryBySlug(categorySlug);
+  let product = KITCHEN_PRODUCTS.find(
     (p) =>
-      p.slug === productSlug &&
-      (!category || p.categoryId === category.id || p.categoryId === categorySlug)
+      (p.slug === productSlug || p.id === productSlug) &&
+      (category ? p.categoryId === category.id || p.categoryId === categorySlug : false)
   );
+
+  // Fallback: If not found under specified category, locate across kitchen catalogue and resolve true category.
+  if (!product) {
+    product = KITCHEN_PRODUCTS.find((p) => p.slug === productSlug || p.id === productSlug);
+  }
+
+  if (product && (!category || category.id !== product.categoryId)) {
+    category = getKitchenCategoryBySlug(product.categoryId);
+  }
+
   return { product, category };
 }
 
@@ -112,26 +133,44 @@ export function getProductsByCategoryId(
  */
 export function getRelatedProducts(product: Product, limit: number = 3): Product[] {
   const pool = product.catalogue === 'hardware' ? HARDWARE_PRODUCTS : KITCHEN_PRODUCTS;
+  const result: Product[] = [];
+  const seenIds = new Set<string>([product.id]);
 
-  // 1. Explicit relatedProductIds if configured
+  // 1. Explicit relatedProductIds if configured (match by either id or slug)
   if (product.relatedProductIds && product.relatedProductIds.length > 0) {
-    const explicit = pool.filter(
-      (p) => product.relatedProductIds?.includes(p.id) && p.id !== product.id
-    );
-    if (explicit.length >= limit) {
-      return explicit.slice(0, limit);
+    for (const relId of product.relatedProductIds) {
+      const match = pool.find((p) => (p.id === relId || p.slug === relId) && !seenIds.has(p.id));
+      if (match) {
+        result.push(match);
+        seenIds.add(match.id);
+        if (result.length >= limit) {
+          return result;
+        }
+      }
     }
   }
 
   // 2. Fallback to same category products
   const sameCategory = pool.filter(
-    (p) => p.categoryId === product.categoryId && p.id !== product.id
+    (p) => p.categoryId === product.categoryId && !seenIds.has(p.id)
   );
-
-  if (sameCategory.length > 0) {
-    return sameCategory.slice(0, limit);
+  for (const p of sameCategory) {
+    result.push(p);
+    seenIds.add(p.id);
+    if (result.length >= limit) {
+      return result;
+    }
   }
 
   // 3. Fallback to any other product in same catalogue
-  return pool.filter((p) => p.id !== product.id).slice(0, limit);
+  const others = pool.filter((p) => !seenIds.has(p.id));
+  for (const p of others) {
+    result.push(p);
+    seenIds.add(p.id);
+    if (result.length >= limit) {
+      return result;
+    }
+  }
+
+  return result.slice(0, limit);
 }

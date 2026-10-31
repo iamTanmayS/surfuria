@@ -89,6 +89,69 @@
   border-radius: 2px;
 }
 
+/* --------------------------------------------------------------------------
+   DEVELOPER CREDIT
+   Centered below copyright, subtle typography, elegant hover interaction
+   -------------------------------------------------------------------------- */
+.site-footer__credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  padding-top: clamp(0.85rem, 1.5vw, 1.15rem);
+  border-top: 1px solid rgba(220, 212, 200, 0.4);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.78125rem;
+  letter-spacing: 0.02em;
+  color: var(--color-ink-muted, #756f66);
+}
+
+.site-footer__credit-text {
+  color: var(--color-ink-muted, #756f66);
+}
+
+.site-footer__credit-name {
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  margin-left: 0.25rem;
+}
+
+.site-footer__credit-link {
+  font-weight: 600;
+  color: var(--color-ink, #171715);
+  text-decoration: none;
+  margin-left: 0.25rem;
+  position: relative;
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.site-footer__credit-link:hover {
+  color: var(--color-bronze, #b77b3f);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer__credit-link:focus-visible {
+  outline: 2px solid var(--color-bronze, #b77b3f);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.site-footer__credit-heart {
+  color: #e53935;
+  margin-left: 0.35rem;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast, 160ms ease);
+}
+
+.site-footer__credit:hover .site-footer__credit-heart {
+  transform: scale(1.2);
+}
+
 /* Oversized SURFURIA Wordmark */
 .site-footer__wordmark-wrap {
   position: relative;
@@ -155,6 +218,12 @@
     flex-wrap: wrap;
     gap: 0.85rem;
     font-size: 0.725rem;
+  }
+
+  .site-footer__credit {
+    font-size: 0.725rem;
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
   }
 
   .site-footer__wordmark-wrap {

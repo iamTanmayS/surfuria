@@ -18,12 +18,31 @@ export default function NavActions({
   contactLabel = 'Contact Us',
   contactUrl = '/contact',
 }: NavActionsProps) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
+  const effectiveContactUrl =
+    contactUrl === '/contact' && isMobile ? '/contact#enquiry-form' : contactUrl;
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    onClose?.();
+    if (typeof window !== 'undefined' && window.innerWidth <= 1024) {
+      if (window.location.pathname === '/contact') {
+        const formEl =
+          document.getElementById('enquiry-form') ||
+          document.getElementById('contact-form');
+        if (formEl) {
+          e.preventDefault();
+          formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  };
+
   return (
     <div className="sf-nav-right">
       <Button
-        to={contactUrl}
+        to={effectiveContactUrl}
         variant={isScrolled ? 'bronze' : 'ghost'}
-        onClick={onClose}
+        onClick={handleContactClick}
         icon={
           <svg
             width="13"

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import KitchenHero from './components/KitchenHero/KitchenHero';
-import MaterialsFinishesSection from '../AboutPage/components/MaterialsFinishesSection';
+import { MaterialsFinishes } from '../../components/sections';
 import {
   KITCHEN_SUBSTRATES_DATA,
   KITCHEN_FINISHES_DATA,
@@ -43,11 +43,9 @@ export default function KitchensPage() {
       <KitchenHero />
 
       {/* 2. Considered Kitchen Materials & Finishes Selection Studio */}
-      <MaterialsFinishesSection
+      <MaterialsFinishes
         id="materials"
-        eyebrow="KITCHEN MATERIALS & FINISHES"
-        headline="Engineered Substrates. Distinctive Finishes."
-        supportingCopy="SURFURIA kitchen cabinetry is precision-machined from certified moisture-resistant core boards and finished with premium architectural surfaces engineered for culinary longevity."
+        title="KITCHEN MATERIALS & FINISHES"
         substrates={KITCHEN_SUBSTRATES_DATA}
         finishes={KITCHEN_FINISHES_DATA}
       />

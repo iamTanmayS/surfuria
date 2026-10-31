@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import HeroSection from './components/hero/HeroSection';
-import HeroScrollTransition from './components/hero/HeroScrollTransition';
+import HeroFeatureSequence from './components/hero/HeroFeatureSequence';
 import { ProductCategories } from './components/ProductCategories';
 import { BrandEditorialSection } from './components/BrandEditorialSection';
 import { SEOHead, buildOrganizationSchema, buildWebSiteSchema } from '../../components/seo';
@@ -23,15 +23,16 @@ export default function HomePage() {
         jsonLd={jsonLd}
       />
 
-      {/* 1. Kabizzu-Inspired Scroll-Driven Hero Transition */}
-      <HeroScrollTransition>
-        <HeroSection scrollTargetId="collections-section" />
-      </HeroScrollTransition>
+      {/* 1. Cinematic Full-Bleed Hero Slideshow */}
+      <HeroSection scrollTargetId="hero-features" />
 
-      {/* 2. Editorial Product Categories Section */}
+      {/* 2. Craftsmanship & Engineering Pinned Feature Story */}
+      <HeroFeatureSequence />
+
+      {/* 3. Editorial Product Categories Section */}
       <ProductCategories id="collections-section" />
 
-      {/* 3. Kitchens & About Surfuria Editorial Section */}
+      {/* 4. Kitchens & About Surfuria Editorial Section */}
       <BrandEditorialSection id="brand-editorial-section" />
     </div>
   );

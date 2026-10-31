@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   getKitchenConfigurationBySlug,
   KITCHEN_CONFIGURATIONS,
 } from '../../data/products';
-import { buildCloudinaryUrl, buildCloudinarySrcSet, buildCloudinaryThumb } from '../../lib/cloudinary';
+import { buildWhatsAppUrl } from '../../config/whatsapp';
+import { buildCloudinaryUrl, buildCloudinarySrcSet } from '../../lib/cloudinary';
+import { ProductGallery } from '../../components/product';
 import ProductCard from '../../components/catalog/ProductCard/ProductCard';
 import Button from '../../components/ui/Button';
 import { SEOHead, buildBreadcrumbSchema, buildKitchenPackageSchema } from '../../components/seo';
@@ -170,19 +172,13 @@ export default function KitchenConfigurationDetailPage() {
     [configSlug]
   );
 
+  // Gallery images list (reused by ProductGallery)
   const gallery = useMemo(() => {
     if (configuration?.galleryImages && configuration.galleryImages.length > 0) {
       return configuration.galleryImages;
     }
     return configuration ? [configuration.image] : [];
   }, [configuration]);
-
-  const [selectedImage, setSelectedImage] = useState<{ slug: string; index: number }>({
-    slug: configSlug,
-    index: 0,
-  });
-  const activeImageIndex = selectedImage.slug === configSlug ? selectedImage.index : 0;
-  const setActiveImageIndex = (index: number) => setSelectedImage({ slug: configSlug, index });
 
   // Scroll to top on route change
   useEffect(() => {
@@ -248,18 +244,22 @@ export default function KitchenConfigurationDetailPage() {
   }
 
   const enquiryUrl = `/contact?type=kitchen-config&product=${configuration.slug}`;
+  const whatsAppUrl = buildWhatsAppUrl(
+    `Hi Surfuria! I'm interested in the ${configuration.name} modular kitchen package (${configuration.formattedPrice}). Can you share specifications and project timelines?`
+  );
 
   return (
     <article className="config-detail-page">
       <SEOHead
         title={`${configuration.name} Modular Kitchen Configuration | Surfuria`}
-        description={`Explore the Surfuria ${configuration.name} kitchen package: ${configuration.doorPanelArea.formatted} acrylic finish door panels, ${configuration.boxPanelArea.formatted} prelam carcasses, inclusive of 8 essential hardware fittings. ₹${configuration.totalPackagePrice.amount.toLocaleString('en-IN')}.`}
+        description={`Explore the Surfuria ${configuration.name} kitchen package: ${configuration.doorPanelArea.formatted} acrylic finish door panels, ${configuration.boxPanelArea.formatted} prelam carcasses, inclusive of 8 essential hardware fittings. ${configuration.formattedPrice}.`}
         canonicalUrl={`https://surfuria.com/kitchens/configurations/${configuration.slug}`}
         ogType="product"
         ogImage={configuration.image}
         ogImageAlt={configuration.imageAlt}
         jsonLd={jsonLd}
       />
+
       <div className="container--wide">
         {/* ==================================================================
             1. BREADCRUMBS
@@ -267,29 +267,17 @@ export default function KitchenConfigurationDetailPage() {
         <nav className="config-breadcrumbs" aria-label="Breadcrumb">
           <ol className="config-breadcrumbs__list">
             <li className="config-breadcrumbs__item">
-              <Link to="/" className="config-breadcrumbs__link">
-                Home
-              </Link>
+              <Link to="/" className="config-breadcrumbs__link">Home</Link>
             </li>
-            <li className="config-breadcrumbs__sep" aria-hidden="true">
-              /
-            </li>
+            <li className="config-breadcrumbs__sep" aria-hidden="true">/</li>
             <li className="config-breadcrumbs__item">
-              <Link to="/kitchens" className="config-breadcrumbs__link">
-                Kitchens
-              </Link>
+              <Link to="/kitchens" className="config-breadcrumbs__link">Kitchens</Link>
             </li>
-            <li className="config-breadcrumbs__sep" aria-hidden="true">
-              /
-            </li>
+            <li className="config-breadcrumbs__sep" aria-hidden="true">/</li>
             <li className="config-breadcrumbs__item">
-              <Link to="/kitchens#configurations" className="config-breadcrumbs__link">
-                Modular Configurations
-              </Link>
+              <Link to="/kitchens#configurations" className="config-breadcrumbs__link">Modular Configurations</Link>
             </li>
-            <li className="config-breadcrumbs__sep" aria-hidden="true">
-              /
-            </li>
+            <li className="config-breadcrumbs__sep" aria-hidden="true">/</li>
             <li className="config-breadcrumbs__item is-current" aria-current="page">
               <span>{configuration.name} Layout</span>
             </li>
@@ -297,374 +285,323 @@ export default function KitchenConfigurationDetailPage() {
         </nav>
 
         {/* ==================================================================
-            2. CONFIGURATION HERO: COMPLETE IMAGE ON LEFT & PROMINENT PRICE
+            2. CONFIGURATION OVERVIEW (TWO-COLUMN DESKTOP / STRUCTURED MOBILE)
             ================================================================== */}
-        <section className="config-hero" aria-labelledby="config-hero-title">
-          <div className="config-hero__grid">
-            {/* Left Column: Complete Uncropped Kitchen Image & Gallery */}
-            <div className="config-hero__visual">
-              <div className="config-hero__stage">
-                <img
-                  src={buildCloudinaryUrl(gallery[activeImageIndex] || configuration.image, { width: 1400, quality: 'auto', format: 'auto' })}
-                  srcSet={buildCloudinarySrcSet(gallery[activeImageIndex] || configuration.image, [640, 1024, 1400]) || undefined}
-                  sizes="(max-width: 860px) 100vw, 55vw"
-                  alt={`${configuration.name} Kitchen photo ${activeImageIndex + 1}`}
-                  className="config-hero__img"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                />
-                <div className="config-hero__stage-caption">
-                  <span className="config-hero__stage-dot" aria-hidden="true" />
-                  <span>
-                    {configuration.name} Modular Layout · Complete Architectural Package
-                    {gallery.length > 1 ? ` · Photo ${activeImageIndex + 1} of ${gallery.length}` : ''}
-                  </span>
-                </div>
-              </div>
+        <div className="config-detail-overview">
+          {/* Mobile Title & Lead (Rendered before gallery on mobile <= 1024px) */}
+          <div className="config-mobile-header">
+            <span className="config-info-tag">FACTORY-ENGINEERED PACKAGE</span>
+            <h1 className="config-info-title">{configuration.name} Modular Kitchen</h1>
+            <p className="config-info-lead">
+              Standardized modular package featuring {configuration.doorPanelArea.formatted} acrylic shutters,{' '}
+              {configuration.boxPanelArea.formatted} prelam carcass, 8 essential hardware items, transportation, and on-site assembly.
+            </p>
+          </div>
 
-              {/* Gallery Thumbnails Strip */}
-              {gallery.length > 1 && (
-                <div
-                  className="config-hero__thumbs"
-                  role="tablist"
-                  aria-label={`${configuration.name} photo gallery`}
-                >
-                  {gallery.map((imgSrc, idx) => {
-                    const isSelected = idx === activeImageIndex;
-                    return (
-                      <button
-                        key={`${imgSrc}-${idx}`}
-                        type="button"
-                        role="tab"
-                        aria-selected={isSelected}
-                        aria-label={`View ${configuration.name} photo ${idx + 1}`}
-                        className={`config-hero__thumb ${isSelected ? 'is-selected' : ''}`}
-                        onClick={() => setActiveImageIndex(idx)}
-                      >
-                        <img
-                          src={buildCloudinaryThumb(imgSrc, 160)}
-                          alt={`${configuration.name} thumbnail ${idx + 1}`}
-                          className="config-hero__thumb-img"
-                          loading="lazy"
-                          decoding="async"
-                          width={80}
-                          height={80}
-                        />
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+          {/* Left Column: Shared Reusable Gallery (4:3 aspect ratio suited to kitchen architecture) */}
+          <div className="config-gallery-col">
+            <ProductGallery
+              images={gallery}
+              productName={`${configuration.name} Modular Kitchen`}
+              speciality="Turnkey Modular"
+              aspectRatio="4/3"
+            />
+          </div>
 
-            {/* Right Column: Concise Package Information & Primary CTA */}
-            <div className="config-hero__content">
-              <div className="config-hero__eyebrow-row">
-                <span className="config-hero__eyebrow">FACTORY-ENGINEERED PACKAGE</span>
-                <span className="config-hero__status-badge">Turnkey Modular</span>
-              </div>
-
-              <h1 id="config-hero-title" className="config-hero__title">
-                {configuration.name} Modular Kitchen
-              </h1>
-
-              <p className="config-hero__subtitle">
-                A standardized, ready-to-build modular kitchen package inclusive of exterior acrylic-finish
+          {/* Right Column: Configuration Information & Specifications */}
+          <div className="config-info-panel">
+            {/* Desktop Title & Lead (Rendered on desktop >= 1025px) */}
+            <div className="config-desktop-header">
+              <span className="config-info-tag">FACTORY-ENGINEERED PACKAGE</span>
+              <h1 className="config-info-title">{configuration.name} Modular Kitchen</h1>
+              <p className="config-info-lead">
+                Standardized, ready-to-build modular kitchen package inclusive of exterior acrylic-finish
                 door panels, full prelam box carcass, 8 essential hardware items, transportation, and
                 on-site installation.
               </p>
-
-              {/* Prominent Price Presentation */}
-              <div className="config-hero__price-box">
-                <span className="config-hero__price-label">Package Price</span>
-                <div className="config-hero__price-row">
-                  <span className="config-hero__price-val">{configuration.formattedPrice}</span>
-                  <span className="config-hero__price-tag">All-Inclusive Fixed Cost</span>
-                </div>
-                <p className="config-hero__price-subtext">
-                  Covers full package specifications · Inclusive of GST · No hidden charges
-                </p>
-              </div>
-
-              {/* Key Dimensions: Door & Box Areas */}
-              <div className="config-hero__specs-row">
-                <div className="config-hero__spec-item">
-                  <span className="config-hero__spec-label">Door Panel Area</span>
-                  <span className="config-hero__spec-val">{configuration.doorPanelArea.formatted}</span>
-                  <span className="config-hero__spec-note">Acrylic finish shutters</span>
-                </div>
-                <div className="config-hero__spec-divider" aria-hidden="true" />
-                <div className="config-hero__spec-item">
-                  <span className="config-hero__spec-label">Box Panel Area</span>
-                  <span className="config-hero__spec-val">{configuration.boxPanelArea.formatted}</span>
-                  <span className="config-hero__spec-note">Prelam board carcass</span>
-                </div>
-              </div>
-
-              {/* Summary of Inclusions */}
-              <div className="config-hero__summary-pills">
-                <span className="config-hero__summary-pill">✓ Acrylic Finish Doors</span>
-                <span className="config-hero__summary-pill">✓ Prelam Carcass</span>
-                <span className="config-hero__summary-pill">✓ 8 Hardware Items</span>
-                <span className="config-hero__summary-pill">✓ Transport &amp; Installation</span>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="config-hero__actions">
-                <Button to={enquiryUrl} variant="bronze" className="config-hero__primary-cta">
-                  Enquire About This Kitchen
-                </Button>
-                <a href="#everything-included" className="config-hero__scroll-link">
-                  <span>See Everything Included</span>
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path
-                      d="M8 3.33334V12.6667M8 12.6667L12.6667 8.00001M8 12.6667L3.33334 8.00001"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
             </div>
+
+            {/* Clear Starting Price */}
+            <div className="config-price-block">
+              <span className="config-price-label">Complete Package Price</span>
+              <div className="config-price-row">
+                <span className="config-price-val">{configuration.formattedPrice}</span>
+                <span className="config-price-tag">All-Inclusive Fixed Cost</span>
+              </div>
+              <p className="config-price-subtext">
+                Covers complete package specifications · Inclusive of GST · Direct factory pricing
+              </p>
+            </div>
+
+            {/* Primary & Secondary Action CTAs */}
+            <div className="config-actions">
+              <Button
+                to={enquiryUrl}
+                variant="bronze"
+                className="config-enquire-btn"
+                icon={
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                    <path d="M5 3l5 5-5 5" />
+                  </svg>
+                }
+              >
+                Enquire About This Kitchen
+              </Button>
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="config-whatsapp-link"
+                aria-label={`Chat on WhatsApp about ${configuration.name} Modular Kitchen`}
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.085-1.802-.401-.986-.411-1.638-1.393-1.687-1.458-.049-.066-.401-.533-.401-1.017 0-.484.254-.722.344-.82.09-.098.197-.123.262-.123.066 0 .131.002.188.005.06.002.139-.023.217.164.082.197.279.68.303.73.025.049.041.107.008.172-.033.066-.049.107-.098.164-.049.057-.103.128-.148.172-.05.049-.102.103-.044.202.057.098.256.423.55.685.378.337.697.441.796.49.098.049.156.041.213-.025.057-.066.246-.287.311-.385.066-.098.131-.082.222-.049.09.033.574.271.672.32.098.049.164.074.188.115.025.041.025.238-.119.643z" />
+                </svg>
+                <span>WhatsApp Enquiry</span>
+              </a>
+            </div>
+
+            {/* Compact Key Specifications Summary (Verified data only) */}
+            <div className="config-specs-summary">
+              <h2 className="config-specs-summary__title">Package Specifications</h2>
+              <dl className="config-specs-dl">
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Configuration Type</dt>
+                  <dd className="config-specs-dd">{configuration.name} Modular Layout</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Door Panel Area</dt>
+                  <dd className="config-specs-dd">{configuration.doorPanelArea.formatted} (Acrylic Finish)</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Box Panel Area</dt>
+                  <dd className="config-specs-dd">{configuration.boxPanelArea.formatted} (Prelam Carcass)</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Door Finish</dt>
+                  <dd className="config-specs-dd">{configuration.doorPanelFinish}</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Box Material</dt>
+                  <dd className="config-specs-dd">{configuration.boxPanelMaterial}</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Included Hardware</dt>
+                  <dd className="config-specs-dd">8 Essential Hardware Items</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Transportation</dt>
+                  <dd className="config-specs-dd">Factory Logistics to Site Included</dd>
+                </div>
+                <div className="config-specs-row">
+                  <dt className="config-specs-dt">Installation</dt>
+                  <dd className="config-specs-dd">Professional On-Site Assembly Included</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        {/* ==================================================================
+            3. INCLUDED HARDWARE SUITE (4 COLS DESKTOP, 2 COLS MOBILE)
+            ================================================================== */}
+        <section className="config-section" id="included-hardware" aria-labelledby="hardware-heading">
+          <div className="config-section__header">
+            <span className="config-section__eyebrow">INCLUDED HARDWARE</span>
+            <h2 id="hardware-heading" className="config-section__title">
+              8-Piece Kinematic Hardware Suite
+            </h2>
+            <p className="config-section__subtitle">
+              Every modular package is delivered with genuine factory-fitted kinematic hardware, storage organizers, and precision fasteners.
+            </p>
+          </div>
+
+          <div className="config-hardware-grid">
+            {INCLUDED_HARDWARE_TILES.map((tile) => (
+              <div key={tile.id} className="config-hw-card">
+                <div className="config-hw-card__media">
+                  {tile.image ? (
+                    <img
+                      src={buildCloudinaryUrl(tile.image, { width: 320, quality: 'auto', format: 'auto' })}
+                      srcSet={buildCloudinarySrcSet(tile.image, [160, 240, 320]) || undefined}
+                      sizes="(max-width: 768px) 45vw, 220px"
+                      alt={tile.imageAlt || tile.name}
+                      className="config-hw-card__img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : tile.isSchematic === 'minifix' ? (
+                    <MinifixSchematic />
+                  ) : (
+                    <ShelfPinSchematic />
+                  )}
+                  <span className="config-hw-card__check" aria-hidden="true">
+                    ✓ Included
+                  </span>
+                </div>
+                <div className="config-hw-card__content">
+                  <h3 className="config-hw-card__name">{tile.name}</h3>
+                  <p className="config-hw-card__label">{tile.label}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* ==================================================================
-            3. EVERYTHING INCLUDED IN YOUR KITCHEN: VISUAL BREAKDOWN
+            4. MATERIALS AND FINISHES (2 COLUMNS)
             ================================================================== */}
-        <section
-          id="everything-included"
-          className="config-inclusions-section"
-          aria-labelledby="inclusions-heading"
-        >
-          <div className="config-section-header">
-            <span className="config-section-eyebrow">PACKAGE INCLUSIONS</span>
-            <h2 id="inclusions-heading" className="config-section-title">
-              Everything Included in Your Kitchen
+        <section className="config-section" id="materials-finishes" aria-labelledby="materials-heading">
+          <div className="config-section__header">
+            <span className="config-section__eyebrow">SPECIFIED MATERIALS</span>
+            <h2 id="materials-heading" className="config-section__title">
+              Architectural Substrates &amp; Exterior Finishes
             </h2>
-            <p className="config-section-subtitle">
-              See the materials, storage systems, and hardware included in this package.
+            <p className="config-section__subtitle">
+              Manufactured with moisture-resistant prelam carcasses and mirror-clarity acrylic shutters for long-term daily performance.
             </p>
           </div>
 
-          {/* A & B: Door Panels and Box Panels (2 Large Visual Cards) */}
-          <div className="config-materials-row">
-            {/* A. Door Panels */}
+          <div className="config-materials-grid">
+            {/* Door Panels */}
             <div className="config-material-card">
-              <div className="config-material-card__image-frame">
+              <div className="config-material-card__visual">
                 <img
                   src="/images/materials/acrylic.jpg"
                   alt="Solid acrylic finish kitchen door panel shutter"
-                  className="config-material-card__image"
+                  className="config-material-card__img"
                   loading="lazy"
+                  decoding="async"
                 />
-                <span className="config-material-card__badge">
+                <span className="config-material-card__tag">
                   {configuration.doorPanelArea.formatted} Coverage
                 </span>
               </div>
-              <div className="config-material-card__content">
-                <div className="config-material-card__header">
-                  <h3 className="config-material-card__title">Door Panels</h3>
-                  <span className="config-material-card__spec-highlight">
-                    Acrylic finish · Included in this package
-                  </span>
-                </div>
+              <div className="config-material-card__body">
+                <h3 className="config-material-card__title">Acrylic Finish Shutters</h3>
                 <p className="config-material-card__desc">
-                  Exterior cabinet shutters and drawer fronts finished with mirror-smooth, high-clarity
-                  acrylic. Offers deep color saturation, UV stability, and scratch-resistant daily
-                  durability.
+                  Exterior cabinet shutters and drawer fascias finished with mirror-smooth, high-clarity
+                  acrylic. Offers deep color saturation, UV stability, and scratch-resistant daily durability.
                 </p>
-                <div className="config-material-card__meta">
-                  <span>
-                    Door panel area: <strong>{configuration.doorPanelArea.formatted}</strong>
+                <div className="config-material-card__specs">
+                  <span className="config-material-card__spec-item">
+                    Finish: <strong>{configuration.doorPanelFinish}</strong>
                   </span>
-                  <span>
-                    Finish: <strong>Acrylic Finish</strong>
+                  <span className="config-material-card__spec-item">
+                    Area: <strong>{configuration.doorPanelArea.formatted}</strong>
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* B. Box Panels */}
+            {/* Box Panels */}
             <div className="config-material-card">
-              <div className="config-material-card__image-frame">
+              <div className="config-material-card__visual">
                 <img
                   src="/images/materials/laminate.jpg"
                   alt="Prelaminated board cabinet box carcass sample"
-                  className="config-material-card__image"
+                  className="config-material-card__img"
                   loading="lazy"
+                  decoding="async"
                 />
-                <span className="config-material-card__badge">
+                <span className="config-material-card__tag">
                   {configuration.boxPanelArea.formatted} Coverage
                 </span>
               </div>
-              <div className="config-material-card__content">
-                <div className="config-material-card__header">
-                  <h3 className="config-material-card__title">Box Panels</h3>
-                  <span className="config-material-card__spec-highlight">
-                    Prelaminated board · Top, bottom, sides, back panel, and one shelf
-                  </span>
-                </div>
+              <div className="config-material-card__body">
+                <h3 className="config-material-card__title">Prelaminated Board Carcass</h3>
                 <p className="config-material-card__desc">
                   Complete structural cabinet carcass manufactured with high-density prelaminated board.
                   Engineered for dimensional stability, screw holding capacity, and kitchen moisture resistance.
                 </p>
-                <div className="config-material-card__meta">
-                  <span>
-                    Box panel area: <strong>{configuration.boxPanelArea.formatted}</strong>
+                <div className="config-material-card__specs">
+                  <span className="config-material-card__spec-item">
+                    Material: <strong>{configuration.boxPanelMaterial}</strong>
                   </span>
-                  <span>
-                    Construction: <strong>Full Cabinet Carcass</strong>
+                  <span className="config-material-card__spec-item">
+                    Area: <strong>{configuration.boxPanelArea.formatted}</strong>
                   </span>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* C. Included Hardware (Visual Grid of 8 Image Tiles) */}
-          <div className="config-hardware-block">
-            <div className="config-hardware-block__header">
-              <h3 className="config-hardware-block__title">Included Hardware Suite</h3>
-              <span className="config-hardware-block__count">8 Factory Items Included</span>
-            </div>
-
-            <div className="config-hardware-grid">
-              {INCLUDED_HARDWARE_TILES.map((tile) => (
-                <div key={tile.id} className="config-hw-tile">
-                  <div className="config-hw-tile__visual">
-                    {tile.image ? (
-                      <img
-                        src={buildCloudinaryUrl(tile.image, { width: 320, quality: 'auto', format: 'auto' })}
-                        srcSet={buildCloudinarySrcSet(tile.image, [160, 240, 320]) || undefined}
-                        sizes="140px"
-                        alt={tile.imageAlt || tile.name}
-                        className="config-hw-tile__img"
-                        loading="lazy"
-                        decoding="async"
-                        width={140}
-                        height={140}
-                      />
-                    ) : tile.isSchematic === 'minifix' ? (
-                      <MinifixSchematic />
-                    ) : (
-                      <ShelfPinSchematic />
-                    )}
-                    <span className="config-hw-tile__check" title="Included in package">
-                      ✓ Included
-                    </span>
-                  </div>
-                  <div className="config-hw-tile__body">
-                    <h4 className="config-hw-tile__name">{tile.name}</h4>
-                    <p className="config-hw-tile__label">{tile.label}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* ==================================================================
-            4. WHAT YOUR PACKAGE COVERS: VISUAL SUMMARY FIGURES
+            5. ADDITIONAL CONFIGURATION INFORMATION (TURNKEY SCOPE & LOGISTICS)
             ================================================================== */}
-        <section className="config-covers-section" aria-labelledby="covers-heading">
-          <div className="config-section-header">
-            <span className="config-section-eyebrow">PACKAGE ARCHITECTURE</span>
-            <h2 id="covers-heading" className="config-section-title">
+        <section className="config-section" id="turnkey-scope" aria-labelledby="scope-heading">
+          <div className="config-section__header">
+            <span className="config-section__eyebrow">PACKAGE ARCHITECTURE</span>
+            <h2 id="scope-heading" className="config-section__title">
               What Your Package Covers
             </h2>
-            <p className="config-section-subtitle">
-              A transparent breakdown of coverage areas, board substrates, and turnkey services included under
-              the {configuration.formattedPrice} package.
+            <p className="config-section__subtitle">
+              A transparent breakdown of coverage areas, logistics, and assembly services included under the {configuration.formattedPrice} package.
             </p>
           </div>
 
-          <div className="config-covers-grid">
-            <div className="config-cover-card">
-              <span className="config-cover-card__val">{configuration.doorPanelArea.formatted}</span>
-              <h3 className="config-cover-card__label">Door Panel Area</h3>
-              <p className="config-cover-card__sub">{configuration.doorPanelFinish}</p>
-              <span className="config-cover-card__detail">Exterior front shutters &amp; drawer fascias</span>
-            </div>
-
-            <div className="config-cover-card">
-              <span className="config-cover-card__val">{configuration.boxPanelArea.formatted}</span>
-              <h3 className="config-cover-card__label">Box Panel Area</h3>
-              <p className="config-cover-card__sub">{configuration.boxPanelMaterial}</p>
-              <span className="config-cover-card__detail">Top, bottom, sides, back panel &amp; one shelf</span>
-            </div>
-
-            <div className="config-cover-card">
-              <span className="config-cover-card__val">8 Items</span>
-              <h3 className="config-cover-card__label">Included Hardware</h3>
-              <p className="config-cover-card__sub">Turnkey Kinematics</p>
-              <span className="config-cover-card__detail">Hinges, tandem drawers, baskets, organizers, fasteners</span>
-            </div>
-
-            <div className="config-cover-card">
-              <span className="config-cover-card__val">Included</span>
-              <h3 className="config-cover-card__label">Transportation to Site</h3>
-              <p className="config-cover-card__sub">Factory Logistics</p>
-              <span className="config-cover-card__detail">Direct factory-to-project transport included</span>
-            </div>
-
-            <div className="config-cover-card">
-              <span className="config-cover-card__val">Included</span>
-              <h3 className="config-cover-card__label">Professional Installation</h3>
-              <p className="config-cover-card__sub">On-Site Assembly</p>
-              <span className="config-cover-card__detail">Plumb alignment, carcass leveling, and hardware calibration</span>
-            </div>
-
-            <div className="config-cover-card config-cover-card--price">
-              <span className="config-cover-card__val config-cover-card__val--price">
-                {configuration.formattedPrice}
-              </span>
-              <h3 className="config-cover-card__label">Net Package Price</h3>
-              <p className="config-cover-card__sub">Turnkey Total · Inclusive of GST</p>
-              <span className="config-cover-card__detail">Single verified baseline package cost</span>
-            </div>
-          </div>
-        </section>
-
-        {/* ==================================================================
-            5. SECONDARY ENQUIRY CTA
-            ================================================================== */}
-        <section className="config-enquiry-banner" aria-labelledby="secondary-enquiry-heading">
-          <div className="config-enquiry-banner__card">
-            <div className="config-enquiry-banner__content">
-              <span className="config-enquiry-banner__eyebrow">TAILORED QUOTATION</span>
-              <h2 id="secondary-enquiry-heading" className="config-enquiry-banner__title">
-                Planning a kitchen like this?
-              </h2>
-              <p className="config-enquiry-banner__desc">
-                Tell us about your space and requirements to get a quotation for your kitchen.
+          <div className="config-scope-grid">
+            <div className="config-scope-card">
+              <div className="config-scope-card__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1" y="3" width="15" height="13" />
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                  <circle cx="5.5" cy="18.5" r="2.5" />
+                  <circle cx="18.5" cy="18.5" r="2.5" />
+                </svg>
+              </div>
+              <h3 className="config-scope-card__title">Direct Site Transportation</h3>
+              <p className="config-scope-card__desc">
+                Factory-to-project transport included across standard regional zones with protective edge crating to prevent transit damage.
               </p>
+              <span className="config-scope-card__meta">Factory Logistics Included</span>
             </div>
-            <div className="config-enquiry-banner__action">
-              <Button to={enquiryUrl} variant="bronze" className="config-enquiry-banner__btn">
-                Get a Kitchen Quote
-              </Button>
+
+            <div className="config-scope-card">
+              <div className="config-scope-card__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                </svg>
+              </div>
+              <h3 className="config-scope-card__title">Professional Installation</h3>
+              <p className="config-scope-card__desc">
+                On-site plumb alignment, carcass leveling, shutter calibration, and hardware installation executed by trained specialists.
+              </p>
+              <span className="config-scope-card__meta">On-Site Assembly Included</span>
+            </div>
+
+            <div className="config-scope-card config-scope-card--price">
+              <div className="config-scope-card__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+              </div>
+              <h3 className="config-scope-card__title">Fixed Net Pricing</h3>
+              <p className="config-scope-card__desc">
+                Single net package cost of {configuration.formattedPrice} inclusive of GST, materials, hardware, and installation without hidden escalation.
+              </p>
+              <span className="config-scope-card__meta config-scope-card__meta--price">{configuration.formattedPrice} Net Total</span>
             </div>
           </div>
         </section>
 
         {/* ==================================================================
-            6. CROSS-COMPARISON: OTHER STANDARDIZED PACKAGES
+            6. RELATED KITCHEN CONFIGURATIONS (BOTTOM OF PAGE)
             ================================================================== */}
-        <section className="config-other-section" aria-labelledby="other-packages-heading">
-          <div className="config-section-header">
-            <span className="config-section-eyebrow">EXPLORE ALTERNATIVES</span>
-            <h2 id="other-packages-heading" className="config-section-title">
+        <section className="config-section" id="other-configurations" aria-labelledby="related-heading">
+          <div className="config-section__header">
+            <span className="config-section__eyebrow">EXPLORE ALTERNATIVES</span>
+            <h2 id="related-heading" className="config-section__title">
               Compare Other Kitchen Packages
             </h2>
-            <p className="config-section-subtitle">
+            <p className="config-section__subtitle">
               Review our alternative standardized layouts to find the ideal modular configuration for your home.
             </p>
           </div>
 
-          <div className="config-other-grid">
+          <div className="config-related-grid">
             {otherConfigurations.map((other) => (
               <ProductCard
                 key={other.id}
@@ -675,28 +612,30 @@ export default function KitchenConfigurationDetailPage() {
                 imageAlt={other.imageAlt}
                 destination={`/kitchens/configurations/${other.slug}`}
                 actionText="View Package"
-                className="config-other-card"
+                className="config-related-card"
               />
             ))}
           </div>
         </section>
 
         {/* ==================================================================
-            7. FINAL CLOSING CTA
+            7. EDITORIAL CLOSING CONSULTATION BANNER
             ================================================================== */}
-        <section className="config-closing-cta" aria-labelledby="final-cta-heading">
-          <div className="config-closing-cta__box">
-            <h2 id="final-cta-heading" className="config-closing-cta__title">
-              Let's plan your kitchen.
+        <section className="config-closing-banner" aria-labelledby="closing-banner-title">
+          <div className="config-closing-banner__inner">
+            <span className="config-closing-banner__eyebrow">TAILORED KITCHEN PLANNING</span>
+            <h2 id="closing-banner-title" className="config-closing-banner__title">
+              Planning your dream kitchen?
             </h2>
-            <p className="config-closing-cta__desc">
-              Whether you select the standardized {configuration.name} package or wish to customize
-              finishes, countertop materials, and spatial modules for your site, our team is ready to
-              collaborate with you.
+            <p className="config-closing-banner__desc">
+              Whether you select the standardized {configuration.name} package or require tailored adaptations
+              for your site, our modular kitchen specialists are ready to collaborate with you.
             </p>
-            <Button to={enquiryUrl} variant="bronze" className="config-closing-cta__btn">
-              Discuss Your Kitchen
-            </Button>
+            <div className="config-closing-banner__actions">
+              <Button to={enquiryUrl} variant="bronze" className="config-closing-btn">
+                Discuss Your Kitchen
+              </Button>
+            </div>
           </div>
         </section>
       </div>

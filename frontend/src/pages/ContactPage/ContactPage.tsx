@@ -1,7 +1,7 @@
 import './ContactPage.css';
 
-import { Link, useSearchParams } from 'react-router-dom';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Button from '../../components/ui/Button';
 import ContactHero from './components/ContactHero';
@@ -133,6 +133,7 @@ function validateForm(values: FormValues, touched: FormTouched) {
 
 export default function ContactPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const context = useMemo(() => getEnquiryContext(searchParams), [searchParams]);
 
   // Context key for remounting and re-syncing form prefill when URL params change
@@ -161,6 +162,25 @@ export default function ContactPage() {
     setSearchParams(next);
   }, [searchParams, setSearchParams]);
 
+  // Auto-scroll directly to enquiry form on mobile or when hash anchor is present
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const isMobile = window.innerWidth <= 1024;
+    const hasFormHash = location.hash === '#enquiry-form' || location.hash === '#contact-form';
+
+    if (hasFormHash || (isMobile && searchParams.get('jump') === 'form')) {
+      const scrollTimer = window.setTimeout(() => {
+        const target =
+          document.getElementById('enquiry-form') ||
+          document.getElementById('contact-form');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 120);
+      return () => window.clearTimeout(scrollTimer);
+    }
+  }, [location.hash, location.pathname, searchParams]);
+
   const jsonLd = useMemo(() => {
     return {
       '@context': 'https://schema.org',
@@ -175,7 +195,7 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <div className="cp-page container--wide">
+    <div className="cp-page">
       <SEOHead
         title="Contact Surfuria | Kitchen & Furniture Hardware Enquiries"
         description="Connect directly with Surfuria's specification studio in Indore, MP. Enquire about modular kitchen configurations, hardware finishes, or architectural quotes."
@@ -183,16 +203,17 @@ export default function ContactPage() {
         ogType="website"
         jsonLd={jsonLd}
       />
-      <div className="cp-layout">
-        {/* ================================================================
-            LEFT COLUMN: Cinematic Studio Hero, Context, WhatsApp & Direct
-            ================================================================ */}
-        <aside className="cp-story-column" aria-label="About our specification studio">
-          <ContactHero />
+      <div className="cp-container">
+        <div className="cp-layout">
+          {/* ================================================================
+              LEFT COLUMN: Cinematic Studio Hero, Context, WhatsApp & Direct
+              ================================================================ */}
+          <aside className="cp-story-column" aria-label="About our specification studio">
+            <ContactHero />
 
-          {/* Active Context Banner (if user arrived from a kitchen config or hardware product) */}
-          {context.type !== 'general' && (
-            <section className="cp-banner" aria-label="Active enquiry context">
+            {/* Active Context Banner (if user arrived from a kitchen config or hardware product) */}
+            {context.type !== 'general' && (
+              <section className="cp-banner" aria-label="Active enquiry context">
               {context.thumbnail && (
                 <div className="cp-banner__thumb">
                   <img
@@ -296,6 +317,7 @@ export default function ContactPage() {
           className="cp-form-column"
           aria-labelledby="enquiry-form-title"
         >
+          <span id="contact-form" className="cp-anchor" aria-hidden="true" />
           <EnquiryForm
             key={contextKey}
             prefillMessage={context.prefillMessage}
@@ -310,6 +332,7 @@ export default function ContactPage() {
         </section>
       </div>
     </div>
+  </div>
   );
 }
 
@@ -497,8 +520,38 @@ function EnquiryForm({
   // ========================================================================
   if (submitState === 'success') {
     return (
-      <div className="cp-success-card" role="alert" aria-live="polite">
-        <div className="cp-success-card__icon" aria-hidden="true">
+      <div
+        className="cp-success-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cp-success-modal-title"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) handleReset();
+        }}
+      >
+        <div className="cp-success-card cp-success-modal" role="alert" aria-live="polite">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="cp-success-modal__close-btn"
+            aria-label="Close confirmation dialog"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+          <div className="cp-success-card__icon" aria-hidden="true">
           <svg
             width="28"
             height="28"
@@ -514,9 +567,11 @@ function EnquiryForm({
         </div>
 
         <span className="cp-success-card__eyebrow">MESSAGE DISPATCHED</span>
-        <h3 className="cp-success-card__title">Your enquiry has been received.</h3>
+        <h3 id="cp-success-modal-title" className="cp-success-card__title">
+          Your enquiry has been received.
+        </h3>
         <p className="cp-success-card__desc">
-          We'll review your message and get back to you.
+          We'll review your message and get back to you promptly.
         </p>
 
         <div className="cp-success-card__actions">
@@ -562,8 +617,9 @@ function EnquiryForm({
           </Button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   // ========================================================================
   // ACTIVE FORM INTERFACE
