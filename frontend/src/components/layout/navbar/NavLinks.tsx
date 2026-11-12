@@ -1,19 +1,19 @@
-import { NavLink } from 'react-router-dom';
 import './NavLinks.css';
+
+import { NavLink } from 'react-router-dom';
 
 type ActiveMenu = 'hardware' | 'kitchens' | null;
 
 interface NavLinksProps {
   activeMenu: ActiveMenu;
   onMouseEnter: (menu: 'hardware' | 'kitchens') => void;
-  onToggle: (menu: 'hardware' | 'kitchens') => void;
+  onToggle?: (menu: 'hardware' | 'kitchens') => void;
   onClose: () => void;
 }
 
 export default function NavLinks({
   activeMenu,
   onMouseEnter,
-  onToggle,
   onClose,
 }: NavLinksProps) {
   return (
@@ -30,20 +30,20 @@ export default function NavLinks({
         </NavLink>
       </li>
 
-      {/* 2. Hardware Mega-Menu Trigger */}
+      {/* 2. Hardware Mega-Menu Trigger & Direct Link */}
       <li
         className="sf-nav-item"
         role="none"
         onMouseEnter={() => onMouseEnter('hardware')}
       >
-        <button
-          type="button"
+        <NavLink
+          to="/hardware"
           role="menuitem"
           aria-haspopup="true"
           aria-expanded={activeMenu === 'hardware'}
           data-active={activeMenu === 'hardware'}
-          className="sf-nav-link"
-          onClick={() => onToggle('hardware')}
+          className={({ isActive }) => `sf-nav-link ${isActive ? 'active' : ''}`}
+          onClick={onClose}
         >
           <span>Hardware</span>
           <svg
@@ -58,23 +58,23 @@ export default function NavLinks({
           >
             <path d="M4 6l4 4 4-4" />
           </svg>
-        </button>
+        </NavLink>
       </li>
 
-      {/* 3. Kitchens Mega-Menu Trigger */}
+      {/* 3. Kitchens Mega-Menu Trigger & Direct Link */}
       <li
         className="sf-nav-item"
         role="none"
         onMouseEnter={() => onMouseEnter('kitchens')}
       >
-        <button
-          type="button"
+        <NavLink
+          to="/kitchens"
           role="menuitem"
           aria-haspopup="true"
           aria-expanded={activeMenu === 'kitchens'}
           data-active={activeMenu === 'kitchens'}
-          className="sf-nav-link"
-          onClick={() => onToggle('kitchens')}
+          className={({ isActive }) => `sf-nav-link ${isActive ? 'active' : ''}`}
+          onClick={onClose}
         >
           <span>Kitchens</span>
           <svg
@@ -89,7 +89,7 @@ export default function NavLinks({
           >
             <path d="M4 6l4 4 4-4" />
           </svg>
-        </button>
+        </NavLink>
       </li>
 
       {/* 4. About Us */}

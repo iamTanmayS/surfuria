@@ -139,19 +139,6 @@
   border-radius: 2px;
 }
 
-.site-footer__credit-heart {
-  color: #e53935;
-  margin-left: 0.35rem;
-  display: inline-block;
-  vertical-align: middle;
-  flex-shrink: 0;
-  transition: transform var(--transition-fast, 160ms ease);
-}
-
-.site-footer__credit:hover .site-footer__credit-heart {
-  transform: scale(1.2);
-}
-
 /* Oversized SURFURIA Wordmark */
 .site-footer__wordmark-wrap {
   position: relative;

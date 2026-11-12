@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import { WHO_WE_ARE_DATA } from '../../../data/about/aboutPageData';
 import './BrandIntroduction.css';
@@ -8,19 +9,22 @@ export default function BrandIntroduction() {
   const { eyebrow, headline, bodyParagraph, callouts, videoUrl, posterImage, posterAlt } =
     WHO_WE_ARE_DATA;
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [modalNotice, setModalNotice] = useState<string | null>(null);
 
   // Parse YouTube video ID safely if a valid URL is provided
   const getYouTubeEmbedUrl = (url: string): string | null => {
     if (!url) return null;
     try {
-      const parsed = new URL(url);
-      let id: string | null = null;
-      if (parsed.hostname.includes('youtube.com')) {
-        id = parsed.searchParams.get('v');
-      } else if (parsed.hostname.includes('youtu.be')) {
-        id = parsed.pathname.slice(1);
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      let id: string | null = match ? match[1] : null;
+      if (!id) {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes('youtube.com')) {
+          id = parsed.searchParams.get('v');
+        } else if (parsed.hostname.includes('youtu.be')) {
+          id = parsed.pathname.slice(1).split('/')[0];
+        }
       }
       return id ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1` : null;
     } catch {
@@ -32,13 +36,37 @@ export default function BrandIntroduction() {
 
   const handlePlayClick = () => {
     if (embedUrl) {
-      setIsPlaying(true);
+      setIsOverlayOpen(true);
     } else {
       setModalNotice(
         'The official brand showcase film is currently being finalized. Please explore our capabilities and modular solutions below.'
       );
     }
   };
+
+  const handleCloseOverlay = useCallback(() => {
+    setIsOverlayOpen(false);
+  }, []);
+
+  // Handle ESC key and prevent body scroll when video overlay is active
+  useEffect(() => {
+    if (!isOverlayOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleCloseOverlay();
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOverlayOpen, handleCloseOverlay]);
 
   const fadeUp = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 28 },
@@ -103,53 +131,43 @@ export default function BrandIntroduction() {
           }}
         >
           <div className="about-intro__video-frame">
-            {isPlaying && embedUrl ? (
-              <iframe
-                src={embedUrl}
-                title="Surfuria Architectural Craftsmanship and Manufacturing"
-                className="about-intro__iframe"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+            <div className="about-intro__poster-wrap">
+              <img
+                src={posterImage}
+                alt={posterAlt}
+                className="about-intro__poster-img"
+                loading="lazy"
+                decoding="async"
               />
-            ) : (
-              <div className="about-intro__poster-wrap">
-                <img
-                  src={posterImage}
-                  alt={posterAlt}
-                  className="about-intro__poster-img"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="about-intro__poster-scrim" aria-hidden="true" />
+              <div className="about-intro__poster-scrim" aria-hidden="true" />
 
-                {/* Floating Play Control */}
-                <button
-                  type="button"
-                  className="about-intro__play-btn"
-                  onClick={handlePlayClick}
-                  aria-label="Play brand overview video"
-                >
-                  <span className="about-intro__play-circle" aria-hidden="true">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                  <span className="about-intro__play-label">Brand Film</span>
-                </button>
+              {/* Floating Play Control */}
+              <button
+                type="button"
+                className="about-intro__play-btn"
+                onClick={handlePlayClick}
+                aria-label="Play brand overview video"
+              >
+                <span className="about-intro__play-circle" aria-hidden="true">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+                <span className="about-intro__play-label">Brand Film</span>
+              </button>
 
-                {/* Specification Tag */}
-                <div className="about-intro__badge" aria-hidden="true">
-                  <span className="about-intro__badge-dot" />
-                  <span>Modular Joinery & Manufacturing</span>
-                </div>
+              {/* Specification Tag */}
+              <div className="about-intro__badge" aria-hidden="true">
+                <span className="about-intro__badge-dot" />
+                <span>Modular Joinery & Manufacturing</span>
               </div>
-            )}
+            </div>
           </div>
 
           {/* Modal / Inline Notice if video is pending */}
@@ -168,6 +186,54 @@ export default function BrandIntroduction() {
           )}
         </motion.div>
       </div>
+
+      {/* Screen Overlay Video Lightbox */}
+      {isOverlayOpen && embedUrl && typeof document !== 'undefined' && createPortal(
+        <div
+          className="about-video-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Surfuria Brand Film"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleCloseOverlay();
+          }}
+        >
+          <div className="about-video-overlay__container">
+            <button
+              type="button"
+              className="about-video-overlay__close"
+              onClick={handleCloseOverlay}
+              aria-label="Close brand film"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+
+            <div className="about-video-overlay__video-wrap">
+              <iframe
+                src={embedUrl}
+                title="Surfuria Architectural Craftsmanship and Manufacturing"
+                className="about-video-overlay__iframe"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }

@@ -10,7 +10,7 @@ export interface BrandProps {
 
 export default function Brand({
   onNavigateHome,
-  title = 'Surfuria',
+  title = 'SURFURIA',
   tagline = 'Hinged on Quality',
   logoSrc = logo,
 }: BrandProps) {

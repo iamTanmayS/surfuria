@@ -75,6 +75,160 @@
   top: calc(var(--navbar-height, 72px) + 1.5rem);
 }
 
+/* ── Dedicated Product-Specific Inquiry Showcase ────────────────────────── */
+.cp-product-inquiry-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: cp-fade-in 0.35s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.cp-product-inquiry-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+  margin-bottom: 0.4rem;
+}
+
+.cp-product-inquiry-title {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-ink, #171715);
+  margin: 0 0 0.5rem;
+}
+
+.cp-product-inquiry-lead {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.925rem;
+  line-height: 1.55;
+  color: var(--color-ink-muted, #5f5b54);
+  margin: 0;
+}
+
+.cp-product-inquiry-card {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e7e0d5);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(23, 23, 21, 0.04);
+}
+
+.cp-product-inquiry-card__media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #fdfbf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-line, #e7e0d5);
+}
+
+.cp-product-inquiry-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+  display: block;
+}
+
+.cp-product-inquiry-card__body {
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cp-product-inquiry-card__badge {
+  display: inline-block;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-bronze, #b77b3f);
+}
+
+.cp-product-inquiry-card__name {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-ink, #171715);
+  margin: 0;
+}
+
+.cp-product-inquiry-card__price-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.cp-product-inquiry-card__price {
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-ink, #171715);
+}
+
+.cp-product-inquiry-card__price-tag {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(183, 123, 63, 0.1);
+  color: var(--color-bronze, #b77b3f);
+}
+
+.cp-product-inquiry-card__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-line, #e7e0d5);
+}
+
+.cp-product-inquiry-card__link {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-bronze, #b77b3f);
+  text-decoration: none;
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.cp-product-inquiry-card__link:hover {
+  color: var(--color-bronze-dark, #8e5b2b);
+  text-decoration: underline;
+}
+
+.cp-product-inquiry-card__clear {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: var(--color-ink-muted, #5f5b54);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color var(--transition-fast, 160ms ease);
+}
+
+.cp-product-inquiry-card__clear:hover {
+  color: var(--color-ink, #171715);
+}
+
 /* ── Active Enquiry Context Banner ────────────────────────────────────────── */
 .cp-banner {
   display: flex;

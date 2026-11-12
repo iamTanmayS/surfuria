@@ -39,7 +39,7 @@ export default function KitchenConfigurationsShowcase() {
               Modular Kitchen Configurations
             </h2>
             <p className="kitchen-configs-desc">
-              Four standardized architectural kitchen layouts engineered for modern residential floor plans. Complete packages inclusive of door panels, prelam board box panels, premium hardware, transportation, and professional installation.
+              Four standardized architectural kitchen layouts engineered for modern residential floor plans. Complete packages including door panels, prelam board box panels, premium hardware, transportation, and professional installation.
             </p>
           </div>
 
@@ -67,13 +67,12 @@ export default function KitchenConfigurationsShowcase() {
           {filteredConfigs.map((config) => (
             <ProductCard
               key={config.id}
-              title={`${config.name} Layout`}
-              subtitle={`Complete turnkey package · ${config.doorPanelArea.formatted} door area`}
-              badge={config.formattedPrice}
+              title={config.id === 'island' ? 'Sample Island Modular Layout' : `${config.name} Layout`}
+              subtitle="Factory-Engineered Modular Package"
               image={config.image}
               imageAlt={config.imageAlt}
               destination={`/kitchens/configurations/${config.slug}`}
-              actionText="View Package"
+              actionText="Explore Layout"
               className="kitchen-configs-card"
             />
           ))}

@@ -13,16 +13,18 @@ export const DEFAULT_NEWSLETTER_CONFIG: NewsletterConfig = {
 };
 
 export const FOOTER_BRAND_INFO = {
-  name: 'Surfuria',
+  name: 'SURFURIA',
   tagline: 'Hinged on Quality',
   description: 'Thoughtfully selected hardware and kitchen fittings for considered contemporary spaces.',
 };
 
 /**
  * Centralized social media profiles for Surfuria.
- * Driven by environment variables with fallback defaults.
+ * Pinterest and X are temporarily deactivated per brand direction.
  */
-export const FOOTER_SOCIAL_PROFILES: readonly FooterSocialProfile[] = resolveSocialProfiles(false);
+export const FOOTER_SOCIAL_PROFILES: readonly FooterSocialProfile[] = resolveSocialProfiles(false).filter(
+  (p) => p.id !== 'pinterest' && p.id !== 'x'
+);
 
 export const FOOTER_NAVIGATION_COLUMNS: readonly FooterNavColumn[] = [
   {
@@ -51,8 +53,6 @@ export const FOOTER_NAVIGATION_COLUMNS: readonly FooterNavColumn[] = [
     title: 'Contact',
     links: [
       { id: 'cnt-main', label: 'Contact Us', to: '/contact' },
-      { id: 'cnt-spec', label: 'Specification Team', to: '/contact#specification' },
-      { id: 'cnt-inquiry', label: 'Project Inquiries', to: '/contact#inquiry' },
     ],
   },
 ] as const;

@@ -83,8 +83,8 @@ export const WHO_WE_ARE_DATA = {
       detail: 'Merchant export operations serving India, USA, Canada & Europe',
     },
   ],
-  // Configurable YouTube video URL: if set, embeds the live iframe; if empty, renders the polished poster placeholder
-  videoUrl: '', // Leave empty to display the architectural poster placeholder
+  // Configurable YouTube video URL: if set, opens the high-definition brand film overlay on play
+  videoUrl: 'https://youtu.be/0akFCX4mjo4?feature=shared',
   posterImage: '/images/kitchen-editorial.jpg',
   posterAlt: 'Surfuria modular kitchen joinery and architectural hardware craftsmanship',
 };
@@ -112,7 +112,7 @@ export const CAPABILITIES_DATA: {
         'Hinges, telescopic channels, drawer systems, handles, and gas springs.',
       linkTo: '/hardware',
       linkLabel: 'Explore Hardware',
-      image: '/images/newsletter-joinery.jpg',
+      image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466153/FURNITURE_HARDWARE_ac1zbg.png',
       imageAlt: 'Architectural concealed hinges and precision bronze joinery hardware',
     },
     {
@@ -124,8 +124,7 @@ export const CAPABILITIES_DATA: {
         'Complete kitchen solutions combining storage, usability, and contemporary finishes.',
       linkTo: '/kitchens',
       linkLabel: 'Explore Modular Kitchens',
-      image:
-        'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80',
+      image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466155/2_uuuxnr.png',
       imageAlt: 'Custom contemporary modular kitchen with seamless cabinetry and island',
     },
     {
@@ -171,8 +170,7 @@ export const SUBSTRATES_DATA: MaterialOrFinishItem[] = [
     application:
       'Ideal for routed cabinet doors, lacquered millwork, and dry interior paneling.',
     spec: 'Homogeneous Density | Fine CNC Profiling',
-    image:
-      'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466248/MDF_wgb9sg.png',
     imageAlt: 'MDF engineered fibreboard core texture and edge grain',
   },
   {
@@ -185,8 +183,7 @@ export const SUBSTRATES_DATA: MaterialOrFinishItem[] = [
     application:
       'Specified for kitchen carcass structures, vanity cabinets, and moisture-exposed zones.',
     spec: 'Moisture Resistant | Hardwood Fibre Matrix',
-    image:
-      'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466167/HDHMR_qzscc1.png',
     imageAlt: 'High-density moisture-resistant board substrate sample',
   },
   {
@@ -199,8 +196,7 @@ export const SUBSTRATES_DATA: MaterialOrFinishItem[] = [
     application:
       'Engineered for heavy-load drawer bases, structural carcass frames, and heavy partitions.',
     spec: 'Cross-Laminated Veneers | High Screw-Holding Force',
-    image:
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466244/PLYWOOD_mehzcs.png',
     imageAlt: 'Calibrated architectural plywood cross-grain layer detail',
   },
   {
@@ -213,8 +209,7 @@ export const SUBSTRATES_DATA: MaterialOrFinishItem[] = [
     application:
       'Applied in modern modular cabinetry assembly and commercial millwork carcasses.',
     spec: 'Dimensional Stability | Lightweight Rigidity',
-    image:
-      'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466162/BOLIO_vlvfzn.png',
     imageAlt: 'Engineered composite board substrate detail',
   },
 ];
@@ -231,8 +226,7 @@ export const FINISHES_DATA: MaterialOrFinishItem[] = [
     application:
       'Contemporary kitchen frontages, feature walls, and sleek modular cabinets.',
     spec: 'High Reflectance | Optical Depth',
-    image:
-      'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466165/GLOSS_wsfhqj.png',
     imageAlt: 'Polished high-gloss architectural cabinetry reflection',
   },
   {
@@ -246,8 +240,7 @@ export const FINISHES_DATA: MaterialOrFinishItem[] = [
     application:
       'Premium kitchen cabinetry, seamless drawer fronts, and minimalist furniture.',
     spec: 'UV-Stable | Glass-Grade Smoothness',
-    image:
-      'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466157/ACRYLIC_kywxl6.png',
     imageAlt: 'Deep saturated acrylic cabinetry surface detail',
   },
   {
@@ -261,8 +254,7 @@ export const FINISHES_DATA: MaterialOrFinishItem[] = [
     application:
       'High-touch wardrobe exteriors, modular work surfaces, and living room credenzas.',
     spec: 'Wear-Resistant | Tactile Texture Options',
-    image:
-      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466162/LAMINATE_wnq9jq.png',
     imageAlt: 'High-pressure tactile laminate architectural surface',
   },
   {
@@ -276,8 +268,7 @@ export const FINISHES_DATA: MaterialOrFinishItem[] = [
     application:
       'Profiled cabinet shutters, rounded kitchen edges, and integrated finger-pull fronts.',
     spec: 'Zero-Joint Seamless Wrap | Moisture Barrier',
-    image:
-      'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466241/POLYMER_b6pbtc.png',
     imageAlt: 'Seamless polymer-wrapped cabinet door edge and soft contour',
   },
 ];

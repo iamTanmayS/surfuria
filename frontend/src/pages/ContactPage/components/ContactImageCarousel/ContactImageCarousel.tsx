@@ -9,17 +9,17 @@ import { useEffect, useState } from 'react';
  */
 const CAROUSEL_IMAGES = [
   {
-    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1793223775/K2_kpxy3y.png',
+    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466196/L_SHAPED_ge1vws.png',
     alt: 'Surfuria L-Shaped architectural kitchen design with acrylic finish and kinematic hardware',
     caption: 'Factory-Engineered Precision · Architectural Craft',
   },
   {
-    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1793223778/K3_dj46ws.png',
+    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466166/ISLAND_kn49pa.png',
     alt: 'Surfuria Island modular kitchen suite with monolithic stone finish and soft-close motion',
     caption: 'Monolithic Surface Design · Integrated Ergonomics',
   },
   {
-    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1793223778/K4_ptugih.png',
+    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466245/U_SHAPED_rpuh3w.png',
     alt: 'Surfuria U-Shaped modular kitchen configuration with high-capacity tandem storage',
     caption: 'Kinematic Storage Systems · Turnkey Manufacturing',
   },
@@ -29,7 +29,7 @@ const CAROUSEL_IMAGES = [
     caption: 'Architectural Carcass Alignment · Daily Durability',
   },
   {
-    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1793223775/K1_bpcrqo.png',
+    url: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466243/SINGLE_WALL_gjh1lh.png',
     alt: 'Surfuria Single Wall contemporary modular kitchen',
     caption: 'Spatial Efficiency · Premium Architectural Finishes',
   },

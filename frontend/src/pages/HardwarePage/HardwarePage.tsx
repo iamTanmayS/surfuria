@@ -66,8 +66,8 @@ export default function HardwarePage() {
         image="https://res.cloudinary.com/dwhajzdg2/image/upload/v1792749955/6_1_SURFURIA_HARDWARE_xuab5u.png"
         imageAlt="Surfuria architectural hardware showcasing precision hinges, drawer slides, handles, and tandem systems"
         primaryCtaTargetId="hardware-catalogue"
-        primaryCtaLabel="Explore Catalogue"
-        secondaryCtaLabel="Request Specifications"
+        primaryCtaLabel="Explore Products"
+        secondaryCtaLabel="Contact Us"
         secondaryCtaLink="/contact"
       />
 

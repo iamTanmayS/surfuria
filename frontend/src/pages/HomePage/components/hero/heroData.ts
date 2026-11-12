@@ -32,8 +32,8 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
       destination: '/hardware',
     },
     secondaryCta: {
-      label: 'Discuss Your Project',
-      destination: '/contact',
+      label: 'Explore Kitchens',
+      destination: '/kitchens',
     },
     image:
       'https://res.cloudinary.com/dwhajzdg2/image/upload/v1792749953/1_1_Landing_Page_Image_dtpgdt.png',
@@ -51,12 +51,12 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
     description:
       'Custom kitchens designed with purpose, style and precision.',
     primaryCta: {
-      label: 'Explore Kitchens',
-      destination: '/kitchens',
+      label: 'Explore Hardware',
+      destination: '/hardware',
     },
     secondaryCta: {
-      label: 'Discuss Your Project',
-      destination: '/contact',
+      label: 'Explore Kitchens',
+      destination: '/kitchens',
     },
     image:
       'https://res.cloudinary.com/dwhajzdg2/image/upload/v1793212986/IMAGE_2_rvehgq.png',
@@ -74,12 +74,12 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
     description:
       'From wardrobes to pantry units, choose the design, storage and finish that suits you.',
     primaryCta: {
-      label: 'Our Story',
-      destination: '/about',
+      label: 'Explore Hardware',
+      destination: '/hardware',
     },
     secondaryCta: {
-      label: 'Discuss Your Project',
-      destination: '/contact',
+      label: 'Explore Kitchens',
+      destination: '/kitchens',
     },
     image:
       'https://res.cloudinary.com/dwhajzdg2/image/upload/v1793213798/IMAGE_3_1_q9anpn.png',

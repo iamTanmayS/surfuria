@@ -7,7 +7,7 @@ import Button from '../../components/ui/Button';
 import ContactHero from './components/ContactHero';
 import { SEOHead, buildBreadcrumbSchema, buildOrganizationSchema } from '../../components/seo';
 import { getEnquiryContext } from '../../lib/enquiryContext';
-import { buildCloudinaryThumb } from '../../lib/cloudinary';
+import { buildCloudinaryUrl } from '../../lib/cloudinary';
 import { extractErrorMessage } from '../../lib/apiErrors';
 import {
   generateEnquiryMessage,
@@ -209,52 +209,59 @@ export default function ContactPage() {
               LEFT COLUMN: Cinematic Studio Hero, Context, WhatsApp & Direct
               ================================================================ */}
           <aside className="cp-story-column" aria-label="About our specification studio">
-            <ContactHero />
-
-            {/* Active Context Banner (if user arrived from a kitchen config or hardware product) */}
-            {context.type !== 'general' && (
-              <section className="cp-banner" aria-label="Active enquiry context">
-              {context.thumbnail && (
-                <div className="cp-banner__thumb">
-                  <img
-                    src={buildCloudinaryThumb(context.thumbnail, 160)}
-                    alt={context.thumbnailAlt ?? context.title}
-                    className="cp-banner__img"
-                    loading="lazy"
-                    decoding="async"
-                    width={80}
-                    height={80}
-                  />
+            {context.type !== 'general' ? (
+              <div className="cp-product-inquiry-showcase">
+                <div className="cp-product-inquiry-header">
+                  <span className="cp-product-inquiry-eyebrow">PRODUCT SPECIFICATION INQUIRY</span>
+                  <h1 className="cp-product-inquiry-title">Inquire About {context.title}</h1>
+                  <p className="cp-product-inquiry-lead">
+                    Review specifications, request CAD drawings, or discuss project quantities directly with our technical team.
+                  </p>
                 </div>
-              )}
 
-              <div className="cp-banner__body">
-                {context.badge && (
-                  <span className="cp-banner__badge">{context.badge}</span>
-                )}
-                <h2 className="cp-banner__title">{context.title}</h2>
-                {context.price && (
-                  <span className="cp-banner__price">{context.price}</span>
-                )}
+                <div className="cp-product-inquiry-card">
+                  {context.thumbnail && (
+                    <div className="cp-product-inquiry-card__media">
+                      <img
+                        src={buildCloudinaryUrl(context.thumbnail, { width: 800, quality: 'auto', format: 'auto' })}
+                        alt={context.thumbnailAlt ?? context.title}
+                        className="cp-product-inquiry-card__img"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </div>
+                  )}
+                  <div className="cp-product-inquiry-card__body">
+                    {context.badge && (
+                      <span className="cp-product-inquiry-card__badge">{context.badge}</span>
+                    )}
+                    <h2 className="cp-product-inquiry-card__name">{context.title}</h2>
+                    {context.price && (
+                      <div className="cp-product-inquiry-card__price-row">
+                        <span className="cp-product-inquiry-card__price">{context.price}</span>
+                        <span className="cp-product-inquiry-card__price-tag">Project Cost</span>
+                      </div>
+                    )}
+                    <div className="cp-product-inquiry-card__nav">
+                      {context.detailUrl && (
+                        <Link to={context.detailUrl} className="cp-product-inquiry-card__link">
+                          ← Back to Product Page
+                        </Link>
+                      )}
+                      <button
+                        type="button"
+                        onClick={handleClearContext}
+                        className="cp-product-inquiry-card__clear"
+                      >
+                        General Contact Form
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              <div className="cp-banner__actions">
-                {context.detailUrl && (
-                  <Link to={context.detailUrl} className="cp-banner__view-link">
-                    View Details
-                  </Link>
-                )}
-                <button
-                  type="button"
-                  onClick={handleClearContext}
-                  className="cp-banner__clear-btn"
-                  title="Clear active context"
-                >
-                  × Clear
-                </button>
-              </div>
-            </section>
-          )}
+            ) : (
+              <ContactHero />
+            )}
 
           {/* Direct WhatsApp Alternative Card */}
           <div className="cp-whatsapp-card">
@@ -627,13 +634,16 @@ function EnquiryForm({
   return (
     <div className="cp-form-container">
       <div className="cp-form-header">
-        <span className="cp-form-header__eyebrow">ENQUIRY FORM</span>
+        <span className="cp-form-header__eyebrow">
+          {contextType !== 'general' ? 'PRODUCT INQUIRY' : 'ENQUIRY FORM'}
+        </span>
         <h2 id="enquiry-form-title" className="cp-form-header__title">
-          {formTitle}
+          {contextType !== 'general' ? `Inquire: ${contextTitle}` : formTitle}
         </h2>
         <p className="cp-form-header__reassurance">
-          Not sure where to start? Tell us what you have in mind, and we'll help
-          you with the next step.
+          {contextType !== 'general'
+            ? `Submit your details and requirements for ${contextTitle}. Our technical team will formulate a full specification response.`
+            : `Not sure where to start? Tell us what you have in mind, and we'll help you with the next step.`}
         </p>
       </div>
 

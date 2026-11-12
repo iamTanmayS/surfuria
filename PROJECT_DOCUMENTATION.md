@@ -278,7 +278,7 @@ export interface Product {
 ## Chapter 7: Kitchen Architecture — Configurations & Suites
 
 ### 7.1 Factory-Engineered Turnkey Packages (`kitchenConfigurations.ts`)
-Surfuria standardizes four modular kitchen configurations with fixed turnkey pricing, material formulations, and inclusive professional services:
+Surfuria standardizes four modular kitchen configurations with turnkey package pricing, material formulations, and inclusive professional services:
 
 | Configuration | Slug | Door Panel Area | Box Panel Area | Package Price | Inclusions |
 |---|---|---|---|---|---|

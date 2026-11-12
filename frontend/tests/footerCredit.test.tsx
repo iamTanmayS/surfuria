@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import SiteFooter from '../src/components/layout/SiteFooter/SiteFooter';
 
 describe('Surfuria Footer Developer Credit', () => {
-  it('renders "Designed & developed by" and "Tanmay Shukla" with a heart icon', () => {
+  it('renders "Designed & developed by" and "Tanmay Shukla" without heart icon', () => {
     const html = renderToString(
       <MemoryRouter>
         <SiteFooter />
@@ -14,7 +14,7 @@ describe('Surfuria Footer Developer Credit', () => {
 
     expect(html).toContain('Designed &amp; developed by');
     expect(html).toContain('Tanmay Shukla');
-    expect(html).toContain('site-footer__credit-heart');
+    expect(html).not.toContain('site-footer__credit-heart');
   });
 
   it('renders Tanmay Shukla as non-clickable plain text when VITE_DEVELOPER_PROFILE_URL is empty', () => {

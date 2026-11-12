@@ -151,15 +151,15 @@ const INCLUDED_HARDWARE_TILES: readonly HardwareTile[] = [
     id: 'minifix-set',
     name: 'Minifix Set',
     label: 'Minifix, dowel & screw assembly',
-    isSchematic: 'minifix',
-    imageAlt: 'Architectural minifix cam, connecting dowel and socket fastener assembly schematic',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466240/MINIFIX_g8sdbl.png',
+    imageAlt: 'Architectural minifix cam, connecting dowel and socket fastener assembly',
   },
   {
     id: 'shelf-support-pins',
     name: 'Shelf Support Pins',
     label: 'Internal shelf support pins',
-    isSchematic: 'pin',
-    imageAlt: 'Nickel-plated steel carcass shelf support pin schematic',
+    image: 'https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466241/SHELF_SUPPORT_PIN_oyi3ua.png',
+    imageAlt: 'Nickel-plated steel carcass shelf support pin',
   },
 ];
 
@@ -198,7 +198,7 @@ export default function KitchenConfigurationDetailPage() {
       '@graph': [
         buildKitchenPackageSchema({
           name: configuration.name,
-          description: `Standardized ${configuration.name} modular kitchen configuration package. Features ${configuration.doorPanelArea.formatted} acrylic finish door panels and ${configuration.boxPanelArea.formatted} prelam board carcasses, inclusive of 8 essential hardware items, transportation, and installation.`,
+          description: `Standardized ${configuration.name} modular kitchen configuration package. Features ${configuration.doorPanelArea.formatted} acrylic finish door panels and ${configuration.boxPanelArea.formatted} prelam board carcasses, including 8 essential hardware items, transportation, and installation.`,
           image: configuration.image,
           url: `https://surfuria.com/kitchens/configurations/${configuration.slug}`,
           priceAmount: configuration.totalPackagePrice.amount,
@@ -252,7 +252,7 @@ export default function KitchenConfigurationDetailPage() {
     <article className="config-detail-page">
       <SEOHead
         title={`${configuration.name} Modular Kitchen Configuration | Surfuria`}
-        description={`Explore the Surfuria ${configuration.name} kitchen package: ${configuration.doorPanelArea.formatted} acrylic finish door panels, ${configuration.boxPanelArea.formatted} prelam carcasses, inclusive of 8 essential hardware fittings. ${configuration.formattedPrice}.`}
+        description={`Explore the Surfuria ${configuration.name} kitchen package: ${configuration.doorPanelArea.formatted} acrylic finish door panels, ${configuration.boxPanelArea.formatted} prelam carcasses, including 8 essential hardware fittings. ${configuration.formattedPrice}.`}
         canonicalUrl={`https://surfuria.com/kitchens/configurations/${configuration.slug}`}
         ogType="product"
         ogImage={configuration.image}
@@ -279,7 +279,7 @@ export default function KitchenConfigurationDetailPage() {
             </li>
             <li className="config-breadcrumbs__sep" aria-hidden="true">/</li>
             <li className="config-breadcrumbs__item is-current" aria-current="page">
-              <span>{configuration.name} Layout</span>
+              <span>{configuration.id === 'island' ? 'Sample Island Modular Layout' : `${configuration.name} Layout`}</span>
             </li>
           </ol>
         </nav>
@@ -291,7 +291,9 @@ export default function KitchenConfigurationDetailPage() {
           {/* Mobile Title & Lead (Rendered before gallery on mobile <= 1024px) */}
           <div className="config-mobile-header">
             <span className="config-info-tag">FACTORY-ENGINEERED PACKAGE</span>
-            <h1 className="config-info-title">{configuration.name} Modular Kitchen</h1>
+            <h1 className="config-info-title">
+              {configuration.id === 'island' ? 'Sample Island Modular Layout' : `${configuration.name} Modular Kitchen`}
+            </h1>
             <p className="config-info-lead">
               Standardized modular package featuring {configuration.doorPanelArea.formatted} acrylic shutters,{' '}
               {configuration.boxPanelArea.formatted} prelam carcass, 8 essential hardware items, transportation, and on-site assembly.
@@ -302,7 +304,7 @@ export default function KitchenConfigurationDetailPage() {
           <div className="config-gallery-col">
             <ProductGallery
               images={gallery}
-              productName={`${configuration.name} Modular Kitchen`}
+              productName={configuration.id === 'island' ? 'Sample Island Modular Layout' : `${configuration.name} Modular Kitchen`}
               speciality="Turnkey Modular"
               aspectRatio="4/3"
             />
@@ -313,9 +315,11 @@ export default function KitchenConfigurationDetailPage() {
             {/* Desktop Title & Lead (Rendered on desktop >= 1025px) */}
             <div className="config-desktop-header">
               <span className="config-info-tag">FACTORY-ENGINEERED PACKAGE</span>
-              <h1 className="config-info-title">{configuration.name} Modular Kitchen</h1>
+              <h1 className="config-info-title">
+                {configuration.id === 'island' ? 'Sample Island Modular Layout' : `${configuration.name} Modular Kitchen`}
+              </h1>
               <p className="config-info-lead">
-                Standardized, ready-to-build modular kitchen package inclusive of exterior acrylic-finish
+                Standardized, ready-to-build modular kitchen package including exterior acrylic-finish
                 door panels, full prelam box carcass, 8 essential hardware items, transportation, and
                 on-site installation.
               </p>
@@ -326,10 +330,10 @@ export default function KitchenConfigurationDetailPage() {
               <span className="config-price-label">Complete Package Price</span>
               <div className="config-price-row">
                 <span className="config-price-val">{configuration.formattedPrice}</span>
-                <span className="config-price-tag">All-Inclusive Fixed Cost</span>
+                <span className="config-price-tag">Project Cost</span>
               </div>
               <p className="config-price-subtext">
-                Covers complete package specifications · Inclusive of GST · Direct factory pricing
+                Covers panels, doors, carcass, hardware, transportation &amp; installation · Direct factory pricing
               </p>
             </div>
 
@@ -363,11 +367,21 @@ export default function KitchenConfigurationDetailPage() {
 
             {/* Compact Key Specifications Summary (Verified data only) */}
             <div className="config-specs-summary">
-              <h2 className="config-specs-summary__title">Package Specifications</h2>
+              <div className="config-specs-summary__header">
+                <h2 className="config-specs-summary__title">Package Specifications</h2>
+                <span className="config-specs-summary__badge">Sample Modular Package</span>
+              </div>
+              <p className="config-specs-summary__note">
+                Specifications shown represent a standardized sample modular kitchen package. All module dimensions, shutter finishes, and internal hardware configurations can be customized for your architectural floor plan.
+              </p>
               <dl className="config-specs-dl">
                 <div className="config-specs-row">
                   <dt className="config-specs-dt">Configuration Type</dt>
-                  <dd className="config-specs-dd">{configuration.name} Modular Layout</dd>
+                  <dd className="config-specs-dd">
+                    {configuration.id === 'island'
+                      ? 'Sample Island Modular Layout'
+                      : `Sample ${configuration.name} Modular Layout`}
+                  </dd>
                 </div>
                 <div className="config-specs-row">
                   <dt className="config-specs-dt">Door Panel Area</dt>
@@ -467,7 +481,7 @@ export default function KitchenConfigurationDetailPage() {
             <div className="config-material-card">
               <div className="config-material-card__visual">
                 <img
-                  src="/images/materials/acrylic.jpg"
+                  src="https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466157/ACRYLIC_kywxl6.png"
                   alt="Solid acrylic finish kitchen door panel shutter"
                   className="config-material-card__img"
                   loading="lazy"
@@ -498,7 +512,7 @@ export default function KitchenConfigurationDetailPage() {
             <div className="config-material-card">
               <div className="config-material-card__visual">
                 <img
-                  src="/images/materials/laminate.jpg"
+                  src="https://res.cloudinary.com/dwhajzdg2/image/upload/v1794466162/LAMINATE_wnq9jq.png"
                   alt="Prelaminated board cabinet box carcass sample"
                   className="config-material-card__img"
                   loading="lazy"
@@ -578,11 +592,11 @@ export default function KitchenConfigurationDetailPage() {
                   <path d="M12 6v6l4 2" />
                 </svg>
               </div>
-              <h3 className="config-scope-card__title">Fixed Net Pricing</h3>
+              <h3 className="config-scope-card__title">Project Cost</h3>
               <p className="config-scope-card__desc">
-                Single net package cost of {configuration.formattedPrice} inclusive of GST, materials, hardware, and installation without hidden escalation.
+                Package price of {configuration.formattedPrice} covers panels, doors, carcass, included hardware, transportation, and professional installation without hidden escalation.
               </p>
-              <span className="config-scope-card__meta config-scope-card__meta--price">{configuration.formattedPrice} Net Total</span>
+              <span className="config-scope-card__meta config-scope-card__meta--price">{configuration.formattedPrice} Project Cost</span>
             </div>
           </div>
         </section>
@@ -606,12 +620,11 @@ export default function KitchenConfigurationDetailPage() {
               <ProductCard
                 key={other.id}
                 title={`${other.name} Layout`}
-                subtitle={`Complete package · ${other.doorPanelArea.formatted} door area`}
-                badge={other.formattedPrice}
+                subtitle="Factory-Engineered Modular Package"
                 image={other.image}
                 imageAlt={other.imageAlt}
                 destination={`/kitchens/configurations/${other.slug}`}
-                actionText="View Package"
+                actionText="Explore Layout"
                 className="config-related-card"
               />
             ))}

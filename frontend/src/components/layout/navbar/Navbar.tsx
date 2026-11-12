@@ -85,21 +85,21 @@ export default function Navbar({
   } =
     activeMenu === 'hardware'
       ? {
-          title: 'Architectural Hardware Systems',
+          title: '',
           viewAllSlug: '/hardware',
           viewAllText: 'View All Collections',
           items: HARDWARE_CATEGORIES,
-          footerNote: 'Architectural hardware solutions • Engineered for durability',
+          footerNote: '                                                  ',
           footerLinkText: 'Schedule an Architectural Consultation →',
           footerLinkHref: '/contact',
         }
       : {
           title: 'Modular Kitchen Configurations',
           viewAllSlug: '/kitchens#configurations',
-          viewAllText: 'View All Packages',
+          viewAllText: 'View All Configurations',
           items: KITCHEN_CONFIGURATION_NAV_ITEMS,
-          footerNote: 'Factory-engineered modular kitchen packages • Turnkey pricing',
-          footerLinkText: 'Explore Package Inclusions & Pricing →',
+          footerNote: 'Factory-engineered modular kitchen layouts',
+          footerLinkText: 'Explore All Kitchen Layouts →',
           footerLinkHref: '/kitchens#configurations',
         };
 

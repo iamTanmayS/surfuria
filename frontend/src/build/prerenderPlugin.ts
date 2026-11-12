@@ -123,7 +123,7 @@ export function prerenderPagesPlugin(): Plugin {
         routes.push({
           path: `/kitchens/configurations/${config.slug}`,
           title: `${config.name} Modular Kitchen Configuration | Surfuria`,
-          description: `Explore the Surfuria ${config.name} kitchen package: ${config.doorPanelArea.formatted} acrylic finish door panels, ${config.boxPanelArea.formatted} prelam carcasses, inclusive of 8 essential hardware fittings. ₹${config.totalPackagePrice.amount.toLocaleString('en-IN')}.`,
+          description: `Explore the Surfuria ${config.name} kitchen package: ${config.doorPanelArea.formatted} acrylic finish door panels, ${config.boxPanelArea.formatted} prelam carcasses, including 8 essential hardware fittings. ₹${config.totalPackagePrice.amount.toLocaleString('en-IN')}.`,
           canonicalUrl: `https://surfuria.com/kitchens/configurations/${config.slug}`,
           image: config.image,
         });

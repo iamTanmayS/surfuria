@@ -20,7 +20,7 @@ export default function KitchenEnquiryCTA() {
                 Book Design Consultation
               </Button>
               <Button to="/hardware" variant="outline" className="kitchen-cta-btn-secondary">
-                Explore Hardware Catalogue
+                Explore Hardware
               </Button>
             </div>
           </div>
@@ -38,7 +38,7 @@ export default function KitchenEnquiryCTA() {
               <div className="kitchen-cta-feat-icon">02</div>
               <div className="kitchen-cta-feat-text">
                 <strong>Transparent Turnkey Pricing</strong>
-                <p>Complete packages with inclusive transportation and installation.</p>
+                <p>Complete packages with transportation and professional installation included.</p>
               </div>
             </div>
             <div className="kitchen-cta-feature-item">
