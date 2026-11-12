@@ -20,10 +20,10 @@ export const FOOTER_BRAND_INFO = {
 
 /**
  * Centralized social media profiles for Surfuria.
- * Pinterest and X are temporarily deactivated per brand direction.
+ * Facebook, Pinterest, and X are temporarily deactivated per brand direction.
  */
 export const FOOTER_SOCIAL_PROFILES: readonly FooterSocialProfile[] = resolveSocialProfiles(false).filter(
-  (p) => p.id !== 'pinterest' && p.id !== 'x'
+  (p) => p.id !== 'pinterest' && p.id !== 'x' && p.id !== 'facebook'
 );
 
 export const FOOTER_NAVIGATION_COLUMNS: readonly FooterNavColumn[] = [

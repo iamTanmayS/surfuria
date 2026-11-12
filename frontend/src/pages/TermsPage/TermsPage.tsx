@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../../components/ui/Button';
-import { SEOHead, buildBreadcrumbSchema } from '../../components/seo';
 import './TermsPage.css';
+
+import React, { useMemo, useState } from 'react';
+import { SEOHead, buildBreadcrumbSchema } from '../../components/seo';
+
+import Button from '../../components/ui/Button';
+import { Link } from 'react-router-dom';
 
 /**
  * SURFURIA — Terms & Conditions Page
@@ -388,7 +390,7 @@ export default function TermsPage() {
               <div className="sf-terms-card">
                 <h4 className="sf-terms-card__title">Surfuria Legal &amp; Commercial Department</h4>
                 <p className="sf-terms-card__line">Attn: Commercial Contracts Officer</p>
-                <p className="sf-terms-card__line">Legal Inquiries: <a href="mailto:legal@surfuria.com" className="sf-terms-inline-link">legal@surfuria.com</a></p>
+                <p className="sf-terms-card__line">Legal Inquiries: <a href="mailto:info@surfuria.com" className="sf-terms-inline-link">info@surfuria.com</a></p>
                 <p className="sf-terms-card__line">Project Consultations: <a href="mailto:info@surfuria.com" className="sf-terms-inline-link">info@surfuria.com</a></p>
                 <p className="sf-terms-card__line">Website: <a href="https://surfuria.com" className="sf-terms-inline-link">surfuria.com</a></p>
               </div>

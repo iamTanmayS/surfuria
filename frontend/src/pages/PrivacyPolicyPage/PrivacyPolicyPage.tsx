@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '../../components/ui/Button';
-import { SEOHead, buildBreadcrumbSchema } from '../../components/seo';
 import './PrivacyPolicyPage.css';
+
+import React, { useMemo, useState } from 'react';
+import { SEOHead, buildBreadcrumbSchema } from '../../components/seo';
+
+import Button from '../../components/ui/Button';
+import { Link } from 'react-router-dom';
 
 /**
  * SURFURIA — Privacy Policy Page
@@ -310,7 +312,7 @@ export default function PrivacyPolicyPage() {
               </ul>
               <p>
                 To exercise any of these rights, please contact our data team at{' '}
-                <a href="mailto:privacy@surfuria.com" className="sf-legal-inline-link">privacy@surfuria.com</a> or submit a request via our{' '}
+                <a href="mailto:info@surfuria.com" className="sf-legal-inline-link">info@surfuria.com</a> or submit a request via our{' '}
                 <Link to="/contact" className="sf-legal-inline-link">Contact Us</Link> page.
               </p>
             </div>
@@ -349,7 +351,7 @@ export default function PrivacyPolicyPage() {
               <div className="sf-legal-card">
                 <h4 className="sf-legal-card__title">Surfuria Architectural Hardware</h4>
                 <p className="sf-legal-card__line">Attn: Privacy &amp; Data Governance</p>
-                <p className="sf-legal-card__line">Email: <a href="mailto:privacy@surfuria.com" className="sf-legal-inline-link">privacy@surfuria.com</a></p>
+                <p className="sf-legal-card__line">Email: <a href="mailto:info@surfuria.com" className="sf-legal-inline-link">info@surfuria.com</a></p>
                 <p className="sf-legal-card__line">General Enquiries: <a href="mailto:info@surfuria.com" className="sf-legal-inline-link">info@surfuria.com</a></p>
                 <p className="sf-legal-card__line">Official Website: <a href="https://surfuria.com" className="sf-legal-inline-link">surfuria.com</a></p>
               </div>

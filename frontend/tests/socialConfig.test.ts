@@ -128,5 +128,17 @@ describe('Surfuria Social Configuration Suite', () => {
       expect(resolveSocialProfiles(true)).toHaveLength(1);
     });
   });
+
+  describe('FOOTER_SOCIAL_PROFILES filtering', () => {
+    it('deactivates facebook, pinterest, and x in the active footer profiles', async () => {
+      const { FOOTER_SOCIAL_PROFILES } = await import('../src/data/site/footerData');
+      const activeIds = FOOTER_SOCIAL_PROFILES.map((p) => p.id);
+      expect(activeIds).toContain('instagram');
+      expect(activeIds).toContain('linkedin');
+      expect(activeIds).not.toContain('facebook');
+      expect(activeIds).not.toContain('pinterest');
+      expect(activeIds).not.toContain('x');
+    });
+  });
 });
 
