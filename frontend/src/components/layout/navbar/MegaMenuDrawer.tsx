@@ -57,7 +57,7 @@ export function CategoryCard({ item, viewAllSlug, onSelect }: CategoryCardProps)
 interface MegaMenuDrawerProps {
   isOpen: boolean;
   activeMenu: 'hardware' | 'kitchens' | null;
-  title: string;
+  title?: string;
   viewAllSlug: string;
   viewAllText?: string;
   items: NavCategoryItem[];
@@ -73,13 +73,10 @@ interface MegaMenuDrawerProps {
 export default function MegaMenuDrawer({
   isOpen,
   activeMenu,
-  title,
+  title = '',
   viewAllSlug,
   viewAllText,
   items,
-  footerNote,
-  footerLinkText,
-  footerLinkHref,
   shouldReduceMotion,
   onMouseEnter,
   onMouseLeave,
@@ -147,7 +144,7 @@ export default function MegaMenuDrawer({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             role="region"
-            aria-label={`${title} Navigation`}
+            aria-label={`${title || (activeMenu === 'kitchens' ? 'Modular Kitchens' : 'Architectural Hardware')} Navigation`}
           >
             <AnimatePresence mode="wait" custom={menuDirection}>
               <motion.div
@@ -158,9 +155,8 @@ export default function MegaMenuDrawer({
                 animate="animate"
                 exit="exit"
               >
-                {/* Header */}
+                {/* Header (View All link aligned to right) */}
                 <div className="sf-megamenu__header">
-                  <div className="sf-megamenu__title">{title}</div>
                   <Link
                     to={viewAllSlug}
                     className="sf-megamenu__viewall"
@@ -191,14 +187,6 @@ export default function MegaMenuDrawer({
                       onSelect={onClose}
                     />
                   ))}
-                </div>
-
-                {/* Footer Insight */}
-                <div className="sf-megamenu__footer">
-                  <span>{footerNote || 'Architectural hardware solutions • Engineered for durability'}</span>
-                  <Link to={footerLinkHref || '/contact'} onClick={onClose}>
-                    {footerLinkText || 'Schedule an Architectural Consultation →'}
-                  </Link>
                 </div>
               </motion.div>
             </AnimatePresence>

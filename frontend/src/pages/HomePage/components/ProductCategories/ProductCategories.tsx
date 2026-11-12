@@ -12,7 +12,6 @@ import './ProductCategories.css';
 
 export default function ProductCategories({
   id = 'collections-section',
-  eyebrow = 'PRODUCT CATEGORIES',
   title = 'Hardware, thoughtfully selected.',
   subtitle = 'Details that define the finished space.',
   description = 'Discover carefully considered hardware and kitchen fittings that bring functionality, precision, and a refined finish to contemporary interiors.',
@@ -159,12 +158,6 @@ export default function ProductCategories({
         {/* Editorial Section Header */}
         <header className="product-categories-header">
           <div className="product-categories-header__primary">
-            {eyebrow && (
-              <div className="product-categories-eyebrow-badge">
-                <span className="product-categories-eyebrow-badge__pip" aria-hidden="true" />
-                <span className="product-categories-eyebrow-badge__text">{eyebrow}</span>
-              </div>
-            )}
             <h2 className="product-categories-title">{title}</h2>
             {subtitle && (
               <p className="product-categories-subtitle">{subtitle}</p>

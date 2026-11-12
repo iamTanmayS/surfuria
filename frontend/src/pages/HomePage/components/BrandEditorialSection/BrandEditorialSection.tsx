@@ -11,7 +11,7 @@ export default function BrandEditorialSection({
   className = '',
 }: BrandEditorialProps) {
   const shouldReduceMotion = useReducedMotion();
-  const { kitchens, eyebrow, headline, description, cards } = data;
+  const { kitchens, headline, description, cards } = data;
 
   const panelTransition = shouldReduceMotion
     ? { duration: 0 }
@@ -44,15 +44,6 @@ export default function BrandEditorialSection({
         >
           {/* Main Brand Statement Area */}
           <div className="brand-editorial__statement-area">
-            {eyebrow && (
-              <div className="brand-editorial__eyebrow-badge">
-                <span
-                  className="brand-editorial__eyebrow-pip"
-                  aria-hidden="true"
-                />
-                <span className="brand-editorial__eyebrow-text">{eyebrow}</span>
-              </div>
-            )}
             <h2 className="brand-editorial__headline">{headline}</h2>
             {description && (
               <p className="brand-editorial__description">{description}</p>

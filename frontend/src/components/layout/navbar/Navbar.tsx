@@ -75,32 +75,20 @@ export default function Navbar({
   const isLightAtTop = !hasSolidNav && effectiveTheme === 'light';
 
   const activeCategories: {
-    title: string;
     viewAllSlug: string;
     viewAllText?: string;
     items: NavCategoryItem[];
-    footerNote?: string;
-    footerLinkText?: string;
-    footerLinkHref?: string;
   } =
     activeMenu === 'hardware'
       ? {
-          title: '',
           viewAllSlug: '/hardware',
           viewAllText: 'View All Collections',
           items: HARDWARE_CATEGORIES,
-          footerNote: '                                                  ',
-          footerLinkText: 'Schedule an Architectural Consultation →',
-          footerLinkHref: '/contact',
         }
       : {
-          title: 'Modular Kitchen Configurations',
           viewAllSlug: '/kitchens#configurations',
           viewAllText: 'View All Configurations',
           items: KITCHEN_CONFIGURATION_NAV_ITEMS,
-          footerNote: 'Factory-engineered modular kitchen layouts',
-          footerLinkText: 'Explore All Kitchen Layouts →',
-          footerLinkHref: '/kitchens#configurations',
         };
 
   return (
@@ -183,13 +171,9 @@ export default function Navbar({
         <MegaMenuDrawer
           isOpen={activeMenu !== null}
           activeMenu={activeMenu}
-          title={activeCategories.title}
           viewAllSlug={activeCategories.viewAllSlug}
           viewAllText={activeCategories.viewAllText}
           items={activeCategories.items}
-          footerNote={activeCategories.footerNote}
-          footerLinkText={activeCategories.footerLinkText}
-          footerLinkHref={activeCategories.footerLinkHref}
           shouldReduceMotion={shouldReduceMotion}
           onMouseEnter={handleDrawerMouseEnter}
           onMouseLeave={handleDrawerMouseLeave}
